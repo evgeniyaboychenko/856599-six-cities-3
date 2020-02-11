@@ -1,15 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 
+const headerCardClickHandler = () => {};
+
 const App = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const {offersCount, offersName} = props;
+  const {offersCount, adsNames} = props;
   return (
     <Main
       offersCount = {offersCount}
-      offersName = {offersName}
+      adsNames = {adsNames}
+      headerCardClickHandler = {headerCardClickHandler}
     />
   );
+};
+
+App.propTypes = {
+  offersCount: PropTypes.number.isRequired,
+  adsNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default App;
