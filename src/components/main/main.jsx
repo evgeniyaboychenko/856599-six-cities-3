@@ -5,8 +5,8 @@ const generateId = () => {
   return String(new Date().valueOf() + Math.random());
 };
 
-const generateOffersCard = (offersName) => {
-  return offersName.map((offerName) => (
+const generateOffersCard = (adsNames, headerCardClickHandler) => {
+  return adsNames.map((adNames) => (
     <article className="cities__place-card place-card" key = {generateId()}>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
@@ -33,7 +33,7 @@ const generateOffersCard = (offersName) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offerName}</a>
+          <a href="#" onClick = {headerCardClickHandler}>{adNames}</a>
         </h2>
         <p className="place-card__type">Private room</p>
       </div>
@@ -41,7 +41,7 @@ const generateOffersCard = (offersName) => {
 };
 
 const Main = (props) => {
-  const {offersCount, offersName} = props;
+  const {offersCount, adsNames, headerCardClickHandler} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -126,7 +126,7 @@ const Main = (props) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {generateOffersCard(offersName)}
+                {generateOffersCard(adsNames, headerCardClickHandler)}
               </div>
             </section>
             <div className="cities__right-section">
@@ -141,7 +141,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offersName: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  adsNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  headerCardClickHandler: PropTypes.func,
 };
 
 export default Main;

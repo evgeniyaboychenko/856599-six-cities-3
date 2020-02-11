@@ -6,11 +6,11 @@ const Settings = {
   OFFERS_COUNT: 10
 };
 
-const offersName = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`];
+const adsNames = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`];
 
 ReactDOM.render(
     <App offersCount = {Settings.OFFERS_COUNT}
-      offersName = {offersName}
+      adsNames = {adsNames}
     />,
     document.querySelector(`#root`)
 );
