@@ -3,7 +3,7 @@ import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Main from './main.jsx';
 
-const adsNames = [`Beautiful apartment`, `Amazing place`];
+const offersNames = [`Beautiful apartment`, `Amazing place`];
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -14,7 +14,7 @@ it(`Should ad heading be pressed`, () => {
   const main = shallow(
       <Main
         offersCount = {6}
-        adsNames = {adsNames}
+        offersNames = {offersNames}
         headerCardClickHandler = {headerCardClickHandler}
       />
   );
@@ -23,5 +23,5 @@ it(`Should ad heading be pressed`, () => {
   headerCards.forEach((headerCard) => {
     headerCard.props().onClick();
   });
-  expect(headerCardClickHandler.mock.calls.length).toBe(adsNames.length);
+  expect(headerCardClickHandler.mock.calls.length).toBe(offersNames.length);
 });
