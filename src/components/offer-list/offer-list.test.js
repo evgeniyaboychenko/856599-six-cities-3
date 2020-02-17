@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import OfferList from './offer-list.jsx';
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
 const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
@@ -24,15 +24,14 @@ const offerCards = [
     price: 120,
     type: OFFER_TYPES[1],
     isPremium: false,
-  }];
+  }
+];
 
-it(`should App render correctly`, () => {
+it(`should OfferList render correctly`, () => {
   const tree = renderer.create(
-      <App
-        offersCount = {6}
+      <OfferList
         offerCards = {offerCards}
-      />
-  ).toJSON();
+      />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

@@ -7,25 +7,29 @@ const getPercent = (rating) => {
 };
 
 const getPremium = (isPremium) => {
-if (isPremium) {
-  return (
-    <div className="place-card__mark">
-      <span>Premium</span>
-    </div>);
-}
-return ``;
+  if (isPremium) {
+    return (
+      <div className="place-card__mark">
+        <span>Premium</span>
+      </div>);
+  }
+  return ``;
 };
 
 const OfferCard = (props) => {
-  const {offerCard} = props;
+  const {offerCard, headerCardClickHandler, handleCardMouseover} = props;
   const {id, img, name, rating, price, type, isPremium} = offerCard;
 
   return (
-    <article className="cities__place-card place-card" key = {id}>
+    <article className="cities__place-card place-card" key = {id} onMouseOver = {(evt) => {
+      evt.preventDefault();
+      handleCardMouseover(id);
+    }
+    }>
       {getPremium(isPremium)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src = {"img/" + img} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src = {`img/` + img} width="260" height="200" alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
@@ -48,7 +52,7 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{name}</a>
+          <a href="#" onClick = {headerCardClickHandler}>{name}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -64,7 +68,9 @@ OfferCard.propTypes = {
     price: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired
-  })
+  }),
+  headerCardClickHandler: PropTypes.func,
+  handleCardMouseover: PropTypes.func,
 };
 
 export default OfferCard;
