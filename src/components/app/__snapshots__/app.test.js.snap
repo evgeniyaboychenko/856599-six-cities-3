@@ -226,7 +226,15 @@ exports[`should App render correctly 1`] = `
           >
             <article
               className="cities__place-card place-card"
+              onMouseOver={[Function]}
             >
+              <div
+                className="place-card__mark"
+              >
+                <span>
+                  Premium
+                </span>
+              </div>
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
@@ -254,7 +262,8 @@ exports[`should App render correctly 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €80
+                      €
+                      100
                     </b>
                     <span
                       className="place-card__price-text"
@@ -291,7 +300,7 @@ exports[`should App render correctly 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": 40,
                         }
                       }
                     />
@@ -309,19 +318,21 @@ exports[`should App render correctly 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Beautiful apartment
+                    Canal View Prinsengracht
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Private room
+                  apartment
                 </p>
               </div>
             </article>
             <article
               className="cities__place-card place-card"
+              onMouseOver={[Function]}
             >
+              
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
@@ -332,7 +343,7 @@ exports[`should App render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/room.jpg"
+                    src="img/apartment-01.jpg"
                     width="260"
                   />
                 </a>
@@ -349,7 +360,8 @@ exports[`should App render correctly 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €80
+                      €
+                      120
                     </b>
                     <span
                       className="place-card__price-text"
@@ -386,7 +398,7 @@ exports[`should App render correctly 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": 60,
                         }
                       }
                     />
@@ -404,13 +416,13 @@ exports[`should App render correctly 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Amazing place
+                    Nice, cozy, warm big bed apartment
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Private room
+                  privet room
                 </p>
               </div>
             </article>

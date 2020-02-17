@@ -5,11 +5,11 @@ import Main from '../main/main.jsx';
 const headerCardClickHandler = () => {};
 
 const App = (props) => {
-  const {offersCount, adsNames} = props;
+  const {offersCount, offerCards} = props;
   return (
     <Main
       offersCount = {offersCount}
-      adsNames = {adsNames}
+      offerCards = {offerCards}
       headerCardClickHandler = {headerCardClickHandler}
     />
   );
@@ -17,7 +17,17 @@ const App = (props) => {
 
 App.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  adsNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  offerCards: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        isPremium: PropTypes.bool.isRequired
+      })
+  ).isRequired,
 };
 
 export default App;
