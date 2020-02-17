@@ -33,12 +33,23 @@ it(`Should card onMouseover get information`, () => {
       <OfferCard
         offerCard = {offerCard}
         handleCardMouseover = {handleCardMouseover}
-        // headerCardClickHandler = {headerCardClickHandler}
       />
   );
-
-
   const currentCard = card.find(`.place-card`);
   currentCard.simulate(`mouseover`, mockEvent);
   expect(handleCardMouseover.mock.calls[0][0]).toBe(offerCard.id);
+});
+
+it(`Should ad heading be pressed`, () => {
+  const headerCardClickHandler = jest.fn();
+  const main = shallow(
+      <OfferCard
+        offerCard = {offerCard}
+        headerCardClickHandler = {headerCardClickHandler}
+      />
+  );
+
+  const headerCard = main.find(`.place-card__name a`);
+  headerCard.props().onClick();
+  expect(headerCardClickHandler.mock.calls.length).toBe(1);
 });

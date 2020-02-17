@@ -92,7 +92,6 @@ const Main = (props) => {
                   offerCards = {offerCards}
                   headerCardClickHandler = {headerCardClickHandler}
                 />
-                {/* {generateOffersCard(offersNames, headerCardClickHandler)} */}
               </div>
             </section>
             <div className="cities__right-section">
