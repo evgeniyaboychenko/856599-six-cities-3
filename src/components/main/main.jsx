@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import OfferList from '../offer-list/offer-list.jsx';
 
 const Main = (props) => {
-  const {offersCount, offerCards, headerCardClickHandler} = props;
+  const {offersCount, offerCards, handleHeaderCardClick} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -90,7 +90,7 @@ const Main = (props) => {
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
                   offerCards = {offerCards}
-                  headerCardClickHandler = {headerCardClickHandler}
+                  handleHeaderCardClick = {handleHeaderCardClick}
                 />
               </div>
             </section>
@@ -109,7 +109,7 @@ Main.propTypes = {
   offerCards: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
-        img: PropTypes.string.isRequired,
+        photos: PropTypes.arrayOf(PropTypes.string.isRequired),
         name: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
@@ -117,7 +117,7 @@ Main.propTypes = {
         isPremium: PropTypes.bool.isRequired
       })
   ).isRequired,
-  headerCardClickHandler: PropTypes.func,
+  handleHeaderCardClick: PropTypes.func,
 };
 
 export default Main;

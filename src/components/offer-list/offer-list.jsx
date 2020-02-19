@@ -14,13 +14,13 @@ class OfferList extends React.PureComponent {
   }
 
   render() {
-    const {offerCards, headerCardClickHandler} = this.props;
+    const {offerCards, handleHeaderCardClick} = this.props;
     return offerCards.map((offerCard) => {
       const {id} = offerCard;
       return <OfferCard
         offerCard = {offerCard}
         key = {id}
-        headerCardClickHandler = {headerCardClickHandler}
+        handleHeaderCardClick = {handleHeaderCardClick}
         handleCardMouseover = {this.handleCardMouseover}
       />;
     });
@@ -31,7 +31,7 @@ OfferList.propTypes = {
   offerCards: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
-        img: PropTypes.string.isRequired,
+        photos: PropTypes.arrayOf(PropTypes.string.isRequired),
         name: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
@@ -39,7 +39,7 @@ OfferList.propTypes = {
         isPremium: PropTypes.bool.isRequired
       })
   ).isRequired,
-  headerCardClickHandler: PropTypes.func,
+  handleHeaderCardClick: PropTypes.func,
 };
 
 export default OfferList;

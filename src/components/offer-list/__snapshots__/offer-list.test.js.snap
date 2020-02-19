@@ -94,6 +94,7 @@ Array [
       >
         <a
           href="#"
+          onClick={[Function]}
         >
           Canal View Prinsengracht
         </a>
@@ -120,7 +121,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/apartment-01.jpg"
+          src="img/room.jpg"
           width="260"
         />
       </a>
@@ -191,6 +192,7 @@ Array [
       >
         <a
           href="#"
+          onClick={[Function]}
         >
           Nice, cozy, warm big bed apartment
         </a>
