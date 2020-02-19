@@ -10,7 +10,7 @@ const OFFER_TYPES = [`apartment`, `privet room`];
 const offerCard =
 {
   id: `889`,
-  img: OFFER_IMAGES[0],
+  photos: OFFER_IMAGES,
   name: OFFER_NAMES[0],
   rating: 2,
   price: 100,
@@ -21,13 +21,12 @@ const offerCard =
 const mockEvent = {
   preventDefault() {}
 };
-// const offersNames = [`Beautiful apartment`, `Amazing place`];
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should card onMouseover get information`, () => {
+it(`onMouseover on heading should get key in handler`, () => {
   const handleCardMouseover = jest.fn();
   const card = shallow(
       <OfferCard
@@ -40,16 +39,31 @@ it(`Should card onMouseover get information`, () => {
   expect(handleCardMouseover.mock.calls[0][0]).toBe(offerCard.id);
 });
 
+it(`click on heading should get key in handler`, ()=> {
+  const handleHeaderCardClick = jest.fn();
+  const card = shallow(
+      <OfferCard
+        offerCard = {offerCard}
+        handleHeaderCardClick = {handleHeaderCardClick}
+      />
+  );
+
+  const currentCard = card.find(`.place-card__name a`);
+  currentCard.simulate(`click`, mockEvent);
+
+  expect(handleHeaderCardClick.mock.calls[0][0]).toBe(offerCard.id);
+});
+
 it(`Should ad heading be pressed`, () => {
-  const headerCardClickHandler = jest.fn();
+  const handleHeaderCardClick = jest.fn();
   const main = shallow(
       <OfferCard
         offerCard = {offerCard}
-        headerCardClickHandler = {headerCardClickHandler}
+        handleHeaderCardClick = {handleHeaderCardClick}
       />
   );
 
   const headerCard = main.find(`.place-card__name a`);
-  headerCard.props().onClick();
-  expect(headerCardClickHandler.mock.calls.length).toBe(1);
+  headerCard.props().onClick(mockEvent);
+  expect(handleHeaderCardClick.mock.calls.length).toBe(1);
 });

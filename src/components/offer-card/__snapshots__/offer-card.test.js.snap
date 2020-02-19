@@ -93,6 +93,7 @@ exports[`should OfferCard render correctly 1`] = `
     >
       <a
         href="#"
+        onClick={[Function]}
       >
         Canal View Prinsengracht
       </a>

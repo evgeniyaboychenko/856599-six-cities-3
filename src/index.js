@@ -12,7 +12,6 @@ const Settings = {
 
 ReactDOM.render(
     <App offersCount = {Settings.OFFERS_COUNT}
-      // offersNames = {adsNames}
       offerCards = {generateOfferCards()}
     />,
     document.querySelector(`#root`)
