@@ -27,43 +27,46 @@ Enzyme.configure({
 });
 
 it(`onMouseover on heading should get key in handler`, () => {
-  const handleCardMouseover = jest.fn();
+  const onCardMouseover = jest.fn();
   const card = shallow(
       <OfferCard
         offerCard = {offerCard}
-        handleCardMouseover = {handleCardMouseover}
+        onHeaderCardClick = {() => {}}
+        onCardMouseover = {onCardMouseover}
       />
   );
   const currentCard = card.find(`.place-card`);
   currentCard.simulate(`mouseover`, mockEvent);
-  expect(handleCardMouseover.mock.calls[0][0]).toBe(offerCard.id);
+  expect(onCardMouseover.mock.calls[0][0]).toBe(offerCard.id);
 });
 
 it(`click on heading should get key in handler`, ()=> {
-  const handleHeaderCardClick = jest.fn();
+  const onHeaderCardClick = jest.fn();
   const card = shallow(
       <OfferCard
         offerCard = {offerCard}
-        handleHeaderCardClick = {handleHeaderCardClick}
+        onHeaderCardClick = {onHeaderCardClick}
+        onCardMouseover = {() => {}}
       />
   );
 
   const currentCard = card.find(`.place-card__name a`);
   currentCard.simulate(`click`, mockEvent);
 
-  expect(handleHeaderCardClick.mock.calls[0][0]).toBe(offerCard.id);
+  expect(onHeaderCardClick.mock.calls[0][0]).toBe(offerCard.id);
 });
 
 it(`Should ad heading be pressed`, () => {
-  const handleHeaderCardClick = jest.fn();
+  const onHeaderCardClick = jest.fn();
   const main = shallow(
       <OfferCard
         offerCard = {offerCard}
-        handleHeaderCardClick = {handleHeaderCardClick}
+        onHeaderCardClick = {onHeaderCardClick}
+        onCardMouseover = {() => {}}
       />
   );
 
   const headerCard = main.find(`.place-card__name a`);
-  headerCard.props().onClick(mockEvent);
-  expect(handleHeaderCardClick.mock.calls.length).toBe(1);
+  headerCard.simulate(`click`, mockEvent);
+  expect(onHeaderCardClick.mock.calls.length).toBe(1);
 });

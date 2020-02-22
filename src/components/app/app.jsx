@@ -17,7 +17,7 @@ class App extends PureComponent {
       return <Main
         offersCount = {offersCount}
         offerCards = {offerCards}
-        handleHeaderCardClick = {this.handleHeaderCardClick}
+        onHeaderCardClick = {this.handleHeaderCardClick}
       />;
     } else {
       return this._renderAbout(this.state.currentCard);
@@ -44,7 +44,6 @@ class App extends PureComponent {
             {this._renderMain()}
           </Route>
           <Route exact path="/offer">
-            // тут рендер компонента
           </Route>
         </Switch>
       </BrowserRouter>);
@@ -56,7 +55,7 @@ App.propTypes = {
   offerCards: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
-        photos: PropTypes.arrayOf(PropTypes.string.isRequired),
+        photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
         name: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,

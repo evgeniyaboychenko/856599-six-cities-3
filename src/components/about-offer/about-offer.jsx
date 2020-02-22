@@ -312,7 +312,7 @@ const AboutOffer = (props) => {
 AboutOffer.propTypes = {
   offerCard: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    photos: PropTypes.arrayOf(PropTypes.string.isRequired),
+    photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     name: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
@@ -320,8 +320,8 @@ AboutOffer.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     countRooms: PropTypes.number.isRequired,
     maxGuests: PropTypes.number.isRequired,
-    appliances: PropTypes.arrayOf(PropTypes.string.isRequired),
-    descriptions: PropTypes.arrayOf(PropTypes.string.isRequired),
+    appliances: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    descriptions: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,

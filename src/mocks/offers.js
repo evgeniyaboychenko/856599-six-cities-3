@@ -7,6 +7,7 @@ const OFFER_DESCRIPTIONS = [`A quiet cozy and picturesque that hides behind a a 
 const AVATARS = [`avatar-angelina.jpg`, `avatar-max.jpg`];
 const NAMES = [`Angelina`, `Max`, `Kate`, `Pol`, `Mike`];
 const APPLIANCES = [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`];
+const COORDINATES = [[52.3909553943508, 4.85309666406198], [52.369553943508, 4.85309666406198], [52.3909553943508, 4.929309666406198], [52.3809553943508, 4.939309666406198]];
 const COUNT_CARD = 4;
 const MAX_RATING = 5;
 const MAX_PRICE = 200;
@@ -29,6 +30,7 @@ const generateOfferCard = () => {
     countRooms: getRandomNumber(10),
     maxGuests: getRandomNumber(10),
     appliances: generateRandomArray(APPLIANCES, getRandomNumber(APPLIANCES.length)),
+    coordinates: COORDINATES[getRandomNumber(COORDINATES.length)],
 
     owner: {
       avatar: AVATARS[getRandomNumber(AVATARS.length)],
