@@ -31,6 +31,8 @@ it(`should OfferList render correctly`, () => {
   const tree = renderer.create(
       <OfferList
         offerCards = {offerCards}
+        onHeaderCardClick = {() => {}}
+        onCardMouseover = {() => {}}
       />).toJSON();
 
   expect(tree).toMatchSnapshot();

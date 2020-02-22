@@ -17,13 +17,13 @@ const getPremium = (isPremium) => {
 };
 
 const OfferCard = (props) => {
-  const {offerCard, handleHeaderCardClick, handleCardMouseover} = props;
+  const {offerCard, onHeaderCardClick, onCardMouseover} = props;
   const {id, photos, name, rating, price, type, isPremium} = offerCard;
 
   return (
     <article className="cities__place-card place-card" key = {id} onMouseOver = {(evt) => {
       evt.preventDefault();
-      handleCardMouseover(id);
+      onCardMouseover(id);
     }
     }>
       {getPremium(isPremium)}
@@ -54,7 +54,7 @@ const OfferCard = (props) => {
         <h2 className="place-card__name">
           <a href="#" onClick = {(evt) => {
             evt.preventDefault();
-            handleHeaderCardClick(id);
+            onHeaderCardClick(id);
           }
           }>
             {name}
@@ -68,15 +68,15 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   offerCard: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    photos: PropTypes.arrayOf(PropTypes.string.isRequired),
+    photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     name: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired
   }),
-  handleHeaderCardClick: PropTypes.func,
-  handleCardMouseover: PropTypes.func,
+  onHeaderCardClick: PropTypes.func.isRequired,
+  onCardMouseover: PropTypes.func.isRequired,
 };
 
 export default OfferCard;

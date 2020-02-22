@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Main from './main.jsx';
-jest.mock(`../map/map.jsx`);
+import Map from './map.jsx';
+jest.mock(`./map`);
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
 const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
@@ -28,15 +28,19 @@ const offerCards = [
     price: 120,
     type: OFFER_TYPES[1],
     isPremium: false,
-  }];
+  }
+];
 
-it(`should Main render correctly`, () => {
+it(`should Map render correctly`, () => {
   const tree = renderer.create(
-      <Main
-        offersCount = {6}
+      <Map
         offerCards = {offerCards}
-        onHeaderCardClick = {() => {}}
-      />).toJSON();
+      />, {
+        createNodeMock: () => {
+          return {};
+        }
+      }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+

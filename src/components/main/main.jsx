@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OfferList from '../offer-list/offer-list.jsx';
+import Map from '../map/map.jsx';
 
 const Main = (props) => {
-  const {offersCount, offerCards, handleHeaderCardClick} = props;
+  const {offersCount, offerCards, onHeaderCardClick} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -90,12 +91,14 @@ const Main = (props) => {
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
                   offerCards = {offerCards}
-                  handleHeaderCardClick = {handleHeaderCardClick}
+                  onHeaderCardClick = {onHeaderCardClick}
                 />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                offerCards = {offerCards}
+              />
             </div>
           </div>
         </div>
@@ -109,7 +112,7 @@ Main.propTypes = {
   offerCards: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
-        photos: PropTypes.arrayOf(PropTypes.string.isRequired),
+        photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
         name: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
@@ -117,7 +120,7 @@ Main.propTypes = {
         isPremium: PropTypes.bool.isRequired
       })
   ).isRequired,
-  handleHeaderCardClick: PropTypes.func,
+  onHeaderCardClick: PropTypes.func.isRequired,
 };
 
 export default Main;
