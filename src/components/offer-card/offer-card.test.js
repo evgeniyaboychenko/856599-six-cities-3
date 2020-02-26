@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import OfferCard from './offer-card.jsx';
+import {CardType} from '../../const.js';
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
 const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
@@ -17,14 +18,28 @@ const offerCard =
   isPremium: true,
 };
 
+describe(`OfferCard component render correctly`, () => {
+  it(`should OfferCard render correctly for offer cities`, () => {
+    const tree = renderer.create(
+        <OfferCard
+          offerCard = {offerCard}
+          onHeaderCardClick = {() => {}}
+          onCardMouseover = {() => {}}
+          cardType = {CardType.CITY}
+        />).toJSON();
 
-it(`should OfferCard render correctly`, () => {
-  const tree = renderer.create(
-      <OfferCard
-        offerCard = {offerCard}
-        onHeaderCardClick = {() => {}}
-        onCardMouseover = {() => {}}
-      />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 
-  expect(tree).toMatchSnapshot();
+  it(`should OfferCard render correctly for offer near`, () => {
+    const tree = renderer.create(
+        <OfferCard
+          offerCard = {offerCard}
+          onHeaderCardClick = {() => {}}
+          onCardMouseover = {() => {}}
+          cardType = {CardType.NEAR}
+        />).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

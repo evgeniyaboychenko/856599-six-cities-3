@@ -9,6 +9,7 @@ const OFFER_TYPES = [`apartment`, `privet room`];
 const offerCard =
 {
   id: `1`,
+  commentsId: [`1`, `2`],
   photos: OFFER_IMAGES,
   name: OFFER_NAMES[0],
   rating: 2,
@@ -27,12 +28,11 @@ const offerCard =
   },
 };
 
-
 it(`should AboutOffer render correctly`, () => {
   const tree = renderer.create(
       <AboutOffer
         offerCard = {offerCard}
-      />).toJSON();
+  />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
