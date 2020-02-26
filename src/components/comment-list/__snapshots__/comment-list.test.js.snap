@@ -72,7 +72,7 @@ exports[`should Comment render correctly 1`] = `
           className="reviews__time"
           dateTime={2019-12-21T20:24:00.000Z}
         >
-          00
+          December 2019
         </time>
       </div>
     </li>
@@ -131,7 +131,7 @@ exports[`should Comment render correctly 1`] = `
           className="reviews__time"
           dateTime={2019-12-19T20:24:00.000Z}
         >
-          00
+          December 2019
         </time>
       </div>
     </li>

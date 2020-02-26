@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import AboutOffer from './about-offer.jsx';
+jest.mock(`../map/map.jsx`);
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
 const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
@@ -32,7 +33,8 @@ it(`should AboutOffer render correctly`, () => {
   const tree = renderer.create(
       <AboutOffer
         offerCard = {offerCard}
-  />).toJSON();
+      />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

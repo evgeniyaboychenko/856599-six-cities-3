@@ -6,7 +6,7 @@ import {generateComments} from '../../mocks/comments.js';
 import {generateOfferCards} from '../../mocks/offers.js';
 import OfferList from '../offer-list/offer-list.jsx';
 import {CardType} from '../../const.js';
-jest.mock(`../map/map.jsx`);
+
 
 const generateId = () => {
   return String(new Date().valueOf() + Math.random());

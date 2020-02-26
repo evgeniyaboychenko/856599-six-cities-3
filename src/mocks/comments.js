@@ -1,4 +1,4 @@
-import {getRandomNumber, getObjectsArray} from '../utils/utils.js';
+import {getRandomNumber, getRandomRange, getObjectsArray} from '../utils/utils.js';
 
 const DESCRIPTIONS = [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`, `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`];
 const AVATARS = [`avatar-angelina.jpg`, `avatar-max.jpg`];
@@ -11,6 +11,7 @@ const generateId = () => {
 
 const generateDateComment = () => {
   let date = new Date();
+  date.setMonth(getRandomRange(0, 12));
   return date;
 };
 

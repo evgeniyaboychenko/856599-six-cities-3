@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 
 const getPercent = (rating) => {
   return rating * 100 / 5;
+};
+
+const getDate = (date) => {
+  return moment(date).format(`MMMM YYYY`);
 };
 
 const Comment = ({comment}) => {
@@ -28,7 +33,7 @@ const Comment = ({comment}) => {
         <p className="reviews__text">
           {text}
         </p>
-        <time className="reviews__time" dateTime={date}>00</time>
+        <time className="reviews__time" dateTime={date}>{getDate(date)}</time>
       </div>
     </li>);
 };
