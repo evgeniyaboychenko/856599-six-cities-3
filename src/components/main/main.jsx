@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OfferList from '../offer-list/offer-list.jsx';
+import {CardType} from '../../const.js';
 import Map from '../map/map.jsx';
+
 
 const Main = (props) => {
   const {offersCount, offerCards, onHeaderCardClick} = props;
@@ -92,13 +94,17 @@ const Main = (props) => {
                 <OfferList
                   offerCards = {offerCards}
                   onHeaderCardClick = {onHeaderCardClick}
+                  cardType = {CardType.CITY}
                 />
               </div>
             </section>
             <div className="cities__right-section">
-              <Map
-                offerCards = {offerCards}
-              />
+              <section className="cities__map map">
+                <Map
+                  offersOnMap = {offerCards}
+                  idCurrentCard = {offerCards[0].id}
+                />
+              </section>
             </div>
           </div>
         </div>

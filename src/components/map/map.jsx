@@ -7,7 +7,12 @@ const ZOOM = 12;
 
 const icon = leaflet.icon({
   iconUrl: `img/pin.svg`,
-  iconSize: [30, 30]
+  iconSize: [27, 39]
+});
+
+const iconActive = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [27, 39]
 });
 
 class Map extends PureComponent {
@@ -17,7 +22,7 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offerCards} = this.props;
+    const {offersOnMap, idCurrentCard} = this.props;
     const map = leaflet.map(this.map.current, {
       center: CITY,
       zoom: ZOOM,
@@ -33,12 +38,20 @@ class Map extends PureComponent {
       })
       .addTo(map);
 
-    offerCards.map((item) => {
+    offersOnMap.map((item) => {
       const {coordinates} = item;
       leaflet
       .marker(coordinates, {icon})
       .addTo(map);
     });
+
+    const {coordinates} = offersOnMap.find((offer) => offer.id === idCurrentCard);
+    // if (offerCard) {
+    // const {coordinates} = offerCard;
+    leaflet
+      .marker(coordinates, {icon: iconActive})
+      .addTo(map);
+    // }
   }
 
   componentWillUnmount() {
@@ -47,15 +60,15 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <section className="cities__map map">
-        <div id="map" style={{height: `100%`}} ref = {this.map}></div>
-      </section>
+      // <section className="cities__map map">
+      <div id="map" style={{height: `100%`}} ref = {this.map}></div>
+      // </section>
     );
   }
 }
 
 Map.propTypes = {
-  offerCards: PropTypes.arrayOf(
+  offersOnMap: PropTypes.arrayOf(
       PropTypes.shape({
         coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
         // id: PropTypes.string.isRequired,
@@ -67,5 +80,6 @@ Map.propTypes = {
         // isPremium: PropTypes.bool.isRequired
       })
   ).isRequired,
+  idCurrentCard: PropTypes.string.isRequired,
 };
 export default Map;

@@ -1,4 +1,4 @@
-import {getRandomNumber, generateBolleanValue, generateRandomArray, getObjectsArray} from '../utils/utils.js';
+import {getRandomNumber, getRandomRange, generateBolleanValue, generateRandomArray, getObjectsArray} from '../utils/utils.js';
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`, `apartment-02.jpg`, `apartment-03.jpg`, `apartment-03.jpg`, `apartment-01.jpg`];
 const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`, `Beautiful & luxurious apartment at great location`, `Wood and stone place`];
@@ -8,7 +8,6 @@ const AVATARS = [`avatar-angelina.jpg`, `avatar-max.jpg`];
 const NAMES = [`Angelina`, `Max`, `Kate`, `Pol`, `Mike`];
 const APPLIANCES = [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`];
 const COORDINATES = [[52.3909553943508, 4.85309666406198], [52.369553943508, 4.85309666406198], [52.3909553943508, 4.929309666406198], [52.3809553943508, 4.939309666406198]];
-const COUNT_CARD = 4;
 const MAX_RATING = 5;
 const MAX_PRICE = 200;
 
@@ -26,7 +25,7 @@ const generateOfferCard = () => {
     isPremium: generateBolleanValue(),
 
     descriptions: generateRandomArray(OFFER_DESCRIPTIONS, getRandomNumber(OFFER_DESCRIPTIONS.length)),
-    photos: generateRandomArray(OFFER_IMAGES, getRandomNumber(OFFER_IMAGES.length)),
+    photos: generateRandomArray(OFFER_IMAGES, getRandomRange(1, OFFER_IMAGES.length + 1)),
     countRooms: getRandomNumber(10),
     maxGuests: getRandomNumber(10),
     appliances: generateRandomArray(APPLIANCES, getRandomNumber(APPLIANCES.length)),
@@ -40,6 +39,6 @@ const generateOfferCard = () => {
   };
 };
 
-export const generateOfferCards = () => {
-  return getObjectsArray(generateOfferCard, COUNT_CARD);
+export const generateOfferCards = (countCard) => {
+  return getObjectsArray(generateOfferCard, countCard);
 };

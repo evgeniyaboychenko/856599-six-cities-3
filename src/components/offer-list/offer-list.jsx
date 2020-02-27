@@ -14,7 +14,7 @@ class OfferList extends React.PureComponent {
   }
 
   render() {
-    const {offerCards, onHeaderCardClick} = this.props;
+    const {offerCards, onHeaderCardClick, cardType} = this.props;
     return offerCards.map((offerCard) => {
       const {id} = offerCard;
       return <OfferCard
@@ -22,6 +22,7 @@ class OfferList extends React.PureComponent {
         key = {id}
         onHeaderCardClick = {onHeaderCardClick}
         onCardMouseover = {this.handleCardMouseover}
+        cardType = {cardType}
       />;
     });
   }
@@ -40,6 +41,7 @@ OfferList.propTypes = {
       })
   ).isRequired,
   onHeaderCardClick: PropTypes.func.isRequired,
+  cardType: PropTypes.string.isRequired,
 };
 
 export default OfferList;

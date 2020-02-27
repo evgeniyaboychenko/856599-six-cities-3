@@ -17,17 +17,16 @@ const getPremium = (isPremium) => {
 };
 
 const OfferCard = (props) => {
-  const {offerCard, onHeaderCardClick, onCardMouseover} = props;
+  const {offerCard, onHeaderCardClick, onCardMouseover, cardType} = props;
   const {id, photos, name, rating, price, type, isPremium} = offerCard;
-
   return (
-    <article className="cities__place-card place-card" key = {id} onMouseOver = {(evt) => {
+    <article className={cardType + `__place-card place-card`} key = {id} onMouseOver = {(evt) => {
       evt.preventDefault();
       onCardMouseover(id);
     }
     }>
       {getPremium(isPremium)}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={cardType + `__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img className="place-card__image" src = {`img/` + photos[0]} width="260" height="200" alt="Place image"/>
         </a>
@@ -77,6 +76,7 @@ OfferCard.propTypes = {
   }),
   onHeaderCardClick: PropTypes.func.isRequired,
   onCardMouseover: PropTypes.func.isRequired,
+  cardType: PropTypes.string.isRequired,
 };
 
 export default OfferCard;

@@ -35,11 +35,7 @@ it(`should Map render correctly`, () => {
   const tree = renderer.create(
       <Map
         offerCards = {offerCards}
-      />, {
-        createNodeMock: () => {
-          return {};
-        }
-      }).toJSON();
+      />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

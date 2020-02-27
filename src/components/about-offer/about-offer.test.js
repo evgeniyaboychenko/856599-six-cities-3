@@ -1,6 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import AboutOffer from './about-offer.jsx';
+jest.mock(`../map/map.jsx`);
+jest.mock(`../comment-list/comment-list.jsx`);
+jest.mock(`../offer-list/offer-list.jsx`);
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
 const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
@@ -9,6 +12,7 @@ const OFFER_TYPES = [`apartment`, `privet room`];
 const offerCard =
 {
   id: `1`,
+  commentsId: [`1`, `2`],
   photos: OFFER_IMAGES,
   name: OFFER_NAMES[0],
   rating: 2,
@@ -27,12 +31,12 @@ const offerCard =
   },
 };
 
-
 it(`should AboutOffer render correctly`, () => {
   const tree = renderer.create(
       <AboutOffer
         offerCard = {offerCard}
-      />).toJSON();
+      />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

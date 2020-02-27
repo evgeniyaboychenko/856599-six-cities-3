@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import OfferList from './offer-list.jsx';
+import {CardType} from '../../const.js';
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
 const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
@@ -27,13 +28,27 @@ const offerCards = [
   }
 ];
 
-it(`should OfferList render correctly`, () => {
-  const tree = renderer.create(
-      <OfferList
-        offerCards = {offerCards}
-        onHeaderCardClick = {() => {}}
-        onCardMouseover = {() => {}}
-      />).toJSON();
+describe(`OfferList component render correctly`, () => {
+  it(`should OfferList render correctly for offer cities`, () => {
+    const tree = renderer.create(
+        <OfferList
+          offerCards = {offerCards}
+          onHeaderCardClick = {() => {}}
+          onCardMouseover = {() => {}}
+          cardType = {CardType.CITY}
+        />).toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
+  it(`should OfferList render correctly for offer near`, () => {
+    const tree = renderer.create(
+        <OfferList
+          offerCards = {offerCards}
+          onHeaderCardClick = {() => {}}
+          onCardMouseover = {() => {}}
+          cardType = {CardType.NEAR}
+        />).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });
