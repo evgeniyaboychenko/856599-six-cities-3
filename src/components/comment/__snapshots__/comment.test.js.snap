@@ -54,9 +54,9 @@ exports[`should Comment render correctly 1`] = `
     </p>
     <time
       className="reviews__time"
-      dateTime={2019-12-16T20:24:00.000Z}
+      dateTime="January 1970"
     >
-      December 2019
+      January 1970
     </time>
   </div>
 </li>

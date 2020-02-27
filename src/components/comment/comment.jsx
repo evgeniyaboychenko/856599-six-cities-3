@@ -33,7 +33,7 @@ const Comment = ({comment}) => {
         <p className="reviews__text">
           {text}
         </p>
-        <time className="reviews__time" dateTime={date}>{getDate(date)}</time>
+        <time className="reviews__time" dateTime={getDate(date)}>{getDate(date)}</time>
       </div>
     </li>);
 };
@@ -45,7 +45,7 @@ Comment.propTypes = {
     name: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date).isRequired,
+    date: PropTypes.number.isRequired,
   }).isRequired,
 };
 

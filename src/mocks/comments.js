@@ -9,11 +9,11 @@ const generateId = () => {
   return String(new Date().valueOf() + Math.random());
 };
 
-const generateDateComment = () => {
-  let date = new Date();
-  date.setMonth(getRandomRange(0, 12));
-  return date;
-};
+// const generateDateComment = () => {
+//   let date = new Date();
+//   date.setMonth(getRandomRange(0, 12));
+//   return date;
+// };
 
 const generateComment = () => {
   return {
@@ -22,7 +22,7 @@ const generateComment = () => {
     name: NAMES[getRandomNumber(NAMES.length)],
     text: DESCRIPTIONS[getRandomNumber(DESCRIPTIONS.length)],
     rating: getRandomNumber(MAX_RATING + 1),
-    date: generateDateComment()
+    date: getRandomRange(1661954344, 1579498575391)
   };
 };
 

@@ -80,7 +80,7 @@ CommentList.propTypes = {
         name: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired,
-        date: PropTypes.instanceOf(Date).isRequired,
+        date: PropTypes.number.isRequired,
       }).isRequired
   ).isRequired,
 };
