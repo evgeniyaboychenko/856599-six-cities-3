@@ -13,7 +13,7 @@ const comments =
   name: NAMES[0],
   rating: 2,
   text: DESCRIPTIONS[0],
-  date: new Date(`December 20, 2019 03:24:00`),
+  date: new Date(`December 20, 2019 04:24:00`),
 },
 {
   id: `2`,
