@@ -2,6 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import AboutOffer from './about-offer.jsx';
 jest.mock(`../map/map.jsx`);
+jest.mock(`../comment-list/comment-list.jsx`);
+jest.mock(`../offer-list/offer-list.jsx`);
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
 const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
