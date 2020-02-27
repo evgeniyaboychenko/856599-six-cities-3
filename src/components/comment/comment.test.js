@@ -13,7 +13,7 @@ const comment =
   name: NAMES[0],
   rating: 2,
   text: DESCRIPTIONS[0],
-  date: new Date(`December 20, 2019 04:24:00`),
+  date: new Date(`2019-12-17T03:24:00`),
 };
 
 it(`should Comment render correctly`, () => {

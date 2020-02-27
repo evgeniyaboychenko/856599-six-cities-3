@@ -30,65 +30,6 @@ exports[`should Comment render correctly 1`] = `
             alt="Reviews avatar"
             className="reviews__avatar user__avatar"
             height="54"
-            src="img/avatar-max.jpg"
-            width="54"
-          />
-        </div>
-        <span
-          className="reviews__user-name"
-        >
-          Max
-        </span>
-      </div>
-      <div
-        className="reviews__info"
-      >
-        <div
-          className="reviews__rating rating"
-        >
-          <div
-            className="reviews__stars rating__stars"
-          >
-            <span
-              style={
-                Object {
-                  "width": 40,
-                }
-              }
-            />
-            <span
-              className="visually-hidden"
-            >
-              Rating
-            </span>
-          </div>
-        </div>
-        <p
-          className="reviews__text"
-        >
-          An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
-        </p>
-        <time
-          className="reviews__time"
-          dateTime={2019-12-25T17:00:00.000Z}
-        >
-          December 2019
-        </time>
-      </div>
-    </li>
-    <li
-      className="reviews__item"
-    >
-      <div
-        className="reviews__user user"
-      >
-        <div
-          className="reviews__avatar-wrapper user__avatar-wrapper"
-        >
-          <img
-            alt="Reviews avatar"
-            className="reviews__avatar user__avatar"
-            height="54"
             src="img/avatar-angelina.jpg"
             width="54"
           />
@@ -129,7 +70,66 @@ exports[`should Comment render correctly 1`] = `
         </p>
         <time
           className="reviews__time"
-          dateTime={2019-12-24T17:00:00.000Z}
+          dateTime={2019-12-16T20:24:00.000Z}
+        >
+          December 2019
+        </time>
+      </div>
+    </li>
+    <li
+      className="reviews__item"
+    >
+      <div
+        className="reviews__user user"
+      >
+        <div
+          className="reviews__avatar-wrapper user__avatar-wrapper"
+        >
+          <img
+            alt="Reviews avatar"
+            className="reviews__avatar user__avatar"
+            height="54"
+            src="img/avatar-max.jpg"
+            width="54"
+          />
+        </div>
+        <span
+          className="reviews__user-name"
+        >
+          Max
+        </span>
+      </div>
+      <div
+        className="reviews__info"
+      >
+        <div
+          className="reviews__rating rating"
+        >
+          <div
+            className="reviews__stars rating__stars"
+          >
+            <span
+              style={
+                Object {
+                  "width": 40,
+                }
+              }
+            />
+            <span
+              className="visually-hidden"
+            >
+              Rating
+            </span>
+          </div>
+        </div>
+        <p
+          className="reviews__text"
+        >
+          An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+        </p>
+        <time
+          className="reviews__time"
+          dateTime={2019-12-16T20:24:00.000Z}
         >
           December 2019
         </time>
