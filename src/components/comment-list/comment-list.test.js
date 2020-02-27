@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import CommentList from './comment-list.jsx';
+import moment from 'moment';
 
 const DESCRIPTIONS = [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`, `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`];
 const AVATARS = [`avatar-angelina.jpg`, `avatar-max.jpg`];
@@ -13,7 +14,7 @@ const comments =
   name: NAMES[0],
   rating: 2,
   text: DESCRIPTIONS[0],
-  date: new Date(`December 20, 2019 04:24:00`),
+  date: moment("2019-12-25").toDate(),
 },
 {
   id: `2`,
@@ -21,7 +22,7 @@ const comments =
   name: NAMES[1],
   rating: 2,
   text: DESCRIPTIONS[1],
-  date: new Date(`December 22, 2019 03:24:00`),
+  date: moment("2019-12-26").toDate(),
 }];
 
 it(`should Comment render correctly`, () => {

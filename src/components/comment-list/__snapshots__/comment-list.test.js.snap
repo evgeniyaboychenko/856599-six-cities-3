@@ -70,7 +70,7 @@ exports[`should Comment render correctly 1`] = `
         </p>
         <time
           className="reviews__time"
-          dateTime={2019-12-21T20:24:00.000Z}
+          dateTime={2019-12-25T17:00:00.000Z}
         >
           December 2019
         </time>
@@ -129,7 +129,7 @@ exports[`should Comment render correctly 1`] = `
         </p>
         <time
           className="reviews__time"
-          dateTime={2019-12-19T21:24:00.000Z}
+          dateTime={2019-12-24T17:00:00.000Z}
         >
           December 2019
         </time>
