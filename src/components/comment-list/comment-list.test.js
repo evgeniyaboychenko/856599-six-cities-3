@@ -14,7 +14,7 @@ const comments =
   name: NAMES[0],
   rating: 2,
   text: DESCRIPTIONS[0],
-  date: moment("2019-12-25").toDate(),
+  date: moment(`2019-12-25`).toDate(),
 },
 {
   id: `2`,
@@ -22,7 +22,7 @@ const comments =
   name: NAMES[1],
   rating: 2,
   text: DESCRIPTIONS[1],
-  date: moment("2019-12-26").toDate(),
+  date: moment(`2019-12-26`).toDate(),
 }];
 
 it(`should Comment render correctly`, () => {
