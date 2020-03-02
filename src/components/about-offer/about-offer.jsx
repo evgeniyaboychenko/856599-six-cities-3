@@ -39,7 +39,7 @@ const getDescription = (descriptions) => {
 };
 
 const AboutOffer = (props) => {
-  const {offerCard} = props;
+  const {offerCard, activeCity} = props;
   const comments = generateComments();
   const offersNearby = generateOfferCards(3);
   const offersForMap = offersNearby.concat(offerCard);
@@ -145,6 +145,7 @@ const AboutOffer = (props) => {
           </div>
           <section className="property__map map">
             <Map
+              activeCity = {activeCity}
               offersOnMap = {offersForMap}
               idCurrentCard = {offerCard.id}
             />
@@ -186,8 +187,22 @@ AboutOffer.propTypes = {
       name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
     }),
-  }),
+  }).isRequired,
+  activeCity: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  }).isRequired,
 };
 
+
+// const mapStateToProps = (state) => (
+//   {
+//     activeCity: state.city
+//   }
+// );
+
+// export {AboutOffer};
+// export default connect(mapStateToProps)(AboutOffer);
 export default AboutOffer;
 

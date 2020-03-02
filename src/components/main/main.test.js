@@ -8,6 +8,32 @@ const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apart
 const OFFER_TYPES = [`apartment`, `privet room`];
 const COORDINATES = [[52.3909553943508, 4.85309666406198], [52.369553943508, 4.85309666406198], [52.3909553943508, 4.929309666406198], [52.3809553943508, 4.939309666406198]];
 
+const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+const COORDINATES_CITY = [[48.856663, 2.351556], [50.930779, 6.938399], [50.854283, 4.352131], [52.373057, 4.892557], [53.552645, 9.966287], [51.230569, 6.787428]];
+
+const activeCity = {
+  id: `1`,
+  name: CITIES[0],
+  coordinatesCity: COORDINATES_CITY[0],
+};
+
+const cities = [{
+  id: `1`,
+  name: CITIES[0],
+  coordinatesCity: COORDINATES_CITY[0],
+},
+{
+  id: `2`,
+  name: CITIES[1],
+  coordinatesCity: COORDINATES_CITY[1],
+},
+{
+  id: `3`,
+  name: CITIES[2],
+  coordinatesCity: COORDINATES_CITY[2],
+}
+];
+
 const offerCards = [
   {
     id: `1`,
@@ -36,6 +62,9 @@ it(`should Main render correctly`, () => {
         offersCount = {6}
         offerCards = {offerCards}
         onHeaderCardClick = {() => {}}
+        activeCity = {activeCity}
+        cities = {cities}
+        onCityClick = {() => {}}
       />).toJSON();
 
   expect(tree).toMatchSnapshot();

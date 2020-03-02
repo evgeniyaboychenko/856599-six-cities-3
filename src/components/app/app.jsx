@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import AboutOffer from '../about-offer/about-offer.jsx';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -11,13 +13,17 @@ class App extends PureComponent {
     this.handleHeaderCardClick = this.handleHeaderCardClick.bind(this);
   }
 
+
   _renderMain() {
-    const {offersCount, offerCards} = this.props;
+    const {offerCards, cities, activeCity, onCityClick} = this.props;
     if (!this.state.currentCard) {
       return <Main
-        offersCount = {offersCount}
+        activeCity = {activeCity}
+        cities = {cities}
+        offersCount = {offerCards.length}
         offerCards = {offerCards}
         onHeaderCardClick = {this.handleHeaderCardClick}
+        onCityClick = {onCityClick}
       />;
     } else {
       return this._renderAbout(this.state.currentCard);
@@ -25,9 +31,10 @@ class App extends PureComponent {
   }
 
   _renderAbout(idCard) {
-    const {offerCards} = this.props;
+    const {offerCards, activeCity} = this.props;
     const offerCard = offerCards.find((item) => item.id === idCard);
     return <AboutOffer
+      activeCity = {activeCity}
       offerCard = {offerCard}
     />;
   }
@@ -51,7 +58,6 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offerCards: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -63,6 +69,32 @@ App.propTypes = {
         isPremium: PropTypes.bool.isRequired
       })
   ).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  })).isRequired,
+  activeCity: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  }).isRequired,
+  onCityClick: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => (
+  {
+    activeCity: state.city,
+    offerCards: state.offers
+  }
+);
+
+const mapDispatchToProps = (dispatch) => ({
+  onCityClick(activeCity) {
+    dispatch(ActionCreator.changeCity(activeCity));
+    dispatch(ActionCreator.getOfferList(activeCity));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

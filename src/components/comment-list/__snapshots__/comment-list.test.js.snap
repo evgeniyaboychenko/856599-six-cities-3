@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should Comment render correctly 1`] = `
+exports[`should CommentList render correctly 1`] = `
 <section
   className="property__reviews reviews"
 >
