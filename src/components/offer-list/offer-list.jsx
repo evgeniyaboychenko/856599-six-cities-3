@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
+// import {connect} from "react-redux";
+// import {ActionCreator} from "../../reducer.js";
+// import { generateOfferCards } from '../../mocks/offers.js';
 
 class OfferList extends React.PureComponent {
   constructor(props) {
@@ -44,4 +47,12 @@ OfferList.propTypes = {
   cardType: PropTypes.string.isRequired,
 };
 
+// const mapStateToProps = (state) => (
+//   {
+//     offerCards: state.offers
+//   }
+// );
+
 export default OfferList;
+// export {OfferList};
+// export default connect(mapStateToProps)(OfferList)

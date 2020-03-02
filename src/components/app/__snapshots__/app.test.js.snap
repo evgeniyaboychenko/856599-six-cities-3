@@ -75,9 +75,10 @@ exports[`should App render correctly 1`] = `
         >
           <li
             className="locations__item"
+            onClick={[Function]}
           >
             <a
-              className="locations__item-link tabs__item"
+              className="locations__item-link tabs__item tabs__item--active"
               href="#"
             >
               <span>
@@ -87,6 +88,7 @@ exports[`should App render correctly 1`] = `
           </li>
           <li
             className="locations__item"
+            onClick={[Function]}
           >
             <a
               className="locations__item-link tabs__item"
@@ -99,6 +101,7 @@ exports[`should App render correctly 1`] = `
           </li>
           <li
             className="locations__item"
+            onClick={[Function]}
           >
             <a
               className="locations__item-link tabs__item"
@@ -106,41 +109,6 @@ exports[`should App render correctly 1`] = `
             >
               <span>
                 Brussels
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item tabs__item--active"
-            >
-              <span>
-                Amsterdam
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Hamburg
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Dusseldorf
               </span>
             </a>
           </li>
@@ -164,8 +132,9 @@ exports[`should App render correctly 1`] = `
           <b
             className="places__found"
           >
-            6
-             places to stay in Amsterdam
+            2
+             places to stay in 
+            Paris
           </b>
           <form
             action="#"
@@ -437,6 +406,7 @@ exports[`should App render correctly 1`] = `
         </div>
       </div>
     </div>
+    2
   </main>
 </div>
 `;

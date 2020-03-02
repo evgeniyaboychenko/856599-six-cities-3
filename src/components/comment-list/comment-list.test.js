@@ -24,7 +24,7 @@ const comments =
   date: 1661954344,
 }];
 
-it(`should Comment render correctly`, () => {
+it(`should CommentList render correctly`, () => {
   const tree = renderer.create(
       <CommentList
         comments = {comments}

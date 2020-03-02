@@ -27,3 +27,7 @@ export const getObjectsArray = (obj, count) => {
   return new Array(count)
     .fill(``).map(obj);
 };
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
