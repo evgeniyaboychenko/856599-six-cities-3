@@ -1,6 +1,7 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
+import {connect} from 'react-redux';
 
 const ZOOM = 12;
 
@@ -44,6 +45,7 @@ class Map extends PureComponent {
 
     offersOnMap.map((item) => {
       const {coordinates} = item;
+      this.markers.push(leaflet.marker(coordinates, {icon}).addTo(this.mapCity));
       if (item.id !== idCurrentCard) {
         this.markers.push(leaflet.marker(coordinates, {icon}).addTo(this.mapCity));
       } else {
@@ -58,22 +60,29 @@ class Map extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const {offersOnMap, idCurrentCard, activeCity} = this.props;
-    if (activeCity.id !== prevProps.activeCity.id) {
 
+    if (activeCity.id !== prevProps.activeCity.id || idCurrentCard !== prevProps.idCurrentCard) {
       const coordinatesCity = activeCity.coordinatesCity;
       this.mapCity.setView(coordinatesCity, ZOOM);
 
       this.markers.map((markers) => this.mapCity.removeLayer(markers));
       this.markers = [];
 
-      offersOnMap.map((item) => {
-        const {coordinates} = item;
-        if (item.id !== idCurrentCard) {
+      if (activeCity.id !== prevProps.activeCity.id) {
+        offersOnMap.map((item) => {
+          const {coordinates} = item;
           this.markers.push(leaflet.marker(coordinates, {icon}).addTo(this.mapCity));
-        } else {
-          this.markers.push(leaflet.marker(coordinates, {icon: iconActive}).addTo(this.mapCity));
-        }
-      });
+        });
+      } else {
+        offersOnMap.map((item) => {
+          const {coordinates} = item;
+          if (item.id !== idCurrentCard) {
+            this.markers.push(leaflet.marker(coordinates, {icon}).addTo(this.mapCity));
+          } else {
+            this.markers.push(leaflet.marker(coordinates, {icon: iconActive}).addTo(this.mapCity));
+          }
+        });
+      }
     }
   }
 
@@ -97,4 +106,13 @@ Map.propTypes = {
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   }).isRequired,
 };
-export default Map;
+
+const mapStateToProps = (state) => (
+  {
+    activeCity: state.city,
+    idCurrentCard: state.idActiveCard
+  }
+);
+
+export {Map};
+export default connect(mapStateToProps)(Map);

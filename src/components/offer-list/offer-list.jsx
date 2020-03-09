@@ -1,35 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
-// import {connect} from "react-redux";
-// import {ActionCreator} from "../../reducer.js";
-// import { generateOfferCards } from '../../mocks/offers.js';
+import {connect} from 'react-redux';
 
-class OfferList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {currentCard: null};
-    this.handleCardMouseover = this.handleCardMouseover.bind(this);
+const sortOffers = (offers, sortType) => {
+  switch (sortType) {
+    case (SortType.DEFAULT):
+      return offers;
+    case (SortType.LOW_TO_HIGH):
+      return offers.slice().sort((a, b) => (a.price - b.price));
+    case (SortType.HIGH_TO_LOW):
+      return offers.slice().sort((a, b) => (b.price - a.price));
+    case (SortType.TOP_RATED_FIRST):
+      return offers.slice().sort((a, b) => (b.rating - a.rating));
   }
+  return offers;
+};
 
-  handleCardMouseover(idCurrentCard) {
-    this.setState({currentCard: idCurrentCard});
-  }
-
-  render() {
-    const {offerCards, onHeaderCardClick, cardType} = this.props;
-    return offerCards.map((offerCard) => {
-      const {id} = offerCard;
-      return <OfferCard
-        offerCard = {offerCard}
-        key = {id}
-        onHeaderCardClick = {onHeaderCardClick}
-        onCardMouseover = {this.handleCardMouseover}
-        cardType = {cardType}
-      />;
-    });
-  }
-}
+const OfferList = (props) => {
+  const {offerCards, onHeaderCardClick, cardType, activeSortItem} = props;
+  return sortOffers(offerCards, activeSortItem).map((offerCard) => {
+    const {id} = offerCard;
+    return <OfferCard
+      offerCard = {offerCard}
+      key = {id}
+      onHeaderCardClick = {onHeaderCardClick}
+      // onCardMouseover = {this.handleCardMouseover}
+      cardType = {cardType}
+    />;
+  });
+};
 
 OfferList.propTypes = {
   offerCards: PropTypes.arrayOf(
@@ -45,14 +45,22 @@ OfferList.propTypes = {
   ).isRequired,
   onHeaderCardClick: PropTypes.func.isRequired,
   cardType: PropTypes.string.isRequired,
+  activeSortItem: PropTypes.string.isRequired
 };
 
-// const mapStateToProps = (state) => (
-//   {
-//     offerCards: state.offers
-//   }
-// );
+const SortType = {
+  DEFAULT: `Popular`,
+  LOW_TO_HIGH: `Price: low to high`,
+  HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED_FIRST: `Top rated first`
+};
 
-export default OfferList;
-// export {OfferList};
-// export default connect(mapStateToProps)(OfferList)
+const mapStateToProps = (state) => (
+  {
+    offerCards: state.offers,
+    activeSortItem: state.activeSortItem
+  }
+);
+
+export {OfferList};
+export default connect(mapStateToProps)(OfferList);

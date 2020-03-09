@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import AboutOffer from '../about-offer/about-offer.jsx';
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer.js';
+import {SortType} from '../../const.js';
 
 class App extends PureComponent {
   constructor(props) {
@@ -91,6 +92,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(activeCity) {
+    dispatch(ActionCreator.changeSort(SortType.DEFAULT));
     dispatch(ActionCreator.changeCity(activeCity));
     dispatch(ActionCreator.getOfferList(activeCity));
   },

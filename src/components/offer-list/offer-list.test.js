@@ -1,7 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import OfferList from './offer-list.jsx';
+import {OfferList} from './offer-list.jsx';
 import {CardType} from '../../const.js';
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+const mockStore = configureStore([]);
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
 const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
@@ -30,24 +34,38 @@ const offerCards = [
 
 describe(`OfferList component render correctly`, () => {
   it(`should OfferList render correctly for offer cities`, () => {
+    const store = mockStore({
+      offers: offerCards,
+      activeSortItem: `Popular`
+    });
+
     const tree = renderer.create(
-        <OfferList
-          offerCards = {offerCards}
-          onHeaderCardClick = {() => {}}
-          onCardMouseover = {() => {}}
-          cardType = {CardType.CITY}
-        />).toJSON();
+        <Provider store={store}>
+          <OfferList
+            offerCards = {offerCards}
+            onHeaderCardClick = {() => {}}
+            cardType = {CardType.CITY}
+            activeSortItem = {`Popular`}
+          />
+        </Provider>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
+
   it(`should OfferList render correctly for offer near`, () => {
+    const store = mockStore({
+      offers: offerCards,
+      activeSortItem: `Popular`
+    });
     const tree = renderer.create(
-        <OfferList
-          offerCards = {offerCards}
-          onHeaderCardClick = {() => {}}
-          onCardMouseover = {() => {}}
-          cardType = {CardType.NEAR}
-        />).toJSON();
+        <Provider store={store}>
+          <OfferList
+            offerCards = {offerCards}
+            onHeaderCardClick = {() => {}}
+            cardType = {CardType.NEAR}
+            activeSortItem = {`Popular`}
+          />
+        </Provider>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

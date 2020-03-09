@@ -1,6 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {App} from './app.jsx';
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+const mockStore = configureStore([]);
 jest.mock(`../map/map.jsx`);
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
@@ -54,15 +58,27 @@ const offerCards = [
   }];
 
 it(`should App render correctly`, () => {
+  const store = mockStore({
+    // city: {
+    //   id: `1`,
+    //   name: CITIES[0],
+    //   coordinatesCity: COORDINATES_CITY[0]
+    // },
+    offers: offerCards,
+    activeSortItem: `Popular`
+  });
+
   const tree = renderer.create(
-      <App
-        activeCity = {activeCity}
-        cities = {cities}
-        offersCount = {offerCards.length}
-        offerCards = {offerCards}
-        onHeaderCardClick = {() => {}}
-        onCityClick = {() => {}}
-      />
+      <Provider store={store}>
+        <App
+          activeCity = {activeCity}
+          cities = {cities}
+          offersCount = {offerCards.length}
+          offerCards = {offerCards}
+          onHeaderCardClick = {() => {}}
+          onCityClick = {() => {}}
+        />
+      </Provider>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
