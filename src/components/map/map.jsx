@@ -1,6 +1,8 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
+import {connect} from 'react-redux';
+import {CardType} from '../../const.js';
 
 const ZOOM = 12;
 
@@ -23,7 +25,15 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offersOnMap, idCurrentCard, activeCity} = this.props;
+    const {offerCards, idCurrentCard, cardType, activeCity, offersNearby} = this.props;
+    let offersOnMap = [];
+    if (cardType === CardType.CITY) {
+      offersOnMap = offerCards;
+    } else {
+      offersOnMap = offersNearby.concat(offerCards.find((offer) => offer.id === idCurrentCard));
+    }
+    // const offersForMap = offersNearby.concat(offerCard);
+
     const coordinatesCity = activeCity.coordinatesCity;
     this.mapCity = leaflet.map(this.map.current, {
       center: coordinatesCity,
@@ -57,23 +67,36 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {offersOnMap, idCurrentCard, activeCity} = this.props;
-    if (activeCity.id !== prevProps.activeCity.id) {
+    const {offerCards, idCurrentCard, cardType, activeCity, offersNearby} = this.props;
+    let offersOnMap = [];
+    if (cardType === CardType.CITY) {
+      offersOnMap = offerCards;
+    } else {
+      offersOnMap = offersNearby.concat(offerCards.find((offer) => offer.id === idCurrentCard));
+    }
 
+    if (activeCity.id !== prevProps.activeCity.id || idCurrentCard !== prevProps.idCurrentCard) {
       const coordinatesCity = activeCity.coordinatesCity;
       this.mapCity.setView(coordinatesCity, ZOOM);
 
       this.markers.map((markers) => this.mapCity.removeLayer(markers));
       this.markers = [];
 
-      offersOnMap.map((item) => {
-        const {coordinates} = item;
-        if (item.id !== idCurrentCard) {
+      if (activeCity.id !== prevProps.activeCity.id) {
+        offersOnMap.map((item) => {
+          const {coordinates} = item;
           this.markers.push(leaflet.marker(coordinates, {icon}).addTo(this.mapCity));
-        } else {
-          this.markers.push(leaflet.marker(coordinates, {icon: iconActive}).addTo(this.mapCity));
-        }
-      });
+        });
+      } else {
+        offersOnMap.map((item) => {
+          const {coordinates} = item;
+          if (item.id !== idCurrentCard) {
+            this.markers.push(leaflet.marker(coordinates, {icon}).addTo(this.mapCity));
+          } else {
+            this.markers.push(leaflet.marker(coordinates, {icon: iconActive}).addTo(this.mapCity));
+          }
+        });
+      }
     }
   }
 
@@ -85,7 +108,12 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  offersOnMap: PropTypes.arrayOf(
+  offerCards: PropTypes.arrayOf(
+      PropTypes.shape({
+        coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+      })
+  ).isRequired,
+  offersNearby: PropTypes.arrayOf(
       PropTypes.shape({
         coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
       })
@@ -96,5 +124,17 @@ Map.propTypes = {
     name: PropTypes.string.isRequired,
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   }).isRequired,
+  cardType: PropTypes.string.isRequired,
 };
-export default Map;
+
+const mapStateToProps = (state) => (
+  {
+    activeCity: state.city,
+    offerCards: state.offers,
+    offersNearby: state.offersNear,
+    idCurrentCard: state.idActiveCard
+  }
+);
+
+export {Map};
+export default connect(mapStateToProps)(Map);

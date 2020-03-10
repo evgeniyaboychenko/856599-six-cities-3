@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer.js';
+import {CardType} from '../../const.js';
 
 
 const getPercent = (rating) => {
@@ -22,7 +25,9 @@ const OfferCard = (props) => {
   return (
     <article className={cardType + `__place-card place-card`} key = {id} onMouseOver = {(evt) => {
       evt.preventDefault();
-      onCardMouseover(id);
+      if (cardType === CardType.CITY) {
+        onCardMouseover(id);
+      }
     }
     }>
       {getPremium(isPremium)}
@@ -79,4 +84,17 @@ OfferCard.propTypes = {
   cardType: PropTypes.string.isRequired,
 };
 
-export default OfferCard;
+const mapStateToProps = (state) => (
+  {
+    id: state.idActiveCard
+  }
+);
+
+const mapDispatchToProps = (dispatch) => ({
+  onCardMouseover(idActiveCard) {
+    dispatch(ActionCreator.changeCurrenCard(idActiveCard));
+  }
+});
+
+export {OfferCard};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);

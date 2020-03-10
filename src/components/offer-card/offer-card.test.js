@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import OfferCard from './offer-card.jsx';
+import {OfferCard} from './offer-card.jsx';
 import {CardType} from '../../const.js';
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];

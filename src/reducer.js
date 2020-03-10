@@ -1,18 +1,25 @@
 import {extend} from './utils/utils.js';
-import {cities, offers} from './mocks/offers.js';
+import {generateOfferCards, cities, offers} from './mocks/offers.js';
 
 const getOffers = (cityId) => {
   return offers.filter((offer) => offer.cityId === cityId);
 };
 
+const offersNearby = generateOfferCards(3);
+
 const initialState = {
   city: cities[0],
   offers: getOffers(cities[0].id),
+  activeSortItem: `Popular`,
+  idActiveCard: `-1`,
+  offersNear: offersNearby
 };
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   GET_OFFER_LIST: `GET_OFFER_LIST`,
+  CHANGE_CURRENT_CARD: `CHANGE_CURRENT_CARD`,
+  CHANGE_SORT: `CHANGE_SORT`
 };
 
 const ActionCreator = {
@@ -22,8 +29,16 @@ const ActionCreator = {
   }),
   getOfferList: (activeCity) => ({
     type: ActionType.GET_OFFER_LIST,
-    payload: getOffers(activeCity.id)
-  })
+    payload: activeCity
+  }),
+  changeCurrenCard: (idActiveCard) => ({
+    type: ActionType.CHANGE_CURRENT_CARD,
+    payload: idActiveCard
+  }),
+  changeSort: (sortType) => ({
+    type: ActionType.CHANGE_SORT,
+    payload: sortType
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,7 +50,17 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.GET_OFFER_LIST:
       return extend(state, {
-        offers: action.payload
+        offers: getOffers(action.payload.id),
+      });
+
+    case ActionType.CHANGE_CURRENT_CARD:
+      return extend(state, {
+        idActiveCard: action.payload
+      });
+
+    case ActionType.CHANGE_SORT:
+      return extend(state, {
+        activeSortItem: action.payload
       });
   }
   return state;
