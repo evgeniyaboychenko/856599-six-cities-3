@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
 import {connect} from 'react-redux';
+import {CardType} from '../../const.js';
 
 const sortOffers = (offers, sortType) => {
   switch (sortType) {
@@ -18,8 +19,15 @@ const sortOffers = (offers, sortType) => {
 };
 
 const OfferList = (props) => {
-  const {offerCards, onHeaderCardClick, cardType, activeSortItem} = props;
-  return sortOffers(offerCards, activeSortItem).map((offerCard) => {
+  const {offerCards, onHeaderCardClick, cardType, activeSortItem, offersNear} = props;
+  let offers = [];
+  if (cardType === CardType.CITY) {
+    offers = offerCards;
+  } else {
+    offers = offersNear;
+  }
+  // return sortOffers(offerCards, activeSortItem).map((offerCard) => {
+  return sortOffers(offers, activeSortItem).map((offerCard) => {
     const {id} = offerCard;
     return <OfferCard
       offerCard = {offerCard}
@@ -33,6 +41,17 @@ const OfferList = (props) => {
 
 OfferList.propTypes = {
   offerCards: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        name: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        isPremium: PropTypes.bool.isRequired
+      })
+  ).isRequired,
+  offersNear: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
         photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
@@ -58,6 +77,7 @@ const SortType = {
 const mapStateToProps = (state) => (
   {
     offerCards: state.offers,
+    offersNear: state.offersNear,
     activeSortItem: state.activeSortItem
   }
 );

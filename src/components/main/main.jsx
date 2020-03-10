@@ -7,7 +7,7 @@ import Map from '../map/map.jsx';
 import SortList from '../sort-list/sort-list.jsx';
 
 const Main = (props) => {
-  const {offersCount, offerCards, onHeaderCardClick, cities, activeCity, onCityClick} = props;
+  const {offersCount, onHeaderCardClick, cities, activeCity, onCityClick} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -58,9 +58,10 @@ const Main = (props) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  activeCity = {activeCity}
-                  offersOnMap = {offerCards}
-                  idCurrentCard = {offerCards[0].id}
+                  // activeCity = {activeCity}
+                  // offersOnMap = {offerCards}
+                  cardType = {CardType.CITY}
+                  // idCurrentCard = {offerCards[0].id}
                 />
               </section>
             </div>
@@ -86,17 +87,17 @@ const Main = (props) => {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offerCards: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        name: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        isPremium: PropTypes.bool.isRequired
-      })
-  ).isRequired,
+  // offerCards: PropTypes.arrayOf(
+  //     PropTypes.shape({
+  //       id: PropTypes.string.isRequired,
+  //       photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  //       name: PropTypes.string.isRequired,
+  //       rating: PropTypes.number.isRequired,
+  //       price: PropTypes.number.isRequired,
+  //       type: PropTypes.string.isRequired,
+  //       isPremium: PropTypes.bool.isRequired
+  //     })
+  // ).isRequired,
   onHeaderCardClick: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,

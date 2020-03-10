@@ -32,11 +32,43 @@ const offerCards = [
   }
 ];
 
+const offersNear = [
+  {
+    id: `11`,
+    photos: OFFER_IMAGES,
+    name: OFFER_NAMES[0],
+    rating: 2,
+    price: 100,
+    type: OFFER_TYPES[0],
+    isPremium: true,
+  },
+  {
+    id: `22`,
+    photos: OFFER_IMAGES,
+    name: OFFER_NAMES[1],
+    rating: 3,
+    price: 120,
+    type: OFFER_TYPES[1],
+    isPremium: false,
+  },
+  {
+    id: `23`,
+    photos: OFFER_IMAGES,
+    name: OFFER_NAMES[1],
+    rating: 3,
+    price: 120,
+    type: OFFER_TYPES[1],
+    isPremium: false,
+  }
+];
+
+
 describe(`OfferList component render correctly`, () => {
   it(`should OfferList render correctly for offer cities`, () => {
     const store = mockStore({
       offers: offerCards,
-      activeSortItem: `Popular`
+      activeSortItem: `Popular`,
+      offersNear: []
     });
 
     const tree = renderer.create(
@@ -46,6 +78,7 @@ describe(`OfferList component render correctly`, () => {
             onHeaderCardClick = {() => {}}
             cardType = {CardType.CITY}
             activeSortItem = {`Popular`}
+            offersNear = {offersNear}
           />
         </Provider>).toJSON();
 
@@ -55,7 +88,8 @@ describe(`OfferList component render correctly`, () => {
   it(`should OfferList render correctly for offer near`, () => {
     const store = mockStore({
       offers: offerCards,
-      activeSortItem: `Popular`
+      activeSortItem: `Popular`,
+      offersNear
     });
     const tree = renderer.create(
         <Provider store={store}>
@@ -64,6 +98,7 @@ describe(`OfferList component render correctly`, () => {
             onHeaderCardClick = {() => {}}
             cardType = {CardType.NEAR}
             activeSortItem = {`Popular`}
+            offersNear = {offersNear}
           />
         </Provider>).toJSON();
 

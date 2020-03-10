@@ -60,21 +60,47 @@ const offerCards = [
     isPremium: false,
   }];
 
+const offersNear = [
+  {
+    id: `11`,
+    photos: OFFER_IMAGES,
+    name: OFFER_NAMES[0],
+    rating: 2,
+    price: 100,
+    type: OFFER_TYPES[0],
+    isPremium: true,
+  },
+  {
+    id: `22`,
+    photos: OFFER_IMAGES,
+    name: OFFER_NAMES[1],
+    rating: 3,
+    price: 120,
+    type: OFFER_TYPES[1],
+    isPremium: false,
+  },
+  {
+    id: `23`,
+    photos: OFFER_IMAGES,
+    name: OFFER_NAMES[1],
+    rating: 3,
+    price: 120,
+    type: OFFER_TYPES[1],
+    isPremium: false,
+  }
+];
+
 it(`should Main render correctly`, () => {
   const store = mockStore({
-    // city: {
-    //   id: `1`,
-    //   name: CITIES[0],
-    //   coordinatesCity: COORDINATES_CITY[0],
-    // },
     offers: offerCards,
-    activeSortItem: `Popular`
+    activeSortItem: `Popular`,
+    offersNear
   });
   const tree = renderer.create(
       <Provider store={store}>
         <Main
           offersCount = {6}
-          offerCards = {offerCards}
+          // offerCards = {offerCards}
           onHeaderCardClick = {() => {}}
           activeCity = {activeCity}
           cities = {cities}

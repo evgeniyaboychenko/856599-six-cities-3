@@ -1,15 +1,18 @@
 import {extend} from './utils/utils.js';
-import {cities, offers} from './mocks/offers.js';
+import {generateOfferCards, cities, offers} from './mocks/offers.js';
 
 const getOffers = (cityId) => {
   return offers.filter((offer) => offer.cityId === cityId);
 };
 
+const offersNearby = generateOfferCards(3);
+
 const initialState = {
   city: cities[0],
   offers: getOffers(cities[0].id),
   activeSortItem: `Popular`,
-  idActiveCard: `-1`
+  idActiveCard: `-1`,
+  offersNear: offersNearby
 };
 
 const ActionType = {

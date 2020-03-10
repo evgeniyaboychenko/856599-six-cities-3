@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import CommentList from '../comment-list/comment-list.jsx';
 import Map from '../map/map.jsx';
 import {generateComments} from '../../mocks/comments.js';
-import {generateOfferCards} from '../../mocks/offers.js';
+// import {generateOfferCards} from '../../mocks/offers.js';
 import OfferList from '../offer-list/offer-list.jsx';
 import {CardType} from '../../const.js';
-
+// import {connect} from "react-redux";
+// import {ActionCreator} from "../../reducer.js";
 
 const generateId = () => {
   return String(new Date().valueOf() + Math.random());
@@ -39,10 +40,9 @@ const getDescription = (descriptions) => {
 };
 
 const AboutOffer = (props) => {
-  const {offerCard, activeCity} = props;
+  const {offerCard} = props;
   const comments = generateComments();
-  const offersNearby = generateOfferCards(3);
-  const offersForMap = offersNearby.concat(offerCard);
+  // const offersForMap = offersNearby.concat(offerCard);
   comments.forEach((comment) => {
     offerCard.commentsId = comment.id;
   });
@@ -145,9 +145,10 @@ const AboutOffer = (props) => {
           </div>
           <section className="property__map map">
             <Map
-              activeCity = {activeCity}
-              offersOnMap = {offersForMap}
-              idCurrentCard = {offerCard.id}
+              // activeCity = {activeCity}
+              // offersOnMap = {offersForMap}
+              // idCurrentCard = {offerCard.id}
+              cardType = {CardType.NEAR}
             />
           </section>
         </section>
@@ -156,7 +157,7 @@ const AboutOffer = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <OfferList
-                offerCards = {offersNearby}
+                // offerCards = {offersNearby}
                 onHeaderCardClick = {() => {}}
                 cardType = {CardType.NEAR}
               />
@@ -188,17 +189,18 @@ AboutOffer.propTypes = {
       isSuper: PropTypes.bool.isRequired,
     }),
   }).isRequired,
-  activeCity: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  }).isRequired,
+  // activeCity: PropTypes.shape({
+  //   id: PropTypes.string.isRequired,
+  //   name: PropTypes.string.isRequired,
+  //   coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  // }).isRequired,
 };
 
 
 // const mapStateToProps = (state) => (
 //   {
-//     activeCity: state.city
+//     //offersNearby: state.offersNear,
+//     //activeCity: state.city
 //   }
 // );
 

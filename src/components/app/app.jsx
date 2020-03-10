@@ -22,7 +22,7 @@ class App extends PureComponent {
         activeCity = {activeCity}
         cities = {cities}
         offersCount = {offerCards.length}
-        offerCards = {offerCards}
+        // offerCards = {offerCards}
         onHeaderCardClick = {this.handleHeaderCardClick}
         onCityClick = {onCityClick}
       />;
