@@ -4,8 +4,6 @@ import Main from '../main/main.jsx';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import AboutOffer from '../about-offer/about-offer.jsx';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
-import {SortType} from '../../const.js';
 
 class App extends PureComponent {
   constructor(props) {
@@ -16,15 +14,13 @@ class App extends PureComponent {
 
 
   _renderMain() {
-    const {offerCards, cities, activeCity, onCityClick} = this.props;
+    const {offerCards, cities, activeCity} = this.props;
     if (!this.state.currentCard) {
       return <Main
         activeCity = {activeCity}
         cities = {cities}
         offersCount = {offerCards.length}
-        // offerCards = {offerCards}
         onHeaderCardClick = {this.handleHeaderCardClick}
-        onCityClick = {onCityClick}
       />;
     } else {
       return this._renderAbout(this.state.currentCard);
@@ -80,7 +76,6 @@ App.propTypes = {
     name: PropTypes.string.isRequired,
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   }).isRequired,
-  onCityClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => (
@@ -90,13 +85,5 @@ const mapStateToProps = (state) => (
   }
 );
 
-const mapDispatchToProps = (dispatch) => ({
-  onCityClick(activeCity) {
-    dispatch(ActionCreator.changeSort(SortType.DEFAULT));
-    dispatch(ActionCreator.changeCity(activeCity));
-    dispatch(ActionCreator.getOfferList(activeCity));
-  },
-});
-
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

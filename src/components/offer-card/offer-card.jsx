@@ -9,16 +9,6 @@ const getPercent = (rating) => {
   return rating * 100 / 5;
 };
 
-const getPremium = (isPremium) => {
-  if (isPremium) {
-    return (
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>);
-  }
-  return ``;
-};
-
 const OfferCard = (props) => {
   const {offerCard, onHeaderCardClick, onCardMouseover, cardType} = props;
   const {id, photos, name, rating, price, type, isPremium} = offerCard;
@@ -30,7 +20,9 @@ const OfferCard = (props) => {
       }
     }
     }>
-      {getPremium(isPremium)}
+      {isPremium && <div className="place-card__mark">
+        <span>Premium</span>
+      </div>}
       <div className={cardType + `__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img className="place-card__image" src = {`img/` + photos[0]} width="260" height="200" alt="Place image"/>

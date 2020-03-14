@@ -20,6 +20,8 @@ it(`should SortList render correctly`, () => {
       <SortList
         activeSortItem = {SortType.LOW_TO_HIGH}
         onSortClick = {onSortClick}
+        onSortListClick = {() => {}}
+        isActive = {true}
       />
   );
 
@@ -34,6 +36,8 @@ it(`should sorting be pressed`, () => {
       <SortList
         activeSortItem = {SortType.DEFAULT}
         onSortClick = {onSortClick}
+        onSortListClick = {() => {}}
+        isActive = {true}
       />
   );
 

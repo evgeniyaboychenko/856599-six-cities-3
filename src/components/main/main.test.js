@@ -92,6 +92,7 @@ const offersNear = [
 
 it(`should Main render correctly`, () => {
   const store = mockStore({
+    city: activeCity,
     offers: offerCards,
     activeSortItem: `Popular`,
     offersNear
@@ -100,13 +101,12 @@ it(`should Main render correctly`, () => {
       <Provider store={store}>
         <Main
           offersCount = {6}
-          // offerCards = {offerCards}
           onHeaderCardClick = {() => {}}
           activeCity = {activeCity}
           cities = {cities}
-          onCityClick = {() => {}}
         />
       </Provider>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+

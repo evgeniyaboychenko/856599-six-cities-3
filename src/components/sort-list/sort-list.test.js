@@ -14,6 +14,8 @@ it(`should SortList render correctly`, () => {
       <SortList
         activeSortItem = {SortType.DEFAULT}
         onSortClick = {() => {}}
+        onSortListClick = {() => {}}
+        isActive = {true}
       />).toJSON();
   expect(tree).toMatchSnapshot();
 });

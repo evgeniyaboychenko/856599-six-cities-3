@@ -1,7 +1,8 @@
 import React from 'react';
-// import {connect} from "react-redux";
-// import {ActionCreator} from "../../reducer.js";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 import PropTypes from 'prop-types';
+import {SortType} from '../../const.js';
 
 const CityList = ({cities, activeCity, onCityClick}) => {
   return (
@@ -36,19 +37,19 @@ CityList.propTypes = {
   onCityClick: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps = (state) => (
-//     {
-//       activeCity: state.city
-//     }
-//   );
+const mapStateToProps = (state) => (
+  {
+    activeCity: state.city
+  }
+);
 
-//   const mapDispatchToProps = (dispatch) => ({
-//     onCityClick(activeCity) {
-//       dispatch(ActionCreator.changeCity(activeCity));
-//       dispatch(ActionCreator.getOfferList(activeCity))
-//     },
-//   });
+const mapDispatchToProps = (dispatch) => ({
+  onCityClick(activeCity) {
+    dispatch(ActionCreator.changeSort(SortType.DEFAULT));
+    dispatch(ActionCreator.changeCity(activeCity));
+    dispatch(ActionCreator.getOfferList(activeCity));
+  }
+});
 
-// export {CityList};
-// export default connect(mapStateToProps, mapDispatchToProps)(CityList);
-export default CityList;
+export {CityList};
+export default connect(mapStateToProps, mapDispatchToProps)(CityList);

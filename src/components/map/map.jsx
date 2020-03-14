@@ -32,7 +32,6 @@ class Map extends PureComponent {
     } else {
       offersOnMap = offersNearby.concat(offerCards.find((offer) => offer.id === idCurrentCard));
     }
-    // const offersForMap = offersNearby.concat(offerCard);
 
     const coordinatesCity = activeCity.coordinatesCity;
     this.mapCity = leaflet.map(this.map.current, {
