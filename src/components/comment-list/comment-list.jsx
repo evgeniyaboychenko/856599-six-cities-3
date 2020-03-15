@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Comment from '../comment/comment.jsx';
 
-const CommentList = React.memo(function CommentList({comments}) {
+const CommentList = React.memo(({comments}) => {
   comments.sort((a, b) => (b.date - a.date));
   const sortingComments = comments.slice(0, 10);
   return (<section className="property__reviews reviews">

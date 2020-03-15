@@ -4,6 +4,7 @@ import {ActionCreator} from "../../reducer.js";
 import PropTypes from 'prop-types';
 import {SortType} from '../../const.js';
 
+
 const CityList = ({cities, activeCity, onCityClick}) => {
   return (
     <div className="tabs">

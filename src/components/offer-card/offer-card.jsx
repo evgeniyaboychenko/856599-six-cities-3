@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer.js';
 import {CardType} from '../../const.js';
 
-
 const getPercent = (rating) => {
   return rating * 100 / 5;
 };

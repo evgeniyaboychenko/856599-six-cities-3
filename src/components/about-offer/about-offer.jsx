@@ -42,7 +42,6 @@ const getDescription = (descriptions) => {
 const AboutOffer = (props) => {
   const {offerCard} = props;
   const comments = generateComments();
-  // const offersForMap = offersNearby.concat(offerCard);
   comments.forEach((comment) => {
     offerCard.commentsId = comment.id;
   });
@@ -145,9 +144,6 @@ const AboutOffer = (props) => {
           </div>
           <section className="property__map map">
             <Map
-              // activeCity = {activeCity}
-              // offersOnMap = {offersForMap}
-              // idCurrentCard = {offerCard.id}
               cardType = {CardType.NEAR}
             />
           </section>
@@ -157,7 +153,6 @@ const AboutOffer = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <OfferList
-                // offerCards = {offersNearby}
                 onHeaderCardClick = {() => {}}
                 cardType = {CardType.NEAR}
               />
@@ -189,22 +184,7 @@ AboutOffer.propTypes = {
       isSuper: PropTypes.bool.isRequired,
     }),
   }).isRequired,
-  // activeCity: PropTypes.shape({
-  //   id: PropTypes.string.isRequired,
-  //   name: PropTypes.string.isRequired,
-  //   coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  // }).isRequired,
 };
 
-
-// const mapStateToProps = (state) => (
-//   {
-//     //offersNearby: state.offersNear,
-//     //activeCity: state.city
-//   }
-// );
-
-// export {AboutOffer};
-// export default connect(mapStateToProps)(AboutOffer);
 export default AboutOffer;
 
