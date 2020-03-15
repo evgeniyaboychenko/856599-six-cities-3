@@ -10,7 +10,6 @@ const getPercent = (rating) => {
 };
 
 const OfferCard = (props) => {
-  // const {offerCard, onHeaderCardClick, onCardMouseover, cardType} = props;
   const {offerCard, onCardMouseover, cardType} = props;
   const {id, photos, name, rating, price, type, isPremium} = offerCard;
   return (
@@ -52,13 +51,6 @@ const OfferCard = (props) => {
           <Link to={`/offer/` + id}>
             {name}
           </Link>
-          {/* <a href="#" onClick = {(evt) => {
-            evt.preventDefault();
-            onHeaderCardClick(id);
-          }
-          }>
-            {name}
-          </a> */}
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -75,7 +67,6 @@ OfferCard.propTypes = {
     type: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired
   }),
-  // onHeaderCardClick: PropTypes.func.isRequired,
   onCardMouseover: PropTypes.func.isRequired,
   cardType: PropTypes.string.isRequired,
 };

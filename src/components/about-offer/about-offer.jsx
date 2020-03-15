@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import CommentList from '../comment-list/comment-list.jsx';
 import Map from '../map/map.jsx';
 import {generateComments} from '../../mocks/comments.js';
-// import {generateOfferCards} from '../../mocks/offers.js';
 import OfferList from '../offer-list/offer-list.jsx';
 import {CardType} from '../../const.js';
-// import {connect} from "react-redux";
-// import {ActionCreator} from "../../reducer.js";
 
 const generateId = () => {
   return String(new Date().valueOf() + Math.random());
@@ -41,8 +38,6 @@ const getDescription = (descriptions) => {
 
 const AboutOffer = (props) => {
   const {offerCard} = props;
-  // const id = props.match.params.id;
-  // console.log(id);
   const comments = generateComments();
   comments.forEach((comment) => {
     offerCard.commentsId = comment.id;
@@ -155,7 +150,6 @@ const AboutOffer = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <OfferList
-                onHeaderCardClick = {() => {}}
                 cardType = {CardType.NEAR}
               />
             </div>

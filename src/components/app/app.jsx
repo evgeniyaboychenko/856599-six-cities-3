@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
@@ -7,63 +7,34 @@ import AboutOffer from '../about-offer/about-offer.jsx';
 import {AppRoute} from '../../const.js';
 import {connect} from 'react-redux';
 
-class App extends PureComponent {
-  constructor(props) {
-    super(props);
-    // this.state = {currentCard: null};
-    // this.handleHeaderCardClick = this.handleHeaderCardClick.bind(this);
-  }
+const App = (props) => {
+  const {offerCards, cities, activeCity} = props;
 
-
-  _renderMain() {
-    const {offerCards, cities, activeCity} = this.props;
-    //  if (!this.state.currentCard) {
+  const renderMain = () => {
     return <Main
       activeCity = {activeCity}
       cities = {cities}
       offersCount = {offerCards.length}
-    //   onHeaderCardClick = {this.handleHeaderCardClick}
     />;
-    //  }
-    // return;
-    // else {
-    //   return this._renderAbout(this.state.currentCard);
-    // }
-  }
+  };
 
-  _renderAbout(idCard) {
-    const {offerCards, activeCity} = this.props;
-    const offerCard = offerCards.find((item) => item.id === idCard);
-    return <AboutOffer
-      activeCity = {activeCity}
-      offerCard = {offerCard}
-    />;
-  }
-
-  // handleHeaderCardClick(idCurrentCard) {
-  //   this.setState({currentCard: idCurrentCard});
-  // }
-
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderMain()}
-          </Route>
-          <Route exact path={AppRoute.ROOM}
-            render = {(props) => {
-              const {offerCards, activeCity} = this.props;
-              const offerCard = offerCards.find((item) => item.id === props.match.params.id);
-              return <AboutOffer
-                activeCity = {activeCity}
-                offerCard = {offerCard}
-              />;
-            }}/>
-        </Switch>
-      </BrowserRouter>);
-  }
-}
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          {renderMain()}
+        </Route>
+        <Route exact path={AppRoute.ROOM}
+          render = {(propsLink) => {
+            const offerCard = offerCards.find((item) => item.id === propsLink.match.params.id);
+            return <AboutOffer
+              activeCity = {activeCity}
+              offerCard = {offerCard}
+            />;
+          }}/>
+      </Switch>
+    </BrowserRouter>);
+};
 
 App.propTypes = {
   offerCards: PropTypes.arrayOf(
