@@ -32,7 +32,7 @@ it(`onMouseover on heading should get key in handler`, () => {
   const card = shallow(
       <OfferCard
         offerCard = {offerCard}
-        onHeaderCardClick = {() => {}}
+        // onHeaderCardClick = {() => {}}
         onCardMouseover = {onCardMouseover}
         cardType = {CardType.CITY}
       />
@@ -42,35 +42,35 @@ it(`onMouseover on heading should get key in handler`, () => {
   expect(onCardMouseover.mock.calls[0][0]).toBe(offerCard.id);
 });
 
-it(`click on heading should get key in handler`, ()=> {
-  const onHeaderCardClick = jest.fn();
-  const card = shallow(
-      <OfferCard
-        offerCard = {offerCard}
-        onHeaderCardClick = {onHeaderCardClick}
-        onCardMouseover = {() => {}}
-        cardType = {CardType.CITY}
-      />
-  );
+// it(`click on heading should get key in handler`, ()=> {
+//   const onHeaderCardClick = jest.fn();
+//   const card = shallow(
+//       <OfferCard
+//         offerCard = {offerCard}
+//         onHeaderCardClick = {onHeaderCardClick}
+//         onCardMouseover = {() => {}}
+//         cardType = {CardType.CITY}
+//       />
+//   );
 
-  const currentCard = card.find(`.place-card__name a`);
-  currentCard.simulate(`click`, mockEvent);
+//   const currentCard = card.find(`.place-card__name a`);
+//   currentCard.simulate(`click`, mockEvent);
 
-  expect(onHeaderCardClick.mock.calls[0][0]).toBe(offerCard.id);
-});
+//   expect(onHeaderCardClick.mock.calls[0][0]).toBe(offerCard.id);
+// });
 
-it(`Should ad heading be pressed`, () => {
-  const onHeaderCardClick = jest.fn();
-  const main = shallow(
-      <OfferCard
-        offerCard = {offerCard}
-        onHeaderCardClick = {onHeaderCardClick}
-        onCardMouseover = {() => {}}
-        cardType = {CardType.CITY}
-      />
-  );
+// it(`Should ad heading be pressed`, () => {
+//   const onHeaderCardClick = jest.fn();
+//   const main = shallow(
+//       <OfferCard
+//         offerCard = {offerCard}
+//         onHeaderCardClick = {onHeaderCardClick}
+//         onCardMouseover = {() => {}}
+//         cardType = {CardType.CITY}
+//       />
+//   );
 
-  const headerCard = main.find(`.place-card__name a`);
-  headerCard.simulate(`click`, mockEvent);
-  expect(onHeaderCardClick.mock.calls.length).toBe(1);
-});
+//   const headerCard = main.find(`.place-card__name a`);
+//   headerCard.simulate(`click`, mockEvent);
+//   expect(onHeaderCardClick.mock.calls.length).toBe(1);
+// });

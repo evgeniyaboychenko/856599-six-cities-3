@@ -23,7 +23,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/room.jpg"
+          src="/img/room.jpg"
           width="260"
         />
       </a>
@@ -93,7 +93,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/1"
           onClick={[Function]}
         >
           Canal View Prinsengracht
@@ -110,7 +110,6 @@ Array [
     className="cities__place-card place-card"
     onMouseOver={[Function]}
   >
-    
     <div
       className="cities__image-wrapper place-card__image-wrapper"
     >
@@ -121,7 +120,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/room.jpg"
+          src="/img/room.jpg"
           width="260"
         />
       </a>
@@ -191,7 +190,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/2"
           onClick={[Function]}
         >
           Nice, cozy, warm big bed apartment
@@ -230,7 +229,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/room.jpg"
+          src="/img/room.jpg"
           width="260"
         />
       </a>
@@ -300,7 +299,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/11"
           onClick={[Function]}
         >
           Canal View Prinsengracht
@@ -317,7 +316,6 @@ Array [
     className="near-places__place-card place-card"
     onMouseOver={[Function]}
   >
-    
     <div
       className="near-places__image-wrapper place-card__image-wrapper"
     >
@@ -328,7 +326,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/room.jpg"
+          src="/img/room.jpg"
           width="260"
         />
       </a>
@@ -398,7 +396,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/22"
           onClick={[Function]}
         >
           Nice, cozy, warm big bed apartment
@@ -415,7 +413,6 @@ Array [
     className="near-places__place-card place-card"
     onMouseOver={[Function]}
   >
-    
     <div
       className="near-places__image-wrapper place-card__image-wrapper"
     >
@@ -426,7 +423,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/room.jpg"
+          src="/img/room.jpg"
           width="260"
         />
       </a>
@@ -496,7 +493,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/23"
           onClick={[Function]}
         >
           Nice, cozy, warm big bed apartment

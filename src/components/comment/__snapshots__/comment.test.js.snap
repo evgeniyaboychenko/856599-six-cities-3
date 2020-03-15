@@ -14,7 +14,7 @@ exports[`should Comment render correctly 1`] = `
         alt="Reviews avatar"
         className="reviews__avatar user__avatar"
         height="54"
-        src="img/avatar-angelina.jpg"
+        src="/img/avatar-angelina.jpg"
         width="54"
       />
     </div>

@@ -15,7 +15,7 @@ const MAX_RATING = 5;
 const MAX_PRICE = 200;
 
 const generateId = () => {
-  return String(new Date().valueOf() + Math.random());
+  return String(new Date().valueOf() + Math.random()).replace(`.`, `_`);
 };
 
 const generateCities = () => {

@@ -7,12 +7,12 @@ import {CardType} from '../../const.js';
 const ZOOM = 12;
 
 const icon = leaflet.icon({
-  iconUrl: `img/pin.svg`,
+  iconUrl: `/img/pin.svg`,
   iconSize: [27, 39]
 });
 
 const iconActive = leaflet.icon({
-  iconUrl: `img/pin-active.svg`,
+  iconUrl: `/img/pin-active.svg`,
   iconSize: [27, 39]
 });
 
@@ -32,7 +32,6 @@ class Map extends PureComponent {
     } else {
       offersOnMap = offersNearby.concat(offerCards.find((offer) => offer.id === idCurrentCard));
     }
-    // const offersForMap = offersNearby.concat(offerCard);
 
     const coordinatesCity = activeCity.coordinatesCity;
     this.mapCity = leaflet.map(this.map.current, {

@@ -5,9 +5,11 @@ import CityList from '../city-list/city-list.jsx';
 import {CardType} from '../../const.js';
 import Map from '../map/map.jsx';
 import SortList from '../sort-list/sort-list.jsx';
+import withActiveSortList from '../../hocs/withAtiveSortList.jsx';
+const SortListWrapperd = withActiveSortList(SortList);
 
 const Main = (props) => {
-  const {offersCount, onHeaderCardClick, cities, activeCity, onCityClick} = props;
+  const {offersCount, cities, activeCity} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -36,9 +38,7 @@ const Main = (props) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <CityList
-          activeCity = {activeCity}
           cities = {cities}
-          onCityClick = {onCityClick}
         />
         {offersCount &&
         <div className="cities">
@@ -46,11 +46,9 @@ const Main = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offersCount} places to stay in {activeCity.name}</b>
-              <SortList/>
+              <SortListWrapperd/>
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
-                  // offerCards = {offerCards}
-                  onHeaderCardClick = {onHeaderCardClick}
                   cardType = {CardType.CITY}
                 />
               </div>
@@ -58,10 +56,7 @@ const Main = (props) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  // activeCity = {activeCity}
-                  // offersOnMap = {offerCards}
                   cardType = {CardType.CITY}
-                  // idCurrentCard = {offerCards[0].id}
                 />
               </section>
             </div>
@@ -87,18 +82,6 @@ const Main = (props) => {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  // offerCards: PropTypes.arrayOf(
-  //     PropTypes.shape({
-  //       id: PropTypes.string.isRequired,
-  //       photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  //       name: PropTypes.string.isRequired,
-  //       rating: PropTypes.number.isRequired,
-  //       price: PropTypes.number.isRequired,
-  //       type: PropTypes.string.isRequired,
-  //       isPremium: PropTypes.bool.isRequired
-  //     })
-  // ).isRequired,
-  onHeaderCardClick: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -109,7 +92,6 @@ Main.propTypes = {
     name: PropTypes.string.isRequired,
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   }).isRequired,
-  onCityClick: PropTypes.func.isRequired,
 };
 
 export default Main;

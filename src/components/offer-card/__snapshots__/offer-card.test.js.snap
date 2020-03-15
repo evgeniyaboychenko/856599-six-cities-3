@@ -22,7 +22,7 @@ exports[`OfferCard component render correctly should OfferCard render correctly 
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/room.jpg"
+        src="/img/room.jpg"
         width="260"
       />
     </a>
@@ -92,7 +92,7 @@ exports[`OfferCard component render correctly should OfferCard render correctly 
       className="place-card__name"
     >
       <a
-        href="#"
+        href="/offer/1"
         onClick={[Function]}
       >
         Canal View Prinsengracht
@@ -129,7 +129,7 @@ exports[`OfferCard component render correctly should OfferCard render correctly 
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/room.jpg"
+        src="/img/room.jpg"
         width="260"
       />
     </a>
@@ -199,7 +199,7 @@ exports[`OfferCard component render correctly should OfferCard render correctly 
       className="place-card__name"
     >
       <a
-        href="#"
+        href="/offer/1"
         onClick={[Function]}
       >
         Canal View Prinsengracht

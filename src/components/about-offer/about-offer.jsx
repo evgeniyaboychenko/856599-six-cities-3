@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import CommentList from '../comment-list/comment-list.jsx';
 import Map from '../map/map.jsx';
 import {generateComments} from '../../mocks/comments.js';
-// import {generateOfferCards} from '../../mocks/offers.js';
 import OfferList from '../offer-list/offer-list.jsx';
 import {CardType} from '../../const.js';
-// import {connect} from "react-redux";
-// import {ActionCreator} from "../../reducer.js";
 
 const generateId = () => {
   return String(new Date().valueOf() + Math.random());
@@ -15,7 +12,7 @@ const generateId = () => {
 
 const getGallery = (photos) => {
   return photos.map((photo) => (<div className="property__image-wrapper" key = {generateId()}>
-    <img className="property__image" src={`img/` + photo} alt="Photo studio"/>
+    <img className="property__image" src={`/img/` + photo} alt="Photo studio"/>
   </div>));
 };
 
@@ -42,7 +39,6 @@ const getDescription = (descriptions) => {
 const AboutOffer = (props) => {
   const {offerCard} = props;
   const comments = generateComments();
-  // const offersForMap = offersNearby.concat(offerCard);
   comments.forEach((comment) => {
     offerCard.commentsId = comment.id;
   });
@@ -54,7 +50,7 @@ const AboutOffer = (props) => {
           <div className="header__wrapper">
             <div className="header__left">
               <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </a>
             </div>
             <nav className="header__nav">
@@ -128,7 +124,7 @@ const AboutOffer = (props) => {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className={owner.isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` : `property__avatar-wrapper user__avatar-wrapper`}>
-                    <img className="property__avatar user__avatar" src={`img/` + owner.avatar} width="74" height="74" alt="Host avatar"/>
+                    <img className="property__avatar user__avatar" src={`/img/` + owner.avatar} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">
                     {owner.name}
@@ -145,9 +141,6 @@ const AboutOffer = (props) => {
           </div>
           <section className="property__map map">
             <Map
-              // activeCity = {activeCity}
-              // offersOnMap = {offersForMap}
-              // idCurrentCard = {offerCard.id}
               cardType = {CardType.NEAR}
             />
           </section>
@@ -157,8 +150,6 @@ const AboutOffer = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <OfferList
-                // offerCards = {offersNearby}
-                onHeaderCardClick = {() => {}}
                 cardType = {CardType.NEAR}
               />
             </div>
@@ -189,22 +180,7 @@ AboutOffer.propTypes = {
       isSuper: PropTypes.bool.isRequired,
     }),
   }).isRequired,
-  // activeCity: PropTypes.shape({
-  //   id: PropTypes.string.isRequired,
-  //   name: PropTypes.string.isRequired,
-  //   coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  // }).isRequired,
 };
 
-
-// const mapStateToProps = (state) => (
-//   {
-//     //offersNearby: state.offersNear,
-//     //activeCity: state.city
-//   }
-// );
-
-// export {AboutOffer};
-// export default connect(mapStateToProps)(AboutOffer);
 export default AboutOffer;
 

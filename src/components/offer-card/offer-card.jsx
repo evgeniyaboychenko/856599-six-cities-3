@@ -1,26 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {ActionCreator} from '../../reducer.js';
 import {CardType} from '../../const.js';
-
 
 const getPercent = (rating) => {
   return rating * 100 / 5;
 };
 
-const getPremium = (isPremium) => {
-  if (isPremium) {
-    return (
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>);
-  }
-  return ``;
-};
-
 const OfferCard = (props) => {
-  const {offerCard, onHeaderCardClick, onCardMouseover, cardType} = props;
+  const {offerCard, onCardMouseover, cardType} = props;
   const {id, photos, name, rating, price, type, isPremium} = offerCard;
   return (
     <article className={cardType + `__place-card place-card`} key = {id} onMouseOver = {(evt) => {
@@ -30,10 +20,12 @@ const OfferCard = (props) => {
       }
     }
     }>
-      {getPremium(isPremium)}
+      {isPremium && <div className="place-card__mark">
+        <span>Premium</span>
+      </div>}
       <div className={cardType + `__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src = {`img/` + photos[0]} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src = {`/img/` + photos[0]} width="260" height="200" alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
@@ -56,13 +48,9 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#" onClick = {(evt) => {
-            evt.preventDefault();
-            onHeaderCardClick(id);
-          }
-          }>
+          <Link to={`/offer/` + id}>
             {name}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -79,7 +67,6 @@ OfferCard.propTypes = {
     type: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired
   }),
-  onHeaderCardClick: PropTypes.func.isRequired,
   onCardMouseover: PropTypes.func.isRequired,
   cardType: PropTypes.string.isRequired,
 };

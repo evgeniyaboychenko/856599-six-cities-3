@@ -9,31 +9,31 @@ const sortOffers = (offers, sortType) => {
     case (SortType.DEFAULT):
       return offers;
     case (SortType.LOW_TO_HIGH):
-      return offers.slice().sort((a, b) => (a.price - b.price));
+      return offers.sort((a, b) => (a.price - b.price));
     case (SortType.HIGH_TO_LOW):
-      return offers.slice().sort((a, b) => (b.price - a.price));
+      return offers.sort((a, b) => (b.price - a.price));
     case (SortType.TOP_RATED_FIRST):
-      return offers.slice().sort((a, b) => (b.rating - a.rating));
+      return offers.sort((a, b) => (b.rating - a.rating));
   }
   return offers;
 };
 
 const OfferList = (props) => {
-  const {offerCards, onHeaderCardClick, cardType, activeSortItem, offersNear} = props;
+  // const {offerCards, onHeaderCardClick, cardType, activeSortItem, offersNear} = props;
+  const {offerCards, cardType, activeSortItem, offersNear} = props;
   let offers = [];
   if (cardType === CardType.CITY) {
     offers = offerCards;
   } else {
     offers = offersNear;
   }
-  // return sortOffers(offerCards, activeSortItem).map((offerCard) => {
-  return sortOffers(offers, activeSortItem).map((offerCard) => {
+
+  return sortOffers(offers.slice(), activeSortItem).map((offerCard) => {
     const {id} = offerCard;
     return <OfferCard
       offerCard = {offerCard}
       key = {id}
-      onHeaderCardClick = {onHeaderCardClick}
-      // onCardMouseover = {this.handleCardMouseover}
+      // onHeaderCardClick = {onHeaderCardClick}
       cardType = {cardType}
     />;
   });
@@ -62,7 +62,7 @@ OfferList.propTypes = {
         isPremium: PropTypes.bool.isRequired
       })
   ).isRequired,
-  onHeaderCardClick: PropTypes.func.isRequired,
+  // onHeaderCardClick: PropTypes.func.isRequired,
   cardType: PropTypes.string.isRequired,
   activeSortItem: PropTypes.string.isRequired
 };

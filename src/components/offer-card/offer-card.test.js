@@ -2,6 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {OfferCard} from './offer-card.jsx';
 import {CardType} from '../../const.js';
+import {MemoryRouter} from "react-router-dom";
 
 const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
 const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
@@ -21,24 +22,28 @@ const offerCard =
 describe(`OfferCard component render correctly`, () => {
   it(`should OfferCard render correctly for offer cities`, () => {
     const tree = renderer.create(
-        <OfferCard
-          offerCard = {offerCard}
-          onHeaderCardClick = {() => {}}
-          onCardMouseover = {() => {}}
-          cardType = {CardType.CITY}
-        />).toJSON();
+        <MemoryRouter>
+          <OfferCard
+            offerCard = {offerCard}
+            // onHeaderCardClick = {() => {}}
+            onCardMouseover = {() => {}}
+            cardType = {CardType.CITY}
+          />
+        </MemoryRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
   it(`should OfferCard render correctly for offer near`, () => {
     const tree = renderer.create(
-        <OfferCard
-          offerCard = {offerCard}
-          onHeaderCardClick = {() => {}}
-          onCardMouseover = {() => {}}
-          cardType = {CardType.NEAR}
-        />).toJSON();
+        <MemoryRouter>
+          <OfferCard
+            offerCard = {offerCard}
+            // onHeaderCardClick = {() => {}}
+            onCardMouseover = {() => {}}
+            cardType = {CardType.NEAR}
+          />
+        </MemoryRouter>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

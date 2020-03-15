@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import Main from './main.jsx';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import {MemoryRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 jest.mock(`../map/map.jsx`);
@@ -92,21 +93,23 @@ const offersNear = [
 
 it(`should Main render correctly`, () => {
   const store = mockStore({
+    city: activeCity,
     offers: offerCards,
     activeSortItem: `Popular`,
     offersNear
   });
   const tree = renderer.create(
       <Provider store={store}>
-        <Main
-          offersCount = {6}
-          // offerCards = {offerCards}
-          onHeaderCardClick = {() => {}}
-          activeCity = {activeCity}
-          cities = {cities}
-          onCityClick = {() => {}}
-        />
+        <MemoryRouter>
+          <Main
+            offersCount = {6}
+            onHeaderCardClick = {() => {}}
+            activeCity = {activeCity}
+            cities = {cities}
+          />
+        </MemoryRouter>
       </Provider>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+

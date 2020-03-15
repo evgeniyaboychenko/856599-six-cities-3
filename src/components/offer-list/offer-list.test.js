@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import {OfferList} from './offer-list.jsx';
 import {CardType} from '../../const.js';
 import {Provider} from "react-redux";
+import {MemoryRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 
 const mockStore = configureStore([]);
@@ -73,13 +74,15 @@ describe(`OfferList component render correctly`, () => {
 
     const tree = renderer.create(
         <Provider store={store}>
-          <OfferList
-            offerCards = {offerCards}
-            onHeaderCardClick = {() => {}}
-            cardType = {CardType.CITY}
-            activeSortItem = {`Popular`}
-            offersNear = {offersNear}
-          />
+          <MemoryRouter>
+            <OfferList
+              offerCards = {offerCards}
+              // onHeaderCardClick = {() => {}}
+              cardType = {CardType.CITY}
+              activeSortItem = {`Popular`}
+              offersNear = {offersNear}
+            />
+          </MemoryRouter>
         </Provider>).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -93,13 +96,15 @@ describe(`OfferList component render correctly`, () => {
     });
     const tree = renderer.create(
         <Provider store={store}>
-          <OfferList
-            offerCards = {offerCards}
-            onHeaderCardClick = {() => {}}
-            cardType = {CardType.NEAR}
-            activeSortItem = {`Popular`}
-            offersNear = {offersNear}
-          />
+          <MemoryRouter>
+            <OfferList
+              offerCards = {offerCards}
+              // onHeaderCardClick = {() => {}}
+              cardType = {CardType.NEAR}
+              activeSortItem = {`Popular`}
+              offersNear = {offersNear}
+            />
+          </MemoryRouter>
         </Provider>).toJSON();
 
     expect(tree).toMatchSnapshot();

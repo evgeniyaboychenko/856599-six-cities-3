@@ -10,4 +10,11 @@ const SortType = {
   TOP_RATED_FIRST: `Top rated first`
 };
 
-export {CardType, SortType};
+const AppRoute = {
+  SIGN_IN: `/login`,
+  FAVORITES: `/favorites`,
+  ROOM: `/offer/:id`,
+  MAIN: `/`,
+};
+
+export {CardType, SortType, AppRoute};
