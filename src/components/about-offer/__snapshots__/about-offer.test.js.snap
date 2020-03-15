@@ -24,7 +24,7 @@ exports[`should AboutOffer render correctly 1`] = `
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width="81"
             />
           </a>
@@ -75,7 +75,7 @@ exports[`should AboutOffer render correctly 1`] = `
             <img
               alt="Photo studio"
               className="property__image"
-              src="img/room.jpg"
+              src="/img/room.jpg"
             />
           </div>
           <div
@@ -84,7 +84,7 @@ exports[`should AboutOffer render correctly 1`] = `
             <img
               alt="Photo studio"
               className="property__image"
-              src="img/apartment-01.jpg"
+              src="/img/apartment-01.jpg"
             />
           </div>
         </div>
@@ -243,7 +243,7 @@ exports[`should AboutOffer render correctly 1`] = `
                   alt="Host avatar"
                   className="property__avatar user__avatar"
                   height="74"
-                  src="img/avatar-angelina.jpg"
+                  src="/img/avatar-angelina.jpg"
                   width="74"
                 />
               </div>

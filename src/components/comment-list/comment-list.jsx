@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Comment from '../comment/comment.jsx';
 
-const CommentList = React.memo(({comments}) => {
+
+const CommentList = ({comments}) => {
   comments.sort((a, b) => (b.date - a.date));
   const sortingComments = comments.slice(0, 10);
   return (<section className="property__reviews reviews">
@@ -63,8 +64,7 @@ const CommentList = React.memo(({comments}) => {
       </div>
     </form>
   </section>);
-}
-);
+};
 
 CommentList.propTypes = {
   comments: PropTypes.arrayOf(
@@ -79,4 +79,4 @@ CommentList.propTypes = {
   ).isRequired,
 };
 
-export default CommentList;
+export default React.memo(CommentList);

@@ -30,7 +30,7 @@ exports[`should CommentList render correctly 1`] = `
             alt="Reviews avatar"
             className="reviews__avatar user__avatar"
             height="54"
-            src="img/avatar-angelina.jpg"
+            src="/img/avatar-angelina.jpg"
             width="54"
           />
         </div>
@@ -89,7 +89,7 @@ exports[`should CommentList render correctly 1`] = `
             alt="Reviews avatar"
             className="reviews__avatar user__avatar"
             height="54"
-            src="img/avatar-max.jpg"
+            src="/img/avatar-max.jpg"
             width="54"
           />
         </div>

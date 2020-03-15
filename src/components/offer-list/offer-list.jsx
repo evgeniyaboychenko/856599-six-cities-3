@@ -19,7 +19,8 @@ const sortOffers = (offers, sortType) => {
 };
 
 const OfferList = (props) => {
-  const {offerCards, onHeaderCardClick, cardType, activeSortItem, offersNear} = props;
+  // const {offerCards, onHeaderCardClick, cardType, activeSortItem, offersNear} = props;
+  const {offerCards, cardType, activeSortItem, offersNear} = props;
   let offers = [];
   if (cardType === CardType.CITY) {
     offers = offerCards;
@@ -32,7 +33,7 @@ const OfferList = (props) => {
     return <OfferCard
       offerCard = {offerCard}
       key = {id}
-      onHeaderCardClick = {onHeaderCardClick}
+      // onHeaderCardClick = {onHeaderCardClick}
       cardType = {cardType}
     />;
   });
@@ -61,7 +62,7 @@ OfferList.propTypes = {
         isPremium: PropTypes.bool.isRequired
       })
   ).isRequired,
-  onHeaderCardClick: PropTypes.func.isRequired,
+  // onHeaderCardClick: PropTypes.func.isRequired,
   cardType: PropTypes.string.isRequired,
   activeSortItem: PropTypes.string.isRequired
 };

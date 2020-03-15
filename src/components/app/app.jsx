@@ -2,29 +2,33 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
+
 import AboutOffer from '../about-offer/about-offer.jsx';
+import {AppRoute} from '../../const.js';
 import {connect} from 'react-redux';
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {currentCard: null};
-    this.handleHeaderCardClick = this.handleHeaderCardClick.bind(this);
+    // this.state = {currentCard: null};
+    // this.handleHeaderCardClick = this.handleHeaderCardClick.bind(this);
   }
 
 
   _renderMain() {
     const {offerCards, cities, activeCity} = this.props;
-    if (!this.state.currentCard) {
-      return <Main
-        activeCity = {activeCity}
-        cities = {cities}
-        offersCount = {offerCards.length}
-        onHeaderCardClick = {this.handleHeaderCardClick}
-      />;
-    } else {
-      return this._renderAbout(this.state.currentCard);
-    }
+    //  if (!this.state.currentCard) {
+    return <Main
+      activeCity = {activeCity}
+      cities = {cities}
+      offersCount = {offerCards.length}
+    //   onHeaderCardClick = {this.handleHeaderCardClick}
+    />;
+    //  }
+    // return;
+    // else {
+    //   return this._renderAbout(this.state.currentCard);
+    // }
   }
 
   _renderAbout(idCard) {
@@ -36,9 +40,9 @@ class App extends PureComponent {
     />;
   }
 
-  handleHeaderCardClick(idCurrentCard) {
-    this.setState({currentCard: idCurrentCard});
-  }
+  // handleHeaderCardClick(idCurrentCard) {
+  //   this.setState({currentCard: idCurrentCard});
+  // }
 
   render() {
     return (
@@ -47,8 +51,15 @@ class App extends PureComponent {
           <Route exact path="/">
             {this._renderMain()}
           </Route>
-          <Route exact path="/offer">
-          </Route>
+          <Route exact path={AppRoute.ROOM}
+            render = {(props) => {
+              const {offerCards, activeCity} = this.props;
+              const offerCard = offerCards.find((item) => item.id === props.match.params.id);
+              return <AboutOffer
+                activeCity = {activeCity}
+                offerCard = {offerCard}
+              />;
+            }}/>
         </Switch>
       </BrowserRouter>);
   }

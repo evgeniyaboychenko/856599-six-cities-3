@@ -15,7 +15,7 @@ const generateId = () => {
 
 const getGallery = (photos) => {
   return photos.map((photo) => (<div className="property__image-wrapper" key = {generateId()}>
-    <img className="property__image" src={`img/` + photo} alt="Photo studio"/>
+    <img className="property__image" src={`/img/` + photo} alt="Photo studio"/>
   </div>));
 };
 
@@ -41,6 +41,8 @@ const getDescription = (descriptions) => {
 
 const AboutOffer = (props) => {
   const {offerCard} = props;
+  // const id = props.match.params.id;
+  // console.log(id);
   const comments = generateComments();
   comments.forEach((comment) => {
     offerCard.commentsId = comment.id;
@@ -53,7 +55,7 @@ const AboutOffer = (props) => {
           <div className="header__wrapper">
             <div className="header__left">
               <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </a>
             </div>
             <nav className="header__nav">
@@ -127,7 +129,7 @@ const AboutOffer = (props) => {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className={owner.isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` : `property__avatar-wrapper user__avatar-wrapper`}>
-                    <img className="property__avatar user__avatar" src={`img/` + owner.avatar} width="74" height="74" alt="Host avatar"/>
+                    <img className="property__avatar user__avatar" src={`/img/` + owner.avatar} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">
                     {owner.name}

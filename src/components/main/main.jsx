@@ -9,7 +9,8 @@ import withActiveSortList from '../../hocs/withAtiveSortList.jsx';
 const SortListWrapperd = withActiveSortList(SortList);
 
 const Main = (props) => {
-  const {offersCount, onHeaderCardClick, cities, activeCity} = props;
+  // const {offersCount, onHeaderCardClick, cities, activeCity} = props;
+  const {offersCount, cities, activeCity} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -49,7 +50,7 @@ const Main = (props) => {
               <SortListWrapperd/>
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
-                  onHeaderCardClick = {onHeaderCardClick}
+                  // onHeaderCardClick = {onHeaderCardClick}
                   cardType = {CardType.CITY}
                 />
               </div>
@@ -83,7 +84,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  onHeaderCardClick: PropTypes.func.isRequired,
+  // onHeaderCardClick: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

@@ -219,7 +219,7 @@ exports[`should App render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/room.jpg"
+                    src="/img/room.jpg"
                     width="260"
                   />
                 </a>
@@ -289,7 +289,7 @@ exports[`should App render correctly 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer/1"
                     onClick={[Function]}
                   >
                     Canal View Prinsengracht
@@ -316,7 +316,7 @@ exports[`should App render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/room.jpg"
+                    src="/img/room.jpg"
                     width="260"
                   />
                 </a>
@@ -386,7 +386,7 @@ exports[`should App render correctly 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer/2"
                     onClick={[Function]}
                   >
                     Nice, cozy, warm big bed apartment
