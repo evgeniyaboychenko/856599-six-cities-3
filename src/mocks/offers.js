@@ -60,6 +60,6 @@ const generateOfferCards = (countCard) => {
   return getObjectsArray(generateOfferCard, countCard);
 };
 
-const offers = generateOfferCards(20);
+const offers = generateOfferCards(10);
 
 export {generateOfferCards, generateCities, cities, offers};

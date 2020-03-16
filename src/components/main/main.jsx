@@ -4,6 +4,7 @@ import OfferList from '../offer-list/offer-list.jsx';
 import CityList from '../city-list/city-list.jsx';
 import {CardType} from '../../const.js';
 import Map from '../map/map.jsx';
+import MainEmpty from '../main-empty/main-empty.jsx';
 import SortList from '../sort-list/sort-list.jsx';
 import withActiveSortList from '../../hocs/withAtiveSortList.jsx';
 const SortListWrapperd = withActiveSortList(SortList);
@@ -35,7 +36,7 @@ const Main = (props) => {
         </div>
       </header>
 
-      <main className="page__main page__main--index">
+      <main className={offersCount ? `page__main page__main--index` : `page__main page__main--index page__main--index-empty`}>
         <h1 className="visually-hidden">Cities</h1>
         <CityList
           cities = {cities}
@@ -63,18 +64,7 @@ const Main = (props) => {
           </div>
         </div>
         }
-        {offersCount ||
-          <div className="cities">
-            <div className="cities__places-container cities__places-container--empty container">
-              <section className="cities__no-places">
-                <div className="cities__status-wrapper tabs__content">
-                  <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">We could not find any property availbale at the moment in {activeCity.name}</p>
-                </div>
-              </section>
-              <div className="cities__right-section"></div>
-            </div>
-          </div>}
+        {offersCount || <MainEmpty activeCity = {activeCity}/>}
       </main>
     </div>
   );
