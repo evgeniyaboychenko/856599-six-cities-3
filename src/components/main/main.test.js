@@ -91,6 +91,8 @@ const offersNear = [
   }
 ];
 
+const offerCardsEmpty = [];
+
 it(`should Main render correctly`, () => {
   const store = mockStore({
     city: activeCity,
@@ -103,7 +105,6 @@ it(`should Main render correctly`, () => {
         <MemoryRouter>
           <Main
             offersCount = {6}
-            onHeaderCardClick = {() => {}}
             activeCity = {activeCity}
             cities = {cities}
           />
@@ -113,3 +114,22 @@ it(`should Main render correctly`, () => {
   expect(tree).toMatchSnapshot();
 });
 
+it(`should Main render correctly if offers-count equal null`, () => {
+  const store = mockStore({
+    city: activeCity,
+    offers: offerCardsEmpty,
+    activeSortItem: `Popular`,
+    offersNear
+  });
+  const tree = renderer.create(
+      <Provider store={store}>
+        <Main
+          offersCount = {0}
+          activeCity = {activeCity}
+          cities = {cities}
+        />
+      </Provider>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
