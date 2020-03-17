@@ -128,10 +128,10 @@ Map.propTypes = {
 
 const mapStateToProps = (state) => (
   {
-    activeCity: state.city,
-    offerCards: state.offers,
-    offersNearby: state.offersNear,
-    idCurrentCard: state.idActiveCard
+    activeCity: state.DATA.city,
+    offerCards: state.DATA.offers,
+    offersNearby: state.DATA.offersNear,
+    idCurrentCard: state.STATE.idActiveCard
   }
 );
 

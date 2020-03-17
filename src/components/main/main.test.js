@@ -86,6 +86,7 @@ const offersNear = [
     name: OFFER_NAMES[1],
     rating: 3,
     price: 120,
+    
     type: OFFER_TYPES[1],
     isPremium: false,
   }

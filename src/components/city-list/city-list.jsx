@@ -1,6 +1,9 @@
 import React from 'react';
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {connect} from 'react-redux';
+//import {ActionCreator} from '../../reducer/reducer.js';
+import {ActionCreator} from '../../reducer/state/state.js';
+import {ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
+// ''../../reducer.js';
 import PropTypes from 'prop-types';
 import {SortType} from '../../const.js';
 
@@ -40,15 +43,15 @@ CityList.propTypes = {
 
 const mapStateToProps = (state) => (
   {
-    activeCity: state.city
+    activeCity: state.DATA.city
   }
 );
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(activeCity) {
     dispatch(ActionCreator.changeSort(SortType.DEFAULT));
-    dispatch(ActionCreator.changeCity(activeCity));
-    dispatch(ActionCreator.getOfferList(activeCity));
+    dispatch(DataActionCreator.changeCity(activeCity));
+    dispatch(DataActionCreator.getOfferList(activeCity));
   }
 });
 

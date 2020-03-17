@@ -76,9 +76,9 @@ const SortType = {
 
 const mapStateToProps = (state) => (
   {
-    offerCards: state.offers,
-    offersNear: state.offersNear,
-    activeSortItem: state.activeSortItem
+    offerCards: state.DATA.offers,
+    offersNear: state.DATA.offersNear,
+    activeSortItem: state.STATE.activeSortItem
   }
 );
 

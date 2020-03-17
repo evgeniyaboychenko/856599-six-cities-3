@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {ActionCreator} from '../../reducer.js';
+import {ActionCreator} from '../../reducer/state/state.js';
+// '../../reducer.js';
 import {CardType} from '../../const.js';
 
 const getPercent = (rating) => {
@@ -73,7 +74,7 @@ OfferCard.propTypes = {
 
 const mapStateToProps = (state) => (
   {
-    id: state.idActiveCard
+    id: state.STATE.idActiveCard
   }
 );
 

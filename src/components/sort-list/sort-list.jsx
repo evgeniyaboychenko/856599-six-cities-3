@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+import {ActionCreator} from '../../reducer/state/state.js';
+// '../../reducer/reducer.js';
 import PropTypes from 'prop-types';
 
 const sortItems = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
@@ -45,7 +46,7 @@ SortList.propTypes = {
 
 const mapStateToProps = (state) => (
   {
-    activeSortItem: state.activeSortItem
+    activeSortItem: state.STATE.activeSortItem
   }
 );
 

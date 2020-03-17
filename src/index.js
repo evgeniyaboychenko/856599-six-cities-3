@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
 import {cities} from './mocks/offers.js';
-import {createStore} from "redux";
-import {Provider} from "react-redux";
-import {reducer} from "./reducer.js";
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import reducer from './reducer/reducer.js';
+// "./reducer.js";
 
 const store = createStore(
     reducer,
