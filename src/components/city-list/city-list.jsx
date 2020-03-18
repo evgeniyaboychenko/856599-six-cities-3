@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-//import {ActionCreator} from '../../reducer/reducer.js';
+// import {ActionCreator} from '../../reducer/reducer.js';
 import {ActionCreator} from '../../reducer/state/state.js';
 import {ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
 // ''../../reducer.js';

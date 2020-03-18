@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import {connect} from 'react-redux';
 import {CardType} from '../../const.js';
+import {getIdActiveCard} from '../../reducer/state/selector.js';
+import {getOffersNear, getCity, getOffersByCityName} from '../../reducer/data/selectors.js';
 
 const ZOOM = 12;
 
@@ -128,10 +130,10 @@ Map.propTypes = {
 
 const mapStateToProps = (state) => (
   {
-    activeCity: state.DATA.city,
-    offerCards: state.DATA.offers,
-    offersNearby: state.DATA.offersNear,
-    idCurrentCard: state.STATE.idActiveCard
+    activeCity: getCity(state),
+    offerCards: getOffersByCityName(state), // state.DATA.offers,
+    offersNearby: getOffersNear(state),
+    idCurrentCard: getIdActiveCard(state)
   }
 );
 

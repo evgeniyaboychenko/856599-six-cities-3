@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import {ActionCreator} from '../../reducer/data/data.js'
 import AboutOffer from '../about-offer/about-offer.jsx';
 import {AppRoute} from '../../const.js';
 import {connect} from 'react-redux';
-import NameSpace from '../../reducer/name-space.js';
-import combineReducers from '../../reducer/reducer.js';
+import {getCity, getOffersByCityName} from '../../reducer/data/selectors.js';
+
 const App = (props) => {
   const {offerCards, cities, activeCity} = props;
 
@@ -61,14 +60,12 @@ App.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = (state) => {
-  console.log(state.DATA);
-  return ({
-    activeCity: state.DATA.city,
-    offerCards: state.DATA.offers
+const mapStateToProps = (state) => (
+  {
+    activeCity: getCity(state),
+    offerCards: getOffersByCityName(state) // getOffers(state)
   }
-  )
-};
+);
 
 export {App};
 export default connect(mapStateToProps)(App);

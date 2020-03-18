@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {getIdActiveCard} from '../../reducer/state/selector.js';
 import {ActionCreator} from '../../reducer/state/state.js';
 // '../../reducer.js';
 import {CardType} from '../../const.js';
@@ -74,7 +75,7 @@ OfferCard.propTypes = {
 
 const mapStateToProps = (state) => (
   {
-    id: state.STATE.idActiveCard
+    id: getIdActiveCard(state)
   }
 );
 

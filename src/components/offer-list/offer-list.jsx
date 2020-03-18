@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
 import {connect} from 'react-redux';
 import {CardType} from '../../const.js';
+import {getActiveSortItem} from '../../reducer/state/selector.js';
+import {getOffersNear, getOffersByCityName} from '../../reducer/data/selectors.js';
 
 const sortOffers = (offers, sortType) => {
   switch (sortType) {
@@ -76,9 +78,9 @@ const SortType = {
 
 const mapStateToProps = (state) => (
   {
-    offerCards: state.DATA.offers,
-    offersNear: state.DATA.offersNear,
-    activeSortItem: state.STATE.activeSortItem
+    offerCards: getOffersByCityName(state),
+    offersNear: getOffersNear(state),
+    activeSortItem: getActiveSortItem(state)
   }
 );
 

@@ -29,12 +29,13 @@ const generateCities = () => {
 };
 
 const cities = generateCities();
-const citiesId = cities.map((city) => (city.id));
+// const citiesId = cities.map((city) => (city.id));
 
 const generateOfferCard = () => {
   return {
     id: generateId(),
-    cityId: citiesId[getRandomNumber(citiesId.length)],
+    cityName: CITIES[getRandomNumber(CITIES.length)],
+    // cityId: citiesId[getRandomNumber(citiesId.length)],
     name: OFFER_NAMES[getRandomNumber(OFFER_NAMES.length)],
     rating: getRandomNumber(MAX_RATING + 1),
     price: getRandomNumber(MAX_PRICE),
