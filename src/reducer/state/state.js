@@ -2,7 +2,7 @@ import {extend} from '../../utils/utils.js';
 
 const initialState = {
   activeSortItem: `Popular`,
-  idActiveCard: `-1`,
+  idActiveCard: -1,
 };
 
 const ActionType = {

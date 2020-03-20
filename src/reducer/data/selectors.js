@@ -3,8 +3,12 @@ import NameSpace from "../name-space.js";
 
 const NAME_SPACE = NameSpace.DATA;
 
-export const getCity = (state) => {
+export const getActiveCity = (state) => {
   return state[NAME_SPACE].city;
+};
+
+export const getCities = (state) => {
+  return state[NAME_SPACE].cities;
 };
 
 export const getOffers = (state) => {
@@ -15,9 +19,9 @@ export const getOffersNear = (state) => {
   return state[NAME_SPACE].offersNear;
 };
 
-export const getOffersByCityName = createSelector(getOffers, getCity,
-    (offers, city) => {
-      return offers.filter((offer) => offer.cityName === city.name);
+export const getOffersByCityName = createSelector(getOffers, getActiveCity,
+    (offers, activeCity) => {
+      return offers.filter((offer) => offer.cityName === activeCity.name);
     }
 );
 

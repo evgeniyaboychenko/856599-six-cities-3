@@ -23,7 +23,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="/img/room.jpg"
+          src="apartment-01.jpg"
           width="260"
         />
       </a>
@@ -120,7 +120,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="/img/room.jpg"
+          src="apartment-01.jpg"
           width="260"
         />
       </a>
@@ -229,7 +229,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="/img/room.jpg"
+          src="apartment-01.jpg"
           width="260"
         />
       </a>
@@ -326,7 +326,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="/img/room.jpg"
+          src="apartment-01.jpg"
           width="260"
         />
       </a>
@@ -423,7 +423,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="/img/room.jpg"
+          src="apartment-01.jpg"
           width="260"
         />
       </a>

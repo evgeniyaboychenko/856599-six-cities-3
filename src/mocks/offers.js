@@ -21,9 +21,10 @@ const generateId = () => {
 const generateCities = () => {
   return CITIES.map((name, i) => {
     return {
-      id: generateId(),
+      // id: generateId(),
       name,
       coordinatesCity: COORDINATES_CITY[i],
+      zoom: 8,
     };
   });
 };
@@ -35,24 +36,31 @@ const generateOfferCard = () => {
   return {
     id: generateId(),
     cityName: CITIES[getRandomNumber(CITIES.length)],
-    // cityId: citiesId[getRandomNumber(citiesId.length)],
+    cityLocation: {
+      coordinatesCity: [48.856663, 2.351556],
+      zoom: 8,
+    },
+
     name: OFFER_NAMES[getRandomNumber(OFFER_NAMES.length)],
     rating: getRandomNumber(MAX_RATING + 1),
     price: getRandomNumber(MAX_PRICE),
     type: OFFER_TYPES[getRandomNumber(OFFER_TYPES.length)],
     isPremium: generateBolleanValue(),
+    isFavorite: false,
 
     descriptions: generateRandomArray(OFFER_DESCRIPTIONS, getRandomNumber(OFFER_DESCRIPTIONS.length)),
     photos: generateRandomArray(OFFER_IMAGES, getRandomRange(1, OFFER_IMAGES.length + 1)),
+    previewImage: `room.jpg`,
     countRooms: getRandomNumber(10),
     maxGuests: getRandomNumber(10),
     appliances: generateRandomArray(APPLIANCES, getRandomNumber(APPLIANCES.length)),
     coordinates: COORDINATES[getRandomNumber(COORDINATES.length)],
-
+    zoom: 12,
     owner: {
       avatar: AVATARS[getRandomNumber(AVATARS.length)],
       name: NAMES[getRandomNumber(NAMES.length)],
       isSuper: generateBolleanValue(),
+      id: generateId(),
     },
   };
 };

@@ -1,33 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
-import {cities} from './mocks/offers.js';
-import {createStore} from 'redux';
+// import {cities} from './mocks/offers.js';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
 import reducer from './reducer/reducer.js';
-// "./reducer.js";
+import {Operation as OffersOperation} from './reducer/data/data.js';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {createAPI} from "./api.js";
+
+const api = createAPI(() => {});
 
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
+    // compose(
+    // applyMiddleware(thunk.withExtraArgument(api))
+    //  window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    // )
 );
 
-// const COUNT_CARD = 10;
-
-// const Settings = {
-//   OFFERS_COUNT: 10
-// };
-
-// const NUMBER_CITY_ACTIVE = 0;
-// const cities = generateCities();
+store.dispatch(OffersOperation.loadOfferList());
 
 ReactDOM.render(
     <Provider store={store}>
       <App
-        // cityActive = {cities[NUMBER_CITY_ACTIVE].id}
-        cities = {cities}
-        // offersCount = {Settings.OFFERS_COUNT}
-        // offerCards = {generateOfferCards(COUNT_CARD)}
+        // cities = {cities}
       />
     </Provider>,
     document.querySelector(`#root`)

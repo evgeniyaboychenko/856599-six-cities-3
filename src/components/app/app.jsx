@@ -5,7 +5,7 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import AboutOffer from '../about-offer/about-offer.jsx';
 import {AppRoute} from '../../const.js';
 import {connect} from 'react-redux';
-import {getCity, getOffersByCityName} from '../../reducer/data/selectors.js';
+import {getActiveCity, getCities, getOffersByCityName} from '../../reducer/data/selectors.js';
 
 const App = (props) => {
   const {offerCards, cities, activeCity} = props;
@@ -39,7 +39,7 @@ const App = (props) => {
 App.propTypes = {
   offerCards: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
         name: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
@@ -49,20 +49,21 @@ App.propTypes = {
       })
   ).isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    zoom: PropTypes.number.isRequired,
   })).isRequired,
   activeCity: PropTypes.shape({
-    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    zoom: PropTypes.number.isRequired,
   }).isRequired,
 };
 
 const mapStateToProps = (state) => (
   {
-    activeCity: getCity(state),
+    activeCity: getActiveCity(state),
+    cities: getCities(state),
     offerCards: getOffersByCityName(state) // getOffers(state)
   }
 );

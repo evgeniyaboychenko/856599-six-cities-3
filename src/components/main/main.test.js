@@ -4,6 +4,7 @@ import Main from './main.jsx';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {MemoryRouter} from "react-router-dom";
+import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 jest.mock(`../map/map.jsx`);
@@ -17,33 +18,35 @@ const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseld
 const COORDINATES_CITY = [[48.856663, 2.351556], [50.930779, 6.938399], [50.854283, 4.352131], [52.373057, 4.892557], [53.552645, 9.966287], [51.230569, 6.787428]];
 
 const activeCity = {
-  id: `1`,
+  id: 1,
   name: CITIES[0],
   coordinatesCity: COORDINATES_CITY[0],
+  zoom: 10
 };
 
 const cities = [{
-  id: `1`,
   name: CITIES[0],
   coordinatesCity: COORDINATES_CITY[0],
+  zoom: 10
 },
 {
-  id: `2`,
   name: CITIES[1],
   coordinatesCity: COORDINATES_CITY[1],
+  zoom: 10
 },
 {
-  id: `3`,
   name: CITIES[2],
   coordinatesCity: COORDINATES_CITY[2],
+  zoom: 10
 }
 ];
 
 const offerCards = [
   {
-    id: `1`,
+    id: 1,
     coordinates: COORDINATES[0],
     photos: OFFER_IMAGES,
+    previewImage: `apartment-01.jpg`,
     name: OFFER_NAMES[0],
     rating: 2,
     price: 100,
@@ -51,8 +54,9 @@ const offerCards = [
     isPremium: true,
   },
   {
-    id: `2`,
+    id: 2,
     coordinates: COORDINATES[1],
+    previewImage: `apartment-01.jpg`,
     photos: OFFER_IMAGES,
     name: OFFER_NAMES[1],
     rating: 3,
@@ -63,8 +67,9 @@ const offerCards = [
 
 const offersNear = [
   {
-    id: `11`,
+    id: 11,
     photos: OFFER_IMAGES,
+    previewImage: `apartment-01.jpg`,
     name: OFFER_NAMES[0],
     rating: 2,
     price: 100,
@@ -72,8 +77,9 @@ const offersNear = [
     isPremium: true,
   },
   {
-    id: `22`,
+    id: 22,
     photos: OFFER_IMAGES,
+    previewImage: `apartment-01.jpg`,
     name: OFFER_NAMES[1],
     rating: 3,
     price: 120,
@@ -81,25 +87,26 @@ const offersNear = [
     isPremium: false,
   },
   {
-    id: `23`,
+    id: 23,
     photos: OFFER_IMAGES,
+    previewImage: `apartment-01.jpg`,
     name: OFFER_NAMES[1],
     rating: 3,
     price: 120,
-    
     type: OFFER_TYPES[1],
     isPremium: false,
   }
 ];
 
-const offerCardsEmpty = [];
-
 it(`should Main render correctly`, () => {
   const store = mockStore({
-    city: activeCity,
-    offers: offerCards,
-    activeSortItem: `Popular`,
-    offersNear
+    [NameSpace.DATA]: {city: activeCity,
+      offers: offerCards,
+      cities,
+      offersNear},
+    [NameSpace.STATE]: {
+      activeSortItem: `Popular`,
+    }
   });
   const tree = renderer.create(
       <Provider store={store}>
@@ -117,10 +124,13 @@ it(`should Main render correctly`, () => {
 
 it(`should Main render correctly if offers-count equal null`, () => {
   const store = mockStore({
-    city: activeCity,
-    offers: offerCardsEmpty,
-    activeSortItem: `Popular`,
-    offersNear
+    [NameSpace.DATA]: {city: activeCity,
+      offers: offerCards,
+      cities,
+      offersNear},
+    [NameSpace.STATE]: {
+      activeSortItem: `Popular`,
+    }
   });
   const tree = renderer.create(
       <Provider store={store}>

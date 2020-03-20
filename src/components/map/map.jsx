@@ -4,9 +4,7 @@ import leaflet from 'leaflet';
 import {connect} from 'react-redux';
 import {CardType} from '../../const.js';
 import {getIdActiveCard} from '../../reducer/state/selector.js';
-import {getOffersNear, getCity, getOffersByCityName} from '../../reducer/data/selectors.js';
-
-const ZOOM = 12;
+import {getOffersNear, getActiveCity, getOffersByCityName} from '../../reducer/data/selectors.js';
 
 const icon = leaflet.icon({
   iconUrl: `/img/pin.svg`,
@@ -38,20 +36,18 @@ class Map extends PureComponent {
     const coordinatesCity = activeCity.coordinatesCity;
     this.mapCity = leaflet.map(this.map.current, {
       center: coordinatesCity,
-      zoom: ZOOM,
+      zoom: activeCity.zoom,
       zoomControl: false,
       markers: true
     });
 
-    this.mapCity.setView(coordinatesCity, ZOOM);
+    this.mapCity.setView(coordinatesCity, activeCity.zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this.mapCity);
-
-    this.mapCity.setView(coordinatesCity, ZOOM);
 
     offersOnMap.map((item) => {
       const {coordinates} = item;
@@ -76,14 +72,14 @@ class Map extends PureComponent {
       offersOnMap = offersNearby.concat(offerCards.find((offer) => offer.id === idCurrentCard));
     }
 
-    if (activeCity.id !== prevProps.activeCity.id || idCurrentCard !== prevProps.idCurrentCard) {
+    if (activeCity.name !== prevProps.activeCity.name || idCurrentCard !== prevProps.idCurrentCard) {
       const coordinatesCity = activeCity.coordinatesCity;
-      this.mapCity.setView(coordinatesCity, ZOOM);
+      this.mapCity.setView(coordinatesCity, activeCity.zoom);
 
       this.markers.map((markers) => this.mapCity.removeLayer(markers));
       this.markers = [];
 
-      if (activeCity.id !== prevProps.activeCity.id) {
+      if (activeCity.name !== prevProps.activeCity.name) {
         offersOnMap.map((item) => {
           const {coordinates} = item;
           this.markers.push(leaflet.marker(coordinates, {icon}).addTo(this.mapCity));
@@ -119,19 +115,20 @@ Map.propTypes = {
         coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
       })
   ).isRequired,
-  idCurrentCard: PropTypes.string.isRequired,
+  idCurrentCard: PropTypes.number.isRequired,
   activeCity: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    // id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    zoom: PropTypes.number.isRequired,
   }).isRequired,
   cardType: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => (
   {
-    activeCity: getCity(state),
-    offerCards: getOffersByCityName(state), // state.DATA.offers,
+    activeCity: getActiveCity(state),
+    offerCards: getOffersByCityName(state),
     offersNearby: getOffersNear(state),
     idCurrentCard: getIdActiveCard(state)
   }

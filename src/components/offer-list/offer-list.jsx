@@ -35,7 +35,6 @@ const OfferList = (props) => {
     return <OfferCard
       offerCard = {offerCard}
       key = {id}
-      // onHeaderCardClick = {onHeaderCardClick}
       cardType = {cardType}
     />;
   });
@@ -44,8 +43,9 @@ const OfferList = (props) => {
 OfferList.propTypes = {
   offerCards: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        previewImage: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
@@ -55,7 +55,7 @@ OfferList.propTypes = {
   ).isRequired,
   offersNear: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
         name: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
@@ -64,7 +64,6 @@ OfferList.propTypes = {
         isPremium: PropTypes.bool.isRequired
       })
   ).isRequired,
-  // onHeaderCardClick: PropTypes.func.isRequired,
   cardType: PropTypes.string.isRequired,
   activeSortItem: PropTypes.string.isRequired
 };
