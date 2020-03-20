@@ -31,3 +31,8 @@ export const getObjectsArray = (obj, count) => {
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
+
+// функция генерирующая случайное число
+export const generateId = () => {
+  return String(new Date().valueOf() + Math.random());
+};

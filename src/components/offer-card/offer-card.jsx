@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {ActionCreator} from '../../reducer.js';
+import {getIdActiveCard} from '../../reducer/state/selector.js';
+import {ActionCreator} from '../../reducer/state/state.js';
 import {CardType} from '../../const.js';
 
 const getPercent = (rating) => {
@@ -11,7 +12,7 @@ const getPercent = (rating) => {
 
 const OfferCard = (props) => {
   const {offerCard, onCardMouseover, cardType} = props;
-  const {id, photos, name, rating, price, type, isPremium} = offerCard;
+  const {id, previewImage, name, rating, price, type, isPremium} = offerCard;
   return (
     <article className={cardType + `__place-card place-card`} key = {id} onMouseOver = {(evt) => {
       evt.preventDefault();
@@ -25,7 +26,7 @@ const OfferCard = (props) => {
       </div>}
       <div className={cardType + `__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src = {`/img/` + photos[0]} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src = {previewImage} width="260" height="200" alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
@@ -59,8 +60,9 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   offerCard: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    previewImage: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
@@ -73,7 +75,7 @@ OfferCard.propTypes = {
 
 const mapStateToProps = (state) => (
   {
-    id: state.idActiveCard
+    id: getIdActiveCard(state)
   }
 );
 

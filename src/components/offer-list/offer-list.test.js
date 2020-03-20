@@ -5,6 +5,7 @@ import {CardType} from '../../const.js';
 import {Provider} from "react-redux";
 import {MemoryRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
@@ -14,8 +15,9 @@ const OFFER_TYPES = [`apartment`, `privet room`];
 
 const offerCards = [
   {
-    id: `1`,
+    id: 1,
     photos: OFFER_IMAGES,
+    previewImage: `apartment-01.jpg`,
     name: OFFER_NAMES[0],
     rating: 2,
     price: 100,
@@ -23,8 +25,9 @@ const offerCards = [
     isPremium: true,
   },
   {
-    id: `2`,
+    id: 2,
     photos: OFFER_IMAGES,
+    previewImage: `apartment-01.jpg`,
     name: OFFER_NAMES[1],
     rating: 3,
     price: 120,
@@ -35,8 +38,9 @@ const offerCards = [
 
 const offersNear = [
   {
-    id: `11`,
+    id: 11,
     photos: OFFER_IMAGES,
+    previewImage: `apartment-01.jpg`,
     name: OFFER_NAMES[0],
     rating: 2,
     price: 100,
@@ -44,8 +48,9 @@ const offersNear = [
     isPremium: true,
   },
   {
-    id: `22`,
+    id: 22,
     photos: OFFER_IMAGES,
+    previewImage: `apartment-01.jpg`,
     name: OFFER_NAMES[1],
     rating: 3,
     price: 120,
@@ -53,8 +58,9 @@ const offersNear = [
     isPremium: false,
   },
   {
-    id: `23`,
+    id: 23,
     photos: OFFER_IMAGES,
+    previewImage: `apartment-01.jpg`,
     name: OFFER_NAMES[1],
     rating: 3,
     price: 120,
@@ -67,9 +73,11 @@ const offersNear = [
 describe(`OfferList component render correctly`, () => {
   it(`should OfferList render correctly for offer cities`, () => {
     const store = mockStore({
-      offers: offerCards,
-      activeSortItem: `Popular`,
-      offersNear: []
+      [NameSpace.DATA]: {offers: offerCards,
+        offersNear: []},
+      [NameSpace.STATE]: {
+        activeSortItem: `Popular`,
+      }
     });
 
     const tree = renderer.create(
@@ -77,7 +85,6 @@ describe(`OfferList component render correctly`, () => {
           <MemoryRouter>
             <OfferList
               offerCards = {offerCards}
-              // onHeaderCardClick = {() => {}}
               cardType = {CardType.CITY}
               activeSortItem = {`Popular`}
               offersNear = {offersNear}
@@ -90,16 +97,17 @@ describe(`OfferList component render correctly`, () => {
 
   it(`should OfferList render correctly for offer near`, () => {
     const store = mockStore({
-      offers: offerCards,
-      activeSortItem: `Popular`,
-      offersNear
+      [NameSpace.DATA]: {offers: offerCards,
+        offersNear},
+      [NameSpace.STATE]: {
+        activeSortItem: `Popular`,
+      }
     });
     const tree = renderer.create(
         <Provider store={store}>
           <MemoryRouter>
             <OfferList
               offerCards = {offerCards}
-              // onHeaderCardClick = {() => {}}
               cardType = {CardType.NEAR}
               activeSortItem = {`Popular`}
               offersNear = {offersNear}

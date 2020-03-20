@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
 import {connect} from 'react-redux';
 import {CardType} from '../../const.js';
+import {getActiveSortItem} from '../../reducer/state/selector.js';
+import {getOffersNear, getOffersByCityName} from '../../reducer/data/selectors.js';
 
 const sortOffers = (offers, sortType) => {
   switch (sortType) {
@@ -33,7 +35,6 @@ const OfferList = (props) => {
     return <OfferCard
       offerCard = {offerCard}
       key = {id}
-      // onHeaderCardClick = {onHeaderCardClick}
       cardType = {cardType}
     />;
   });
@@ -42,8 +43,9 @@ const OfferList = (props) => {
 OfferList.propTypes = {
   offerCards: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        previewImage: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
@@ -53,7 +55,7 @@ OfferList.propTypes = {
   ).isRequired,
   offersNear: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
         name: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
@@ -62,7 +64,6 @@ OfferList.propTypes = {
         isPremium: PropTypes.bool.isRequired
       })
   ).isRequired,
-  // onHeaderCardClick: PropTypes.func.isRequired,
   cardType: PropTypes.string.isRequired,
   activeSortItem: PropTypes.string.isRequired
 };
@@ -76,9 +77,9 @@ const SortType = {
 
 const mapStateToProps = (state) => (
   {
-    offerCards: state.offers,
-    offersNear: state.offersNear,
-    activeSortItem: state.activeSortItem
+    offerCards: getOffersByCityName(state),
+    offersNear: getOffersNear(state),
+    activeSortItem: getActiveSortItem(state)
   }
 );
 

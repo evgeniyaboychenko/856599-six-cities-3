@@ -9,22 +9,26 @@ const activeCity = {
   id: `1`,
   name: CITIES[0],
   coordinatesCity: COORDINATES_CITY[0],
+  zoom: 8
 };
 
 const cities = [{
   id: `1`,
   name: CITIES[0],
   coordinatesCity: COORDINATES_CITY[0],
+  zoom: 8
 },
 {
   id: `2`,
   name: CITIES[1],
   coordinatesCity: COORDINATES_CITY[1],
+  zoom: 8
 },
 {
   id: `3`,
   name: CITIES[2],
   coordinatesCity: COORDINATES_CITY[2],
+  zoom: 8
 }
 ];
 

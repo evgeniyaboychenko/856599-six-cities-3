@@ -22,7 +22,7 @@ exports[`OfferCard component render correctly should OfferCard render correctly 
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="/img/room.jpg"
+        src="apartment-01.jpg"
         width="260"
       />
     </a>
@@ -129,7 +129,7 @@ exports[`OfferCard component render correctly should OfferCard render correctly 
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="/img/room.jpg"
+        src="apartment-01.jpg"
         width="260"
       />
     </a>

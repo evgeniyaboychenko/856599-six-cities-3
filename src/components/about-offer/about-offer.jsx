@@ -5,10 +5,7 @@ import Map from '../map/map.jsx';
 import {generateComments} from '../../mocks/comments.js';
 import OfferList from '../offer-list/offer-list.jsx';
 import {CardType} from '../../const.js';
-
-const generateId = () => {
-  return String(new Date().valueOf() + Math.random());
-};
+import {generateId} from '../../utils/utils.js';
 
 const getGallery = (photos) => {
   return photos.map((photo) => (<div className="property__image-wrapper" key = {generateId()}>

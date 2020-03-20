@@ -10,8 +10,9 @@ const OFFER_TYPES = [`apartment`, `privet room`];
 
 const offerCard =
 {
-  id: `889`,
+  id: 889,
   photos: OFFER_IMAGES,
+  previewImage: `apartment-01.jpg`,
   name: OFFER_NAMES[0],
   rating: 2,
   price: 100,

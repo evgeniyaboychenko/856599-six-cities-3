@@ -1,13 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+import {getActiveSortItem} from '../../reducer/state/selector.js';
+import {ActionCreator} from '../../reducer/state/state.js';
+// '../../reducer/reducer.js';
 import PropTypes from 'prop-types';
+import {generateId} from '../../utils/utils.js';
 
 const sortItems = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
-
-const generateId = () => {
-  return String(new Date().valueOf() + Math.random());
-};
 
 const SortList = ({activeSortItem, onSortClick, onSortListClick, isActive}) => {
   return (
@@ -45,7 +44,7 @@ SortList.propTypes = {
 
 const mapStateToProps = (state) => (
   {
-    activeSortItem: state.activeSortItem
+    activeSortItem: getActiveSortItem(state)
   }
 );
 

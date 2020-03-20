@@ -43,7 +43,6 @@ it(`should AboutOffer render correctly`, () => {
   const tree = renderer.create(
       <AboutOffer
         offerCard = {offerCard}
-        // activeCity = {activeCity}
       />
   ).toJSON();
 
