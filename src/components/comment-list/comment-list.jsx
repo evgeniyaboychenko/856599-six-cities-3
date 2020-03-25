@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Comment from '../comment/comment.jsx';
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 
-const CommentList = ({comments}) => {
+const CommentList = ({comments, authorizationStatus}) => {
   comments.sort((a, b) => (b.date - a.date));
   const sortingComments = comments.slice(0, 10);
   return (<section className="property__reviews reviews">
@@ -17,6 +18,7 @@ const CommentList = ({comments}) => {
         />;
       })}
     </ul>
+    {authorizationStatus === AuthorizationStatus.AUTH &&
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -62,11 +64,12 @@ const CommentList = ({comments}) => {
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
       </div>
-    </form>
+    </form>}
   </section>);
 };
 
 CommentList.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   comments: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,

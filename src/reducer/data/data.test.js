@@ -73,79 +73,83 @@ const offerCards = [
 
 const loadeOfferCards = [
   {
-    bedrooms: 3,
-    city: {
-      location: {
-        latitude: 48.856663,
-        longitude: 2.351556,
-        zoom: 10
+    'bedrooms': 3,
+    'city': {
+      'location': {
+        'latitude': 48.856663,
+        'longitude': 2.351556,
+        'zoom': 10
       },
-      name: CITIES[0]
+      'name': CITIES[0]
     },
-    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-    goods: [`Heating`, `Kitchen`],
-    host: {
-      avatar_url: `img/1.png`,
-      id: 3,
-      is_pro: true,
-      name: `Angelina`
+    'description': `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    'goods': [`Heating`, `Kitchen`],
+    'host': {
+      'avatar_url': `img/1.png`,
+      'id': 3,
+      'is_pro': true,
+      'name': `Angelina`
     },
-    id: 1,
-    images: [`img/1.png`, `img/2.png`],
-    is_favorite: false,
-    is_premium: false,
-    location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
+    'id': 1,
+    'images': [`img/1.png`, `img/2.png`],
+    'is_favorite': false,
+    'is_premium': false,
+    'location': {
+      'latitude': 52.35514938496378,
+      'longitude': 4.673877537499948,
+      'zoom': 8
     },
-    max_adults: 4,
-    preview_image: `img/1.png`,
-    price: 100,
-    rating: 3,
-    title: `Beautiful & luxurious studio at great location`,
-    type: `apartment`
+    'max_adults': 4,
+    'preview_image': `img/1.png`,
+    'price': 100,
+    'rating': 3,
+    'title': `Beautiful & luxurious studio at great location`,
+    'type': `apartment`
   },
   {
-    bedrooms: 3,
-    city: {
-      location: {
-        latitude: 50.930779,
-        longitude: 6.938399,
-        zoom: 10
+    'bedrooms': 3,
+    'city': {
+      'location': {
+        'latitude': 50.930779,
+        'longitude': 6.938399,
+        'zoom': 10
       },
-      name: CITIES[1]
+      'name': CITIES[1]
     },
-    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-    goods: [`Heating`, `Kitchen`],
-    host: {
-      avatar_url: `img/1.png`,
-      id: 3,
-      is_pro: true,
-      name: `Angelina`
+    'description': `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    'goods': [`Heating`, `Kitchen`],
+    'host': {
+      'avatar_url': `img/1.png`,
+      'id': 3,
+      'is_pro': true,
+      'name': `Angelina`
     },
-    id: 2,
-    images: [`img/1.png`, `img/2.png`],
-    is_favorite: false,
-    is_premium: false,
-    location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
+    'id': 2,
+    'images': [`img/1.png`, `img/2.png`],
+    'is_favorite': false,
+    'is_premium': false,
+    'location': {
+      'latitude': 52.35514938496378,
+      'longitude': 4.673877537499948,
+      'zoom': 8
     },
-    max_adults: 4,
-    preview_image: `img/1.png`,
-    price: 100,
-    rating: 3,
-    title: `Beautiful & luxurious studio at great location`,
-    type: `apartment`
+    'max_adults': 4,
+    'preview_image': `img/1.png`,
+    'price': 100,
+    'rating': 3,
+    'title': `Beautiful & luxurious studio at great location`,
+    'type': `apartment`
   },
 ];
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     cities: [],
-    city: {},
+    city: {
+      name: ``,
+      coordinatesCity: [],
+      zoom: 0
+    },
     offers: [],
     offersNear: []
   });

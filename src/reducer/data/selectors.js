@@ -3,6 +3,11 @@ import NameSpace from "../name-space.js";
 
 const NAME_SPACE = NameSpace.DATA;
 
+
+export const getIsData = (state) => {
+  return state[NAME_SPACE].isData;
+};
+
 export const getActiveCity = (state) => {
   return state[NAME_SPACE].city;
 };

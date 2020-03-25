@@ -4,13 +4,16 @@ import OfferList from '../offer-list/offer-list.jsx';
 import CityList from '../city-list/city-list.jsx';
 import {CardType} from '../../const.js';
 import Map from '../map/map.jsx';
+import MessageError from '../message-error/message-error.jsx';
 import MainEmpty from '../main-empty/main-empty.jsx';
 import SortList from '../sort-list/sort-list.jsx';
 import withActiveSortList from '../../hocs/withAtiveSortList.jsx';
 const SortListWrapperd = withActiveSortList(SortList);
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {Link} from 'react-router-dom';
 
 const Main = (props) => {
-  const {offersCount, cities, activeCity} = props;
+  const {error, isData, authorizationStatus, user, offersCount, cities, activeCity} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -24,18 +27,40 @@ const Main = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                  {authorizationStatus === AuthorizationStatus.AUTH &&
+                  <Link to = {`/favorites`} className="header__nav-link header__nav-link--profile">
+                    <div className="header__avatar-wrapper user__avatar-wrapper" style = {{backgroundImage: `url(https://htmlacademy-react-3.appspot.com/six-cities${user.avatar_url})`}}>
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
+                    <span className="header__user-name user__name">{user.email}</span>
+                  </Link>}
+                  {authorizationStatus === AuthorizationStatus.NO_AUTH &&
+                  <Link to = {`/login`} className="header__nav-link header__nav-link--profile">
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <span className="header__login">Sign in</span>
+                  </Link>
+                  }
                 </li>
               </ul>
             </nav>
           </div>
         </div>
       </header>
-
+      {isData ||
+      <div style = {{position: `absolute`, content: ``, marginLeft: `50%`, marginTop: `200px`}}>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xmlSpace="preserve">
+          <g><circle cx="16" cy="64" r="16" fill="#000000" fillOpacity="1"/><circle cx="16" cy="64" r="14.344" fill="#000000" fillOpacity="1" transform="rotate(45 64 64)"/>
+            <circle cx="16" cy="64" r="12.531" fill="#000000" fillOpacity="1" transform="rotate(90 64 64)"/>
+            <circle cx="16" cy="64" r="10.75" fill="#000000" fillOpacity="1" transform="rotate(135 64 64)"/>
+            <circle cx="16" cy="64" r="10.063" fill="#000000" fillOpacity="1" transform="rotate(180 64 64)"/>
+            <circle cx="16" cy="64" r="8.063" fill="#000000" fillOpacity="1" transform="rotate(225 64 64)"/>
+            <circle cx="16" cy="64" r="6.438" fill="#000000" fillOpacity="1" transform="rotate(270 64 64)"/>
+            <circle cx="16" cy="64" r="5.375" fill="#000000" fillOpacity="1" transform="rotate(315 64 64)"/>
+            <animateTransform attributeName="transform" type="rotate" values="0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64" calcMode="discrete" dur="720ms" repeatCount="indefinite">
+            </animateTransform></g>
+        </svg>
+        {/* <img className="loading" src="img/loading.gif" alt="loading" width="64" height="64"/> */}
+      </div>}
+      {isData &&
       <main className={offersCount ? `page__main page__main--index` : `page__main page__main--index page__main--index-empty`}>
         <h1 className="visually-hidden">Cities</h1>
         <CityList
@@ -65,12 +90,24 @@ const Main = (props) => {
         </div>
         }
         {offersCount || <MainEmpty activeCity = {activeCity}/>}
-      </main>
+      </main>}
+      <MessageError
+        error = {error}
+      />
     </div>
   );
 };
 
 Main.propTypes = {
+  error: PropTypes.string.isRequired,
+  isData: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    'id': PropTypes.number.isRequired,
+    'name': PropTypes.string.isRequired,
+    'avatar_url': PropTypes.string.isRequired,
+    'email': PropTypes.string.isRequired,
+    'is_pro': PropTypes.bool.isRequired,
+  }).isRequired,
   offersCount: PropTypes.number.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -82,6 +119,7 @@ Main.propTypes = {
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     zoom: PropTypes.number.isRequired,
   }).isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 export default Main;

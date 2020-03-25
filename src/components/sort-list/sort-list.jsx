@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {getActiveSortItem} from '../../reducer/state/selector.js';
 import {ActionCreator} from '../../reducer/state/state.js';
-// '../../reducer/reducer.js';
 import PropTypes from 'prop-types';
 import {generateId} from '../../utils/utils.js';
 
