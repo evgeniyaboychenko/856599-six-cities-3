@@ -1,35 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
-// import {cities} from './mocks/offers.js';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './reducer/reducer.js';
 import {Operation as OffersOperation} from './reducer/data/data.js';
+import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from "./api.js";
 
-const api = createAPI(() => {});
+const onUnauthorized = () => {
+  store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH, {id: -1,
+    name: ``,
+    avatar_url: ``,
+    email: ``,
+    is_pro: false}));
+};
+
+// const onServerError = () => {
+//   store.dispatch(ActionCreator.setLoadingError(``));
+// };
+
+const api = createAPI((onUnauthorized));
 
 const store = createStore(
     reducer,
     composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument(api))
     )
-    // compose(
-    // applyMiddleware(thunk.withExtraArgument(api))
-    //  window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
-    // )
 );
 
 store.dispatch(OffersOperation.loadOfferList());
+store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        // cities = {cities}
-      />
+      <App/>
     </Provider>,
     document.querySelector(`#root`)
 );

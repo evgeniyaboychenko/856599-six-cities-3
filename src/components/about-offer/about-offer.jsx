@@ -6,10 +6,12 @@ import {generateComments} from '../../mocks/comments.js';
 import OfferList from '../offer-list/offer-list.jsx';
 import {CardType} from '../../const.js';
 import {generateId} from '../../utils/utils.js';
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {Link} from 'react-router-dom';
 
 const getGallery = (photos) => {
   return photos.map((photo) => (<div className="property__image-wrapper" key = {generateId()}>
-    <img className="property__image" src={`/img/` + photo} alt="Photo studio"/>
+    <img className="property__image" src={photo} alt="Photo studio"/>
   </div>));
 };
 
@@ -25,16 +27,16 @@ const getInsideList = (appliances) => {
   );
 };
 
-const getDescription = (descriptions) => {
-  return descriptions.map((description) => (
-    <p className="property__text" key = {generateId()}>
-      {description}
-    </p>)
-  );
-};
+// const getDescription = (descriptions) => {
+//   return descriptions.map((description) => (
+//     <p className="property__text" key = {generateId()}>
+//       {description}
+//     </p>)
+//   );
+// };
 
 const AboutOffer = (props) => {
-  const {offerCard} = props;
+  const {authorizationStatus, user, offerCard} = props;
   const comments = generateComments();
   comments.forEach((comment) => {
     offerCard.commentsId = comment.id;
@@ -53,11 +55,18 @@ const AboutOffer = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                {authorizationStatus === AuthorizationStatus.AUTH &&
+                  <Link to = {`/favorites`} className="header__nav-link header__nav-link--profile">
+                    <div className="header__avatar-wrapper user__avatar-wrapper" style = {{backgroundImage: `url(https://htmlacademy-react-3.appspot.com/six-cities${user.avatar_url})`}}>
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
+                    <span className="header__user-name user__name">{user.email}</span>
+                  </Link>}
+                  {authorizationStatus === AuthorizationStatus.NO_AUTH &&
+                  <Link to = {`/login`} className="header__nav-link header__nav-link--profile">
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <span className="header__login">Sign in</span>
+                  </Link>
+                  }
                 </li>
               </ul>
             </nav>
@@ -121,17 +130,20 @@ const AboutOffer = (props) => {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className={owner.isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` : `property__avatar-wrapper user__avatar-wrapper`}>
-                    <img className="property__avatar user__avatar" src={`/img/` + owner.avatar} width="74" height="74" alt="Host avatar"/>
+                    <img className="property__avatar user__avatar" src={`/` + owner.avatar} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">
                     {owner.name}
                   </span>
                 </div>
                 <div className="property__description">
-                  {getDescription(descriptions)}
+                  <p className="property__text">
+                    {descriptions}
+                  </p>)
                 </div>
               </div>
               <CommentList
+                authorizationStatus = {authorizationStatus}
                 comments = {comments}
               />
             </div>
@@ -158,8 +170,9 @@ const AboutOffer = (props) => {
 };
 
 AboutOffer.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   offerCard: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     commentsId: PropTypes.arrayOf(PropTypes.string),
     photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     name: PropTypes.string.isRequired,
@@ -170,7 +183,7 @@ AboutOffer.propTypes = {
     countRooms: PropTypes.number.isRequired,
     maxGuests: PropTypes.number.isRequired,
     appliances: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    descriptions: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    descriptions: PropTypes.string.isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -180,4 +193,3 @@ AboutOffer.propTypes = {
 };
 
 export default AboutOffer;
-

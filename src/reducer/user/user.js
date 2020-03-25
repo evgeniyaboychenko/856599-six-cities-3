@@ -1,0 +1,95 @@
+import {extend} from '../../utils/utils.js';
+
+const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
+const initialState = {
+  error: ``,
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  user: {
+    id: -1,
+    name: ``,
+    avatar_url: ``,
+    email: ``,
+    is_pro: false,
+  }
+};
+
+const ActionType = {
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  SET_LOADING_ERROR: `SET_LOADING_ERROR`
+  // LOAD_USER_DATA: `LOAD_USER_DATA`
+};
+
+const ActionCreator = {
+  requireAuthorization: (status, user) => {
+    return {
+      type: ActionType.REQUIRED_AUTHORIZATION,
+      payload: {status, user}
+    };
+  },
+  setLoadingError: (error) => {
+    return {
+      type: ActionType.SET_LOADING_ERROR,
+      payload: error
+    };
+  },
+  // loadUserData: (user) => {
+  //   return {
+  //     type: ActionType.LOAD_USER_DATA,
+  //     payload: user,
+  //   };
+  // },
+};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return extend(state, {
+        authorizationStatus: action.payload.status,
+        user: action.payload.user
+      });
+    case ActionType.SET_LOADING_ERROR:
+      return extend(state, {
+        error: action.payload
+      });
+    // case ActionType.LOAD_USER_DATA:
+    //   return extend(state, {
+    //     user: action.payload,
+    //   });
+  }
+
+  return state;
+};
+
+const Operation = {
+  checkAuth: () => (dispatch, getState, api) => {
+    return api.get(`/login`)
+      .then((response) => {
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, response.data));
+      }, () => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH, {id: -1,
+        name: ``,
+        avatar_url: ``,
+        email: ``,
+        is_pro: false})));
+  },
+
+  login: (authData) => (dispatch, getState, api) => {
+    return api.post(`/login`, {
+      email: authData.login,
+      password: authData.password,
+    })
+      .then((response) => {
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, response.data));
+      })
+    .catch((err) => {
+      const {response} = err;
+      dispatch(ActionCreator.setLoadingError(response.data.error));
+      // throw err;
+    });
+  },
+};
+
+export {reducer, ActionCreator, ActionType, AuthorizationStatus, Operation};

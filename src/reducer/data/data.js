@@ -1,20 +1,8 @@
 import {extend} from '../../utils/utils.js';
-// import {generateOfferCards, cities, offers} from '../../mocks/offers.js';
 import {adaptOffers, adaptCity} from '../../utils/adapter.js';
-// const getOffers = (cityId) => {
-//   return offers.filter((offer) => offer.cityId === cityId);
-// };
-
-// const offersNearby = generateOfferCards(3);
-
-// const initialState = {
-//   city: cities[0],
-//   offers, // getOffers(cities[0].id),
-//   offersNear: offersNearby
-// };
-
 
 const initialState = {
+  isData: false,
   cities: [],
   city: {
     name: ``,
@@ -29,6 +17,8 @@ const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   // GET_OFFER_LIST: `GET_OFFER_LIST`,
   LOAD_OFFER_LIST: `LOAD_OFFER_LIST`,
+  LOAD_OFFERS_NEAR: `LOAD_OFFERS_NEAR`,
+  CHANGE_DOWNLOAD_STATUS: `CHANGE_DOWNLOAD_STATUS`,
 };
 
 const ActionCreator = {
@@ -40,6 +30,15 @@ const ActionCreator = {
     type: ActionType.LOAD_OFFER_LIST,
     payload: offers
   }),
+  loadOffersNear: (offers) => ({
+    type: ActionType.LOAD_OFFERS_NEAR,
+    payload: offers
+  }),
+  changeDownloadStatus: (status) => ({
+    type: ActionType.CHANGE_DOWNLOAD_STATUS,
+    payload: status
+  }),
+
   // getOfferList: (activeCity) => ({
   //   type: ActionType.GET_OFFER_LIST,
   //   payload: activeCity
@@ -51,6 +50,14 @@ const Operation = {
     return api.get(`/hotels`)
       .then((response) => {
         dispatch(ActionCreator.loadOfferList(response.data));
+        dispatch(ActionCreator.changeDownloadStatus(true));
+      });
+  },
+  loadOffersNear: (idHotel) => (dispatch, setState, api) => {
+    return api.get(`/hotels/` + idHotel + `/nearby`)
+      .then((response) => {
+        dispatch(ActionCreator.loadOffersNear(response.data));
+        // dispatch(ActionCreator.changeDownloadStatus(true));
       });
   },
 };
@@ -68,6 +75,16 @@ const reducer = (state = initialState, action) => {
         offers: adaptOffers(action.payload), // getOffers(action.payload.id),
         cities: adaptCity(adaptOffers(action.payload)),
         city: adaptCity(adaptOffers(action.payload))[0],
+      });
+
+    case ActionType.LOAD_OFFERS_NEAR:
+      return extend(state, {
+        offersNear: adaptOffers(action.payload), // getOffers(action.payload.id),
+      });
+
+    case ActionType.CHANGE_DOWNLOAD_STATUS:
+      return extend(state, {
+        isData: action.payload
       });
   }
   return state;
