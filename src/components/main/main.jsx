@@ -29,7 +29,7 @@ const Main = (props) => {
                 <li className="header__nav-item user">
                   {authorizationStatus === AuthorizationStatus.AUTH &&
                   <Link to = {`/favorites`} className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper" style = {{backgroundImage: `url(https://htmlacademy-react-3.appspot.com/six-cities${user.avatar_url})`}}>
+                    <div className="header__avatar-wrapper user__avatar-wrapper" style = {{backgroundImage: `url(https://htmlacademy-react-3.appspot.com/six-cities${user.avatar})`}}>
                     </div>
                     <span className="header__user-name user__name">{user.email}</span>
                   </Link>}
@@ -102,11 +102,11 @@ Main.propTypes = {
   error: PropTypes.string.isRequired,
   isData: PropTypes.bool.isRequired,
   user: PropTypes.shape({
-    'id': PropTypes.number.isRequired,
-    'name': PropTypes.string.isRequired,
-    'avatar_url': PropTypes.string.isRequired,
-    'email': PropTypes.string.isRequired,
-    'is_pro': PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    isPro: PropTypes.bool.isRequired,
   }).isRequired,
   offersCount: PropTypes.number.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
@@ -121,5 +121,6 @@ Main.propTypes = {
   }).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
 };
+
 
 export default Main;

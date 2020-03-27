@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 import Favorites from '../favorites/favorites.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
-import {Switch, Route, BrowserRouter, Redirect} from 'react-router-dom';
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import AboutOffer from '../about-offer/about-offer.jsx';
 import {AppRoute} from '../../const.js';
 import {connect} from 'react-redux';
-import {getActiveCity, getCities, getOffersByCityName, getIsData, getOffersNear} from '../../reducer/data/selectors.js';
+import {getActiveCity, getCities, getOffersByCityName, getIsData} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus, getUserData, getError} from "../../reducer/user/selector.js";
 import {Operation as UserOperation, AuthorizationStatus} from "../../reducer/user/user.js";
-// import {Operation as OffersOperation, ActionCreator} from '../../reducer/data/data.js';
+import {Operation as OffersOperation} from '../../reducer/data/data.js';
+import {Operation as CommentOperation} from '../../reducer/comment/comment.js';
 
 const App = (props) => {
-  const {error, isData, authorizationStatus, user, offerCards, cities, activeCity, onSubmitLogin, onOpenAboutOffer} = props;
+  const {onLoadOffersNear, onLoadComments, error, isData, authorizationStatus, user, offerCards, cities, activeCity, onSubmitLogin} = props;
 
   const renderMain = () => {
     return <Main
@@ -44,11 +45,9 @@ const App = (props) => {
         <Route exact path={AppRoute.ROOM}
           render = {(propsLink) => {
             const offerCard = offerCards.find((item) => item.id === Number(propsLink.match.params.id));
+            onLoadComments(offerCard.id);
+            onLoadOffersNear(offerCard.id);
             return <AboutOffer
-              isData = {isData}
-              authorizationStatus = {authorizationStatus}
-              user = {user}
-              activeCity = {activeCity}
               offerCard = {offerCard}
             />;
           }}/>
@@ -76,9 +75,9 @@ App.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    avatar_url: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    is_pro: PropTypes.bool.isRequired,
+    isPro: PropTypes.bool.isRequired,
   }).isRequired,
   offerCards: PropTypes.arrayOf(
       PropTypes.shape({
@@ -103,6 +102,8 @@ App.propTypes = {
   }).isRequired,
   onSubmitLogin: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  onLoadOffersNear: PropTypes.func.isRequired,
+  onLoadComments: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => (
@@ -113,7 +114,7 @@ const mapStateToProps = (state) => (
     authorizationStatus: getAuthorizationStatus(state),
     activeCity: getActiveCity(state),
     cities: getCities(state),
-    offerCards: getOffersByCityName(state) // getOffers(state)
+    offerCards: getOffersByCityName(state)
   }
 );
 
@@ -121,6 +122,13 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmitLogin(authData) {
     dispatch(UserOperation.login(authData));
   },
+  onLoadComments(idCard) {
+    dispatch(CommentOperation.loadComments(idCard));
+  },
+  onLoadOffersNear(idCard) {
+    dispatch(OffersOperation.loadOffersNear(idCard));
+  },
+
 });
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(App));

@@ -1,4 +1,5 @@
 import {extend} from '../../utils/utils.js';
+import {adaptUser} from '../../utils/adapter.js';
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -11,16 +12,15 @@ const initialState = {
   user: {
     id: -1,
     name: ``,
-    avatar_url: ``,
+    avatar: ``,
     email: ``,
-    is_pro: false,
+    isPro: false,
   }
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_LOADING_ERROR: `SET_LOADING_ERROR`
-  // LOAD_USER_DATA: `LOAD_USER_DATA`
 };
 
 const ActionCreator = {
@@ -36,12 +36,6 @@ const ActionCreator = {
       payload: error
     };
   },
-  // loadUserData: (user) => {
-  //   return {
-  //     type: ActionType.LOAD_USER_DATA,
-  //     payload: user,
-  //   };
-  // },
 };
 
 const reducer = (state = initialState, action) => {
@@ -55,10 +49,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         error: action.payload
       });
-    // case ActionType.LOAD_USER_DATA:
-    //   return extend(state, {
-    //     user: action.payload,
-    //   });
   }
 
   return state;
@@ -68,12 +58,12 @@ const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then((response) => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, response.data));
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, adaptUser(response.data)));
       }, () => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH, {id: -1,
         name: ``,
-        avatar_url: ``,
+        avatar: ``,
         email: ``,
-        is_pro: false})));
+        isPro: false})));
   },
 
   login: (authData) => (dispatch, getState, api) => {
@@ -82,7 +72,7 @@ const Operation = {
       password: authData.password,
     })
       .then((response) => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, response.data));
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, adaptUser(response.data)));
       })
     .catch((err) => {
       const {response} = err;

@@ -34,7 +34,6 @@ export const adaptOffers = (loadedOffers) => {
 };
 
 export const adaptCity = (offers) => {
-  // const tt = offers.slice();
   const cities = [];
   offers.slice().reduce((city, item) => {
     if (city.indexOf(item.cityName) === -1) {
@@ -48,3 +47,33 @@ export const adaptCity = (offers) => {
   }, []);
   return cities;
 };
+
+const adaptComment = (initialStructure) => {
+  return (
+    {
+      id: initialStructure.id,
+      text: initialStructure.comment,
+      date: initialStructure.date,
+      rating: initialStructure.rating,
+      avatar: initialStructure.user.avatar_url,
+      idUser: initialStructure.user.id,
+      name: initialStructure.user.name,
+      isPro: initialStructure.user.is_pro,
+    });
+};
+export const adaptComments = (loadedComments) => {
+  return loadedComments.map((item) => adaptComment(item));
+};
+
+export const adaptUser = (initialStructure) => {
+  return (
+    {
+      id: initialStructure.id,
+      email: initialStructure.email,
+      avatar: initialStructure.avatar_url,
+      name: initialStructure.name,
+      isPro: initialStructure.is_pro,
+    }
+  );
+};
+

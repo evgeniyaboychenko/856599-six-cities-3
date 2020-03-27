@@ -4,7 +4,7 @@ import leaflet from 'leaflet';
 import {connect} from 'react-redux';
 import {CardType} from '../../const.js';
 import {getIdActiveCard} from '../../reducer/state/selector.js';
-import {getOffersNear, getActiveCity, getOffersByCityName} from '../../reducer/data/selectors.js';
+import {getActiveCity, getOffersByCityName} from '../../reducer/data/selectors.js';
 
 const icon = leaflet.icon({
   iconUrl: `/img/pin.svg`,
@@ -25,12 +25,12 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offerCards, idCurrentCard, cardType, activeCity, offersNearby} = this.props;
+    const {offerCards, idCurrentCard, cardType, activeCity, offersNear} = this.props;
     let offersOnMap = [];
     if (cardType === CardType.CITY) {
       offersOnMap = offerCards;
     } else {
-      offersOnMap = offersNearby.concat(offerCards.find((offer) => offer.id === idCurrentCard));
+      offersOnMap = offersNear.concat(offerCards.find((offer) => offer.id === idCurrentCard));
     }
 
     const coordinatesCity = activeCity.coordinatesCity;
@@ -64,12 +64,12 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {offerCards, idCurrentCard, cardType, activeCity, offersNearby} = this.props;
+    const {offerCards, idCurrentCard, cardType, activeCity, offersNear} = this.props;
     let offersOnMap = [];
     if (cardType === CardType.CITY) {
       offersOnMap = offerCards;
     } else {
-      offersOnMap = offersNearby.concat(offerCards.find((offer) => offer.id === idCurrentCard));
+      offersOnMap = offersNear.concat(offerCards.find((offer) => offer.id === idCurrentCard));
     }
 
     if (activeCity.name !== prevProps.activeCity.name || idCurrentCard !== prevProps.idCurrentCard) {
@@ -110,11 +110,11 @@ Map.propTypes = {
         coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
       })
   ).isRequired,
-  offersNearby: PropTypes.arrayOf(
+  offersNear: PropTypes.arrayOf(
       PropTypes.shape({
         coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
       })
-  ).isRequired,
+  ),
   idCurrentCard: PropTypes.number.isRequired,
   activeCity: PropTypes.shape({
     // id: PropTypes.string.isRequired,
@@ -129,7 +129,7 @@ const mapStateToProps = (state) => (
   {
     activeCity: getActiveCity(state),
     offerCards: getOffersByCityName(state),
-    offersNearby: getOffersNear(state),
+    // offersNear: getOffersNear(state),
     idCurrentCard: getIdActiveCard(state)
   }
 );
