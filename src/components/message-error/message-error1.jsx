@@ -6,8 +6,7 @@ import {ActionCreator} from '../../reducer/comment/comment.js';
 const MessageErrorForm = ({error, onCloseClick}) => {
   return (
     <section style = {error === 200 ? {display: `none`} :
-      {display: `block`, position: `fixed`, zIndex: 30,
-        width: `600px`, marginLeft: `-150px`, left: `50%`, top: `100px`, backgroundColor: `white`}}>
+      {display: `block`, position: `fixed`, zIndex: 30, marginLeft: `-150px`, left: `50%`, top: `300px`, backgroundColor: `white`}}>
       <h2 style = {{display: `flex`, textAlign: `center`}}>Ошибка. Попробуйте еще раз.</h2>
       <button type="button" aria-label="Закрыть модальное окно" style = {{display: `flex`, margin: `auto`}}onClick = {(evt) => {
         evt.preventDefault();
@@ -26,7 +25,7 @@ MessageErrorForm.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onCloseClick() {
-    dispatch(ActionCreator.setIsError(``));
+    dispatch(ActionCreator.setIsError(200));
   }
 });
 

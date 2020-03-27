@@ -27,10 +27,10 @@ const ActionCreator = {
   //   type: ActionType.POST_COMMENT,
   //   payload: comments
   // }),
-  // setIsError: (error) => ({
-  //   type: ActionType.SET_IS_ERROR,
-  //   payload: error
-  // }),
+  setIsError: (error) => ({
+    type: ActionType.SET_IS_ERROR,
+    payload: error
+  }),
   setIsFormSubmit: () => ({
     type: ActionType.SET_IS_FORM_SUBMIT,
     payload: true
@@ -55,10 +55,10 @@ const reducer = (state = initialState, action) => {
     //   return extend(state, {
     //     comments: adaptComments(action.payload)
     //   });
-    // case ActionType.SET_IS_ERROR:
-    //   return extend(state, {
-    //     errorForm: action.payload
-    //   });
+    case ActionType.SET_IS_ERROR:
+      return extend(state, {
+        errorForm: action.payload
+      });
     case ActionType.SET_SUCCESS_FORM_SUBMISSION:
       return extend(state, {
         isSubmitForm: action.payload.isSubmitForm,
