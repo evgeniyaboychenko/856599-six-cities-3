@@ -3,7 +3,6 @@ import NameSpace from "../name-space.js";
 
 const NAME_SPACE = NameSpace.DATA;
 
-
 export const getIsData = (state) => {
   return state[NAME_SPACE].isData;
 };
@@ -29,4 +28,3 @@ export const getOffersByCityName = createSelector(getOffers, getActiveCity,
       return offers.filter((offer) => offer.cityName === activeCity.name);
     }
 );
-

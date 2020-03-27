@@ -13,9 +13,9 @@ import {createAPI} from "./api.js";
 const onUnauthorized = () => {
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH, {id: -1,
     name: ``,
-    avatar_url: ``,
+    avatar: ``,
     email: ``,
-    is_pro: false}));
+    isPro: false}));
 };
 
 // const onServerError = () => {

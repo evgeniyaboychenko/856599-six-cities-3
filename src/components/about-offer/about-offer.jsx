@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CommentList from '../comment-list/comment-list.jsx';
 import Map from '../map/map.jsx';
-import {generateComments} from '../../mocks/comments.js';
 import OfferList from '../offer-list/offer-list.jsx';
 import {CardType} from '../../const.js';
 import {generateId} from '../../utils/utils.js';
-import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {getAuthorizationStatus, getUserData, getError} from "../../reducer/user/selector.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {getComment, getComments, getIsError, getIsSubmitForm, getErrorForm} from '../../reducer/comment/selector.js';
+import {getOffersNear} from '../../reducer/data/selectors.js';
+// import {Operation as OffersOperation} from '../../reducer/data/data.js';
+import {Operation as CommentOperation} from '../../reducer/comment/comment.js';
 
 const getGallery = (photos) => {
   return photos.map((photo) => (<div className="property__image-wrapper" key = {generateId()}>
@@ -27,21 +32,10 @@ const getInsideList = (appliances) => {
   );
 };
 
-// const getDescription = (descriptions) => {
-//   return descriptions.map((description) => (
-//     <p className="property__text" key = {generateId()}>
-//       {description}
-//     </p>)
-//   );
-// };
-
 const AboutOffer = (props) => {
-  const {authorizationStatus, user, offerCard} = props;
-  const comments = generateComments();
-  comments.forEach((comment) => {
-    offerCard.commentsId = comment.id;
-  });
+  const {comment, comments, authorizationStatus, user, offerCard, offersNear, onSubmitFormComment, isErrorSubmitForm, isSubmitForm, errorForm} = props;
   const {name, rating, price, type, isPremium, descriptions, photos, countRooms, maxGuests, appliances, owner} = offerCard;
+  const {avatar, email} = user;
   return (
     <div className="page">
       <header className="header">
@@ -55,11 +49,11 @@ const AboutOffer = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                {authorizationStatus === AuthorizationStatus.AUTH &&
+                  {authorizationStatus === AuthorizationStatus.AUTH &&
                   <Link to = {`/favorites`} className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper" style = {{backgroundImage: `url(https://htmlacademy-react-3.appspot.com/six-cities${user.avatar_url})`}}>
+                    <div className="header__avatar-wrapper user__avatar-wrapper" style = {{backgroundImage: `url(https://htmlacademy-react-3.appspot.com/six-cities${avatar})`}}>
                     </div>
-                    <span className="header__user-name user__name">{user.email}</span>
+                    <span className="header__user-name user__name">{email}</span>
                   </Link>}
                   {authorizationStatus === AuthorizationStatus.NO_AUTH &&
                   <Link to = {`/login`} className="header__nav-link header__nav-link--profile">
@@ -139,20 +133,28 @@ const AboutOffer = (props) => {
                 <div className="property__description">
                   <p className="property__text">
                     {descriptions}
-                  </p>)
+                  </p>
                 </div>
               </div>
               <CommentList
+                comment = {comment}
+                isSubmitForm = {isSubmitForm}
+                errorForm = {errorForm}
+                isErrorSubmitForm = {isErrorSubmitForm}
                 authorizationStatus = {authorizationStatus}
                 comments = {comments}
+                onSubmitFormComment = {onSubmitFormComment}
+                idCard = {offerCard.id}
               />
             </div>
           </div>
+          {offersNear.length !== 0 &&
           <section className="property__map map">
             <Map
+              offersNear = {offersNear}
               cardType = {CardType.NEAR}
             />
-          </section>
+          </section>}
         </section>
         <div className="container">
           <section className="near-places places">
@@ -171,9 +173,27 @@ const AboutOffer = (props) => {
 
 AboutOffer.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    isPro: PropTypes.bool.isRequired,
+  }).isRequired,
+  comments: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        idUser: PropTypes.number.isRequired,
+        avatar: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        text: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        isPro: PropTypes.bool.isRequired,
+      }).isRequired
+  ).isRequired,
   offerCard: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    commentsId: PropTypes.arrayOf(PropTypes.string),
     photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     name: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
@@ -190,6 +210,39 @@ AboutOffer.propTypes = {
       isSuper: PropTypes.bool.isRequired,
     }),
   }).isRequired,
+  offersNear: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        name: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        isPremium: PropTypes.bool.isRequired
+      })
+  ).isRequired,
 };
 
-export default AboutOffer;
+
+const mapStateToProps = (state) => (
+  {
+    isSubmitForm: getIsSubmitForm(state),
+    errorForm: getErrorForm(state),
+    isErrorSubmitForm: getIsError(state),
+    comments: getComments(state),
+    comment: getComment(state),
+    error: getError(state),
+    user: getUserData(state),
+    authorizationStatus: getAuthorizationStatus(state),
+    offersNear: getOffersNear(state),
+  }
+);
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmitFormComment(comment, idHotel) {
+    dispatch(CommentOperation.submitComment(comment, idHotel));
+  },
+});
+
+export {AboutOffer};
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(AboutOffer));

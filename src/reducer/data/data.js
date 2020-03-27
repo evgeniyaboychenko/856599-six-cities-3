@@ -10,12 +10,11 @@ const initialState = {
     zoom: 0
   },
   offers: [],
-  offersNear: []
+  offersNear: [],
 };
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  // GET_OFFER_LIST: `GET_OFFER_LIST`,
   LOAD_OFFER_LIST: `LOAD_OFFER_LIST`,
   LOAD_OFFERS_NEAR: `LOAD_OFFERS_NEAR`,
   CHANGE_DOWNLOAD_STATUS: `CHANGE_DOWNLOAD_STATUS`,
@@ -38,11 +37,6 @@ const ActionCreator = {
     type: ActionType.CHANGE_DOWNLOAD_STATUS,
     payload: status
   }),
-
-  // getOfferList: (activeCity) => ({
-  //   type: ActionType.GET_OFFER_LIST,
-  //   payload: activeCity
-  // }),
 };
 
 const Operation = {
@@ -57,11 +51,9 @@ const Operation = {
     return api.get(`/hotels/` + idHotel + `/nearby`)
       .then((response) => {
         dispatch(ActionCreator.loadOffersNear(response.data));
-        // dispatch(ActionCreator.changeDownloadStatus(true));
       });
   },
 };
-
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -72,14 +64,14 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.LOAD_OFFER_LIST:
       return extend(state, {
-        offers: adaptOffers(action.payload), // getOffers(action.payload.id),
+        offers: adaptOffers(action.payload),
         cities: adaptCity(adaptOffers(action.payload)),
         city: adaptCity(adaptOffers(action.payload))[0],
       });
 
     case ActionType.LOAD_OFFERS_NEAR:
       return extend(state, {
-        offersNear: adaptOffers(action.payload), // getOffers(action.payload.id),
+        offersNear: adaptOffers(action.payload),
       });
 
     case ActionType.CHANGE_DOWNLOAD_STATUS:

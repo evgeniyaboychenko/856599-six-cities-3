@@ -17,7 +17,7 @@ const Comment = ({comment}) => {
     <li className="reviews__item" key = {id}>
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={`/img/` + avatar} width="54" height="54" alt="Reviews avatar"/>
+          <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="Reviews avatar"/>
         </div>
         <span className="reviews__user-name">
           {name}
@@ -40,12 +40,12 @@ const Comment = ({comment}) => {
 
 Comment.propTypes = {
   comment: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     avatar: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
   }).isRequired,
 };
 

@@ -49,9 +49,14 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/` + id}>
+          {cardType === CardType.CITY &&
+            <Link to={`/offer/` + id}>
+              {name}
+            </Link>}
+          {cardType === CardType.NEAR &&
+          <a href= "#">
             {name}
-          </Link>
+          </a>}
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
