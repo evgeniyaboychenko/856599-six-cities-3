@@ -17,4 +17,12 @@ const AppRoute = {
   MAIN: `/`,
 };
 
-export {CardType, SortType, AppRoute};
+const ServerCode = {
+  SUCCESS: 200,
+  UNAUTHORIZED: 401,
+  INVALID_REQUEST: 400,
+  NOT_FOUND: 404,
+  SERVER_IS_NOT_AVAILABLE: 500
+};
+
+export {CardType, SortType, AppRoute, ServerCode};

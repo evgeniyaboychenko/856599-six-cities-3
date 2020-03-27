@@ -4,7 +4,7 @@ import Comment from '../comment/comment.jsx';
 import CommentForm from '../comment-form/comment-form.jsx';
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 
-const CommentList = ({comment, idCard, comments, authorizationStatus, onSubmitFormComment, isErrorSubmitForm, isSubmitForm, errorForm}) => {
+const CommentList = ({idCard, comments, authorizationStatus, isSubmitForm, errorForm}) => {
   comments.reverse();
   const sortingComments = comments.slice(0, 10);
   return (<section className="property__reviews reviews">
@@ -20,17 +20,18 @@ const CommentList = ({comment, idCard, comments, authorizationStatus, onSubmitFo
     </ul>
     {authorizationStatus === AuthorizationStatus.AUTH &&
       <CommentForm
-        comment = {comment}
         isSubmitForm = {isSubmitForm}
         errorForm = {errorForm}
-        isErrorSubmitForm = {isErrorSubmitForm}
-        onSubmitFormComment = {onSubmitFormComment}
+        // isErrorSubmitForm = {isErrorSubmitForm}
         idCard = {idCard}/>
     }
   </section>);
 };
 
 CommentList.propTypes = {
+  isSubmitForm: PropTypes.bool.isRequired,
+  errorForm: PropTypes.number.isRequired,
+  idCard: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   comments: PropTypes.arrayOf(
       PropTypes.shape({

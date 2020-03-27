@@ -10,13 +10,13 @@ export const getComments = (state) => {
   return state[NAME_SPACE].comments;
 };
 
-export const getComment = (state) => {
-  return state[NAME_SPACE].comment;
-};
+// export const getComment = (state) => {
+//   return state[NAME_SPACE].comment;
+// };
 
-export const getIsError = (state) => {
-  return state[NAME_SPACE].isErrorSubmitForm;
-};
+// export const getIsError = (state) => {
+//   return state[NAME_SPACE].isErrorSubmitForm;
+// };
 
 export const getIsSubmitForm = (state) => {
   return state[NAME_SPACE].isSubmitForm;

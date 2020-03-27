@@ -9,10 +9,8 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getAuthorizationStatus, getUserData, getError} from "../../reducer/user/selector.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {getComment, getComments, getIsError, getIsSubmitForm, getErrorForm} from '../../reducer/comment/selector.js';
+import {getComments, getIsSubmitForm, getErrorForm} from '../../reducer/comment/selector.js';
 import {getOffersNear} from '../../reducer/data/selectors.js';
-// import {Operation as OffersOperation} from '../../reducer/data/data.js';
-import {Operation as CommentOperation} from '../../reducer/comment/comment.js';
 
 const getGallery = (photos) => {
   return photos.map((photo) => (<div className="property__image-wrapper" key = {generateId()}>
@@ -33,7 +31,7 @@ const getInsideList = (appliances) => {
 };
 
 const AboutOffer = (props) => {
-  const {comment, comments, authorizationStatus, user, offerCard, offersNear, onSubmitFormComment, isErrorSubmitForm, isSubmitForm, errorForm} = props;
+  const {comments, authorizationStatus, user, offerCard, offersNear, isSubmitForm, errorForm} = props;
   const {name, rating, price, type, isPremium, descriptions, photos, countRooms, maxGuests, appliances, owner} = offerCard;
   const {avatar, email} = user;
   return (
@@ -137,13 +135,11 @@ const AboutOffer = (props) => {
                 </div>
               </div>
               <CommentList
-                comment = {comment}
                 isSubmitForm = {isSubmitForm}
                 errorForm = {errorForm}
-                isErrorSubmitForm = {isErrorSubmitForm}
+                // isErrorSubmitForm = {isErrorSubmitForm}
                 authorizationStatus = {authorizationStatus}
                 comments = {comments}
-                onSubmitFormComment = {onSubmitFormComment}
                 idCard = {offerCard.id}
               />
             </div>
@@ -172,6 +168,8 @@ const AboutOffer = (props) => {
 };
 
 AboutOffer.propTypes = {
+  isSubmitForm: PropTypes.bool.isRequired,
+  errorForm: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -228,9 +226,9 @@ const mapStateToProps = (state) => (
   {
     isSubmitForm: getIsSubmitForm(state),
     errorForm: getErrorForm(state),
-    isErrorSubmitForm: getIsError(state),
+    // isErrorSubmitForm: getIsError(state),
     comments: getComments(state),
-    comment: getComment(state),
+    // comment: getComment(state),
     error: getError(state),
     user: getUserData(state),
     authorizationStatus: getAuthorizationStatus(state),
@@ -238,11 +236,5 @@ const mapStateToProps = (state) => (
   }
 );
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmitFormComment(comment, idHotel) {
-    dispatch(CommentOperation.submitComment(comment, idHotel));
-  },
-});
-
 export {AboutOffer};
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(AboutOffer));
+export default connect(mapStateToProps)(React.memo(AboutOffer));
