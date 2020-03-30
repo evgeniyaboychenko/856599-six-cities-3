@@ -23,6 +23,10 @@ export const getOffersNear = (state) => {
   return state[NAME_SPACE].offersNear;
 };
 
+export const getStatusFavorite = (state) => {
+  return state[NAME_SPACE].isFavorite;
+};
+
 export const getOffersByCityName = createSelector(getOffers, getActiveCity,
     (offers, activeCity) => {
       return offers.filter((offer) => offer.cityName === activeCity.name);

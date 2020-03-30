@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {ServerCode} from './const.js';
 
-export const createAPI = (onUnauthorized) => {
+export const createAPI = (onUnauthorized, onServerError) => {
   const api = axios.create({
     baseURL: `https://htmlacademy-react-3.appspot.com/six-cities`,
     timeout: 5000,
@@ -20,12 +20,12 @@ export const createAPI = (onUnauthorized) => {
         throw err;
       }
       case ServerCode.NOT_FOUND: {
-        // onServerError(response.data.error);
+        onServerError(response.data.error);
         throw response.data.error;
       }
     }
     if (response.status >= ServerCode.SERVER_IS_NOT_AVAILABLE) {
-      //  onServerError(response.data.error);
+      onServerError(response.data.error);
       throw response.data.error;
     }
 
@@ -39,3 +39,9 @@ export const createAPI = (onUnauthorized) => {
   api.interceptors.response.use(onSuccess, onFail);
   return api;
 };
+
+export const apiDefault = axios.create({
+  baseURL: `https://htmlacademy-react-3.appspot.com/six-cities`,
+  timeout: 5000,
+  withCredentials: true,
+});

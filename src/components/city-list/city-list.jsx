@@ -5,15 +5,14 @@ import {ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
 import PropTypes from 'prop-types';
 import {SortType} from '../../const.js';
 import {getActiveCity, getCities} from '../../reducer/data/selectors.js';
-import {generateId} from '../../utils/utils.js';
 
 const CityList = ({cities, activeCity, onCityClick}) => {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((city) =>
-            (<li className="locations__item" key = {generateId()} onClick = {() => {
+          {cities.map((city, i) =>
+            (<li className="locations__item" key = {i + city.name} onClick = {() => {
               onCityClick(city);
             }
             }>

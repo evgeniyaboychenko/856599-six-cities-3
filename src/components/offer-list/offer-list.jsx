@@ -21,7 +21,6 @@ const sortOffers = (offers, sortType) => {
 };
 
 const OfferList = (props) => {
-  // const {offerCards, onHeaderCardClick, cardType, activeSortItem, offersNear} = props;
   const {offerCards, cardType, activeSortItem, offersNear} = props;
   let offers = [];
   if (cardType === CardType.CITY) {

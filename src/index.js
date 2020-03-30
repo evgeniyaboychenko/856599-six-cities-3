@@ -9,6 +9,8 @@ import {Operation as OffersOperation} from './reducer/data/data.js';
 import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from "./api.js";
+import history from "./history.js";
+import {AppRoute} from './const.js';
 
 const onUnauthorized = () => {
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH, {id: -1,
@@ -16,13 +18,15 @@ const onUnauthorized = () => {
     avatar: ``,
     email: ``,
     isPro: false}));
+  return history.push(AppRoute.SIGN_IN);
 };
 
-// const onServerError = () => {
-//   store.dispatch(ActionCreator.setLoadingError(``));
-// };
+const onServerError = (error) => {
+  store.dispatch(ActionCreator.setLoadingError(error));
+  // store.dispatch(ActionCreator.setLoadingError(``));
+};
 
-const api = createAPI((onUnauthorized));
+const api = createAPI((onUnauthorized), (onServerError));
 
 const store = createStore(
     reducer,
