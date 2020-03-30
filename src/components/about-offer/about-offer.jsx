@@ -4,16 +4,16 @@ import CommentList from '../comment-list/comment-list.jsx';
 import Map from '../map/map.jsx';
 import OfferList from '../offer-list/offer-list.jsx';
 import {CardType} from '../../const.js';
-import {generateId} from '../../utils/utils.js';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getAuthorizationStatus, getUserData, getError} from "../../reducer/user/selector.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {getComments, getIsSubmitForm, getErrorForm} from '../../reducer/comment/selector.js';
 import {getOffersNear} from '../../reducer/data/selectors.js';
+import FavoriteToggle from '../favorite-toggle/favorite-toggle.jsx';
 
 const getGallery = (photos) => {
-  return photos.map((photo) => (<div className="property__image-wrapper" key = {generateId()}>
+  return photos.map((photo, i) => (<div className="property__image-wrapper" key = {i + photo}>
     <img className="property__image" src={photo} alt="Photo studio"/>
   </div>));
 };
@@ -23,8 +23,8 @@ const getPercent = (rating) => {
 };
 
 const getInsideList = (appliances) => {
-  return appliances.map((appliance) => (
-    <li className="property__inside-item" key = {generateId()}>
+  return appliances.map((appliance, i) => (
+    <li className="property__inside-item" key = {i + appliance}>
       {appliance}
     </li>)
   );
@@ -32,7 +32,7 @@ const getInsideList = (appliances) => {
 
 const AboutOffer = (props) => {
   const {comments, authorizationStatus, user, offerCard, offersNear, isSubmitForm, errorForm} = props;
-  const {name, rating, price, type, isPremium, descriptions, photos, countRooms, maxGuests, appliances, owner} = offerCard;
+  const {name, rating, price, type, id, isFavorite, isPremium, descriptions, photos, countRooms, maxGuests, appliances, owner} = offerCard;
   const {avatar, email} = user;
   return (
     <div className="page">
@@ -83,12 +83,10 @@ const AboutOffer = (props) => {
                 <h1 className="property__name">
                   {name}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"/>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <FavoriteToggle
+                  dataComponent = {{nameClass: `property`, width: `31`, height: `33`}}
+                  isFavorite = {isFavorite}
+                  idCard = {id}/>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -137,7 +135,6 @@ const AboutOffer = (props) => {
               <CommentList
                 isSubmitForm = {isSubmitForm}
                 errorForm = {errorForm}
-                // isErrorSubmitForm = {isErrorSubmitForm}
                 authorizationStatus = {authorizationStatus}
                 comments = {comments}
                 idCard = {offerCard.id}
@@ -191,6 +188,7 @@ AboutOffer.propTypes = {
       }).isRequired
   ).isRequired,
   offerCard: PropTypes.shape({
+    isFavorite: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired,
     photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     name: PropTypes.string.isRequired,
@@ -226,9 +224,7 @@ const mapStateToProps = (state) => (
   {
     isSubmitForm: getIsSubmitForm(state),
     errorForm: getErrorForm(state),
-    // isErrorSubmitForm: getIsError(state),
     comments: getComments(state),
-    // comment: getComment(state),
     error: getError(state),
     user: getUserData(state),
     authorizationStatus: getAuthorizationStatus(state),

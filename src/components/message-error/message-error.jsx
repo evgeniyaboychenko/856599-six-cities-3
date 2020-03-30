@@ -5,7 +5,7 @@ import {ActionCreator} from '../../reducer/user/user.js';
 
 const MessageError = ({error, onCloseClick}) => {
   return (
-    <section style = {!(error || error === 200) ? {display: `none`} : {display: `block`, position: `absolute`,
+    <section style = {(!error || error === 200) ? {display: `none`} : {display: `block`, position: `absolute`,
       width: `500px`, marginLeft: `-150px`, left: `50%`, top: `100px`, backgroundColor: `white`}}>
       <h2 style = {{display: `flex`, textAlign: `center`}}>Ошибка {error}</h2>
       <button type="button" aria-label="Закрыть модальное окно" style = {{display: `flex`, margin: `auto`}}onClick = {(evt) => {

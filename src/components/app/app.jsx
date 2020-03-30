@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 import Favorites from '../favorites/favorites.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router} from 'react-router-dom';
 import AboutOffer from '../about-offer/about-offer.jsx';
 import {AppRoute} from '../../const.js';
 import {connect} from 'react-redux';
@@ -12,6 +12,9 @@ import {getAuthorizationStatus, getUserData, getError} from "../../reducer/user/
 import {Operation as UserOperation, AuthorizationStatus} from "../../reducer/user/user.js";
 import {Operation as OffersOperation} from '../../reducer/data/data.js';
 import {Operation as CommentOperation} from '../../reducer/comment/comment.js';
+import history from "../../history.js";
+import MessageError from '../message-error/message-error.jsx';
+import {ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
 
 const App = (props) => {
   const {onLoadOffersNear, onLoadComments, error, isData, authorizationStatus, user, offerCards, cities, activeCity, onSubmitLogin} = props;
@@ -28,7 +31,7 @@ const App = (props) => {
     />;
   };
   return (
-    <BrowserRouter>
+    [<Router key = {1} history={history}>
       <Switch>
         <Route exact path="/">
           {renderMain()}
@@ -52,21 +55,26 @@ const App = (props) => {
             />;
           }}/>
         <Route exact path={AppRoute.SIGN_IN}
-          render = {(propsLink) => {
+          render = {() => {
             if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
               return <SignIn
                 error = {error}
                 onSubmit = {onSubmitLogin}
               />;
             } else if (authorizationStatus === AuthorizationStatus.AUTH) {
-              propsLink.history.goBack();
+              return history.push(AppRoute.MAIN);
+              // history.goBack();
+              // propsLink.history.goBack();
               // return <Redirect to="/"/>;
             }
             return ``;
           }}
         />
       </Switch>
-    </BrowserRouter>);
+    </Router>,
+    <MessageError key = {2}
+      error = {error}
+    />]);
 };
 
 App.propTypes = {
@@ -126,6 +134,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(CommentOperation.loadComments(idCard));
   },
   onLoadOffersNear(idCard) {
+    dispatch(DataActionCreator.resertOffersNear());
     dispatch(OffersOperation.loadOffersNear(idCard));
   },
 

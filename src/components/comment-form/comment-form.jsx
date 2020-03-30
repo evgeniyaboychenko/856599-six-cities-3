@@ -4,6 +4,10 @@ import MessageErrorForm from '../message-error/message-error1.jsx';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/comment/comment.js';
 import {Operation as CommentOperation} from '../../reducer/comment/comment.js';
+const CommentLength = {
+  MAX: 300,
+  MIN: 50
+};
 
 class CommentForm extends PureComponent {
   constructor(props) {
@@ -27,7 +31,7 @@ class CommentForm extends PureComponent {
     };
     formData[name] = value;
 
-    if (formData.rating && this.state.review.length >= 50 && this.state.review.length <= 300) {
+    if (formData.rating && this.state.review.length >= CommentLength.MIN && this.state.review.length <= CommentLength.MAX) {
       this.setState(()=>({isFormValid: true}));
     } else {
       this.setState(()=>({isFormValid: false}));
@@ -41,7 +45,7 @@ class CommentForm extends PureComponent {
       review: ``,
     };
     formData[name] = value;
-    if ((formData.review.length >= 50 && formData.review.length <= 300) && this.state.rating) {
+    if ((formData.review.length >= CommentLength.MIN && formData.review.length <= CommentLength.MAX) && this.state.rating) {
       this.setState(()=>({isFormValid: true}));
     } else {
       this.setState(()=>({isFormValid: false}));
@@ -51,11 +55,10 @@ class CommentForm extends PureComponent {
   handleSubmit(evt) {
     const {idCard, onSubmit} = this.props;
     evt.preventDefault();
-    const result = onSubmit({
+    onSubmit({
       comment: this.state.review,
       rating: Number(this.state.rating),
-    }, idCard);
-    result.then(
+    }, idCard).then(
         () => this.setState({rating: ``, review: ``, isFormValid: false}),
         () => {});
   }

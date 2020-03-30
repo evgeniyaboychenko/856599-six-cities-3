@@ -4,7 +4,7 @@ import OfferList from '../offer-list/offer-list.jsx';
 import CityList from '../city-list/city-list.jsx';
 import {CardType} from '../../const.js';
 import Map from '../map/map.jsx';
-import MessageError from '../message-error/message-error.jsx';
+//  import MessageError from '../message-error/message-error.jsx';
 import MainEmpty from '../main-empty/main-empty.jsx';
 import SortList from '../sort-list/sort-list.jsx';
 import withActiveSortList from '../../hocs/withAtiveSortList.jsx';
@@ -13,7 +13,7 @@ import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from 'react-router-dom';
 
 const Main = (props) => {
-  const {error, isData, authorizationStatus, user, offersCount, cities, activeCity} = props;
+  const {isData, authorizationStatus, user, offersCount, cities, activeCity} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -29,7 +29,8 @@ const Main = (props) => {
                 <li className="header__nav-item user">
                   {authorizationStatus === AuthorizationStatus.AUTH &&
                   <Link to = {`/favorites`} className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper" style = {{backgroundImage: `url(https://htmlacademy-react-3.appspot.com/six-cities${user.avatar})`}}>
+                    <div className="header__avatar-wrapper user__avatar-wrapper"
+                      style = {{backgroundImage: `url(https://htmlacademy-react-3.appspot.com/six-cities${user.avatar})`}}>
                     </div>
                     <span className="header__user-name user__name">{user.email}</span>
                   </Link>}
@@ -58,7 +59,6 @@ const Main = (props) => {
             <animateTransform attributeName="transform" type="rotate" values="0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64" calcMode="discrete" dur="720ms" repeatCount="indefinite">
             </animateTransform></g>
         </svg>
-        {/* <img className="loading" src="img/loading.gif" alt="loading" width="64" height="64"/> */}
       </div>}
       {isData &&
       <main className={offersCount ? `page__main page__main--index` : `page__main page__main--index page__main--index-empty`}>
@@ -91,15 +91,15 @@ const Main = (props) => {
         }
         {offersCount || <MainEmpty activeCity = {activeCity}/>}
       </main>}
-      <MessageError
+      {/* <MessageError
         error = {error}
-      />
+      /> */}
     </div>
   );
 };
 
 Main.propTypes = {
-  error: PropTypes.string.isRequired,
+  // error: PropTypes.string.isRequired,
   isData: PropTypes.bool.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,

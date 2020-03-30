@@ -1,6 +1,6 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
-import MessageError from '../message-error/message-error.jsx';
+// import MessageError from '../message-error/message-error.jsx';
 
 
 class SignIn extends PureComponent {
@@ -21,7 +21,7 @@ class SignIn extends PureComponent {
   }
 
   render() {
-    const {error} = this.props;
+    // const {error} = this.props;
     return (<div className="page page--gray page--login">
       <main className="page__main page__main--login">
         <div className="page__login-container container">
@@ -54,9 +54,9 @@ class SignIn extends PureComponent {
             </div>
           </section>
         </div>
-        <MessageError
+        {/* <MessageError
           error = {error}
-        />
+        /> */}
       </main>
     </div>
     );

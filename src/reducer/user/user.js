@@ -1,6 +1,6 @@
 import {extend} from '../../utils/utils.js';
 import {adaptUser} from '../../utils/adapter.js';
-
+import {apiDefault} from '../../api.js';
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
@@ -55,11 +55,15 @@ const reducer = (state = initialState, action) => {
 };
 
 const Operation = {
-  checkAuth: () => (dispatch, getState, api) => {
-    return api.get(`/login`)
+  checkAuth: () => (dispatch) => {
+    return apiDefault.get(`/login`)
       .then((response) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, adaptUser(response.data)));
-      }, () => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH, {id: -1,
+      }
+      // .catch((err) => {
+      //   throw err;
+      // });
+      , () => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH, {id: -1,
         name: ``,
         avatar: ``,
         email: ``,
