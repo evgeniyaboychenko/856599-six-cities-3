@@ -11,6 +11,7 @@ import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {getComments, getIsSubmitForm, getErrorForm} from '../../reducer/comment/selector.js';
 import {getOffersNear} from '../../reducer/data/selectors.js';
 import FavoriteToggle from '../favorite-toggle/favorite-toggle.jsx';
+import {SortType} from '../../const.js';
 
 const getGallery = (photos) => {
   return photos.map((photo, i) => (<div className="property__image-wrapper" key = {i + photo}>
@@ -154,6 +155,8 @@ const AboutOffer = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <OfferList
+                activeSortItem = {SortType.DEFAULT}
+                offers = {offersNear}
                 cardType = {CardType.NEAR}
               />
             </div>

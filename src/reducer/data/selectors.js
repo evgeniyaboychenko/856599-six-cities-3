@@ -23,6 +23,14 @@ export const getOffersNear = (state) => {
   return state[NAME_SPACE].offersNear;
 };
 
+export const getOffersFavorites = (state) => {
+  return state[NAME_SPACE].offersFavorite;
+};
+
+// export const getCitiesFavorite = (state) => {
+//   return state[NAME_SPACE].citiesFavorite;
+// };
+
 export const getStatusFavorite = (state) => {
   return state[NAME_SPACE].isFavorite;
 };
@@ -32,3 +40,9 @@ export const getOffersByCityName = createSelector(getOffers, getActiveCity,
       return offers.filter((offer) => offer.cityName === activeCity.name);
     }
 );
+
+// export const getOffersFavoriteByCityName = createSelector(getOffersFavorites, getCitiesFavorite,
+//     (offers, activeCity) => {
+//       return offers.filter((offer) => offer.cityName === activeCity.name);
+//     }
+// );

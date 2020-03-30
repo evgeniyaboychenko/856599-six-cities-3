@@ -1,6 +1,7 @@
 const CardType = {
   NEAR: `near-places`,
-  CITY: `cities`
+  CITY: `cities`,
+  FAVORITES: `favorites`
 };
 
 const SortType = {

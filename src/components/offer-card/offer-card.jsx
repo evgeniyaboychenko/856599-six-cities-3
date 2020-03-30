@@ -31,7 +31,7 @@ const OfferCard = (props) => {
           <img className="place-card__image" src = {previewImage} width="260" height="200" alt="Place image"/>
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={cardType === CardType.FAVORITES ? `favorites__card-info place-card__info` : `place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -53,7 +53,7 @@ const OfferCard = (props) => {
             <Link to={`/offer/` + id}>
               {name}
             </Link>}
-          {cardType === CardType.NEAR &&
+          {(cardType === CardType.NEAR || cardType === CardType.FAVORITES) &&
           <a href= "#">
             {name}
           </a>}

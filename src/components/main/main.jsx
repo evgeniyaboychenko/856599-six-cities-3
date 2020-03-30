@@ -13,7 +13,8 @@ import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from 'react-router-dom';
 
 const Main = (props) => {
-  const {isData, authorizationStatus, user, offersCount, cities, activeCity} = props;
+  const {isData, authorizationStatus, user, cities, activeCity, offerCards, activeSortItem} = props;
+  const offersCount = offerCards.length;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -33,7 +34,8 @@ const Main = (props) => {
                       style = {{backgroundImage: `url(https://htmlacademy-react-3.appspot.com/six-cities${user.avatar})`}}>
                     </div>
                     <span className="header__user-name user__name">{user.email}</span>
-                  </Link>}
+                  </Link>
+                  }
                   {authorizationStatus === AuthorizationStatus.NO_AUTH &&
                   <Link to = {`/login`} className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
@@ -75,6 +77,8 @@ const Main = (props) => {
               <SortListWrapperd/>
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
+                  activeSortItem = {activeSortItem}
+                  offers = {offerCards}
                   cardType = {CardType.CITY}
                 />
               </div>
@@ -99,7 +103,19 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  activeSortItem: PropTypes.string.isRequired,
   // error: PropTypes.string.isRequired,
+  offerCards: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        name: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        isPremium: PropTypes.bool.isRequired
+      })
+  ).isRequired,
   isData: PropTypes.bool.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -108,7 +124,6 @@ Main.propTypes = {
     email: PropTypes.string.isRequired,
     isPro: PropTypes.bool.isRequired,
   }).isRequired,
-  offersCount: PropTypes.number.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
