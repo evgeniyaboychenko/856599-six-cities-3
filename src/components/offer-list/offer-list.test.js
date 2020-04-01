@@ -213,13 +213,13 @@ it(`should OfferList render correctly`, () => {
   // });
   const tree = renderer.create(
       //  <Provider store={store}>
-        <MemoryRouter>
-          <OfferList
-            offers = {offerCards}
-            cardType = {CardType.CITY}
-            activeSortItem = {`Popular`}
-          />
-        </MemoryRouter>
+      // <MemoryRouter>
+      <OfferList
+        offers = {offerCards}
+        cardType = {CardType.CITY}
+        activeSortItem = {`Popular`}
+      />
+      // </MemoryRouter>
       //  </Provider>
   ).toJSON();
   expect(tree).toMatchSnapshot();

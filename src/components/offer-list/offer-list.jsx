@@ -19,14 +19,14 @@ const sortOffers = (offers, sortType) => {
 
 const OfferList = ({offers, cardType, activeSortItem}) => {
   let offerList = offers.slice();
-  return sortOffers(offerList.slice(), activeSortItem).map((offerCard) => {
+  return <>{sortOffers(offerList.slice(), activeSortItem).map((offerCard) => {
     const {id} = offerCard;
     return <OfferCard
       offerCard = {offerCard}
       key = {id}
       cardType = {cardType}
     />;
-  });
+  })} </>;
 };
 
 OfferList.propTypes = {

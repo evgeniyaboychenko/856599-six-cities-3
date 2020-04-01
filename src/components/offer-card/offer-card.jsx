@@ -11,6 +11,12 @@ const getPercent = (rating) => {
 };
 
 const OfferCard = ({offerCard, onCardMouseover, cardType}) => {
+// class OfferCard extends PureComponent {
+//   constructor(props) {
+//     super(props);
+//   }
+//   render() {
+//     const {offerCard, onCardMouseover, cardType} = this.props;
   const {id, previewImage, name, rating, price, type, isPremium, isFavorite} = offerCard;
   return (
     <article className={cardType + `__place-card place-card`} key = {id}
@@ -60,6 +66,7 @@ const OfferCard = ({offerCard, onCardMouseover, cardType}) => {
       </div>
     </article>);
 };
+// }
 
 OfferCard.propTypes = {
   offerCard: PropTypes.shape({
