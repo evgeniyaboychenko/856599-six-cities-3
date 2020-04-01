@@ -4,7 +4,6 @@ import OfferList from '../offer-list/offer-list.jsx';
 import CityList from '../city-list/city-list.jsx';
 import {CardType} from '../../const.js';
 import Map from '../map/map.jsx';
-//  import MessageError from '../message-error/message-error.jsx';
 import MainEmpty from '../main-empty/main-empty.jsx';
 import SortList from '../sort-list/sort-list.jsx';
 import withActiveSortList from '../../hocs/withAtiveSortList.jsx';
@@ -12,8 +11,8 @@ const SortListWrapperd = withActiveSortList(SortList);
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from 'react-router-dom';
 
-const Main = (props) => {
-  const {isData, authorizationStatus, user, offersCount, cities, activeCity} = props;
+const Main = ({isData, authorizationStatus, user, cities, activeCity, offerCards, activeSortItem}) => {
+  const offersCount = offerCards.length;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -33,7 +32,8 @@ const Main = (props) => {
                       style = {{backgroundImage: `url(https://htmlacademy-react-3.appspot.com/six-cities${user.avatar})`}}>
                     </div>
                     <span className="header__user-name user__name">{user.email}</span>
-                  </Link>}
+                  </Link>
+                  }
                   {authorizationStatus === AuthorizationStatus.NO_AUTH &&
                   <Link to = {`/login`} className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
@@ -75,6 +75,8 @@ const Main = (props) => {
               <SortListWrapperd/>
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
+                  activeSortItem = {activeSortItem}
+                  offers = {offerCards}
                   cardType = {CardType.CITY}
                 />
               </div>
@@ -91,15 +93,23 @@ const Main = (props) => {
         }
         {offersCount || <MainEmpty activeCity = {activeCity}/>}
       </main>}
-      {/* <MessageError
-        error = {error}
-      /> */}
     </div>
   );
 };
 
 Main.propTypes = {
-  // error: PropTypes.string.isRequired,
+  activeSortItem: PropTypes.string.isRequired,
+  offerCards: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        name: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        isPremium: PropTypes.bool.isRequired
+      })
+  ).isRequired,
   isData: PropTypes.bool.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -108,7 +118,6 @@ Main.propTypes = {
     email: PropTypes.string.isRequired,
     isPro: PropTypes.bool.isRequired,
   }).isRequired,
-  offersCount: PropTypes.number.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
@@ -123,4 +132,4 @@ Main.propTypes = {
 };
 
 
-export default Main;
+export default React.memo(Main);

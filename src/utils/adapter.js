@@ -77,3 +77,10 @@ export const adaptUser = (initialStructure) => {
   );
 };
 
+export const adaptOffersFavorite = (loadedOffers) => {
+  return adaptCity(adaptOffers(loadedOffers)).map((city) => {
+    let offers = (adaptOffers(loadedOffers)).filter((offer) => offer.cityName === city.name);
+    return ({city, offersFavoriteByCity: offers});
+  });
+};
+

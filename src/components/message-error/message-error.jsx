@@ -5,8 +5,9 @@ import {ActionCreator} from '../../reducer/user/user.js';
 
 const MessageError = ({error, onCloseClick}) => {
   return (
-    <section style = {(!error || error === 200) ? {display: `none`} : {display: `block`, position: `absolute`,
-      width: `500px`, marginLeft: `-150px`, left: `50%`, top: `100px`, backgroundColor: `white`}}>
+    <section style = {(!error) ? {display: `none`} :
+      {display: `block`, position: `fixed`, zIndex: 30,
+        width: `500px`, marginLeft: `-250px`, left: `50%`, top: `50%`, backgroundColor: `#f5f5f5`}}>
       <h2 style = {{display: `flex`, textAlign: `center`}}>Ошибка {error}</h2>
       <button type="button" aria-label="Закрыть модальное окно" style = {{display: `flex`, margin: `auto`}}onClick = {(evt) => {
         evt.preventDefault();
@@ -30,4 +31,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {MessageError};
-export default connect(null, mapDispatchToProps)(MessageError);
+export default connect(null, mapDispatchToProps)(React.memo(MessageError));

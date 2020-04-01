@@ -1,9 +1,9 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import MessageErrorForm from '../message-error/message-error1.jsx';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/comment/comment.js';
 import {Operation as CommentOperation} from '../../reducer/comment/comment.js';
+
 const CommentLength = {
   MAX: 300,
   MIN: 50
@@ -64,7 +64,7 @@ class CommentForm extends PureComponent {
   }
 
   render() {
-    const {isSubmitForm, errorForm, onSubmitDisableButton} = this.props;
+    const {isSubmitForm, onSubmitDisableButton} = this.props;
     return (
       <form className="reviews__form form" action="#" method="post"
         onSubmit={(evt) => {
@@ -129,8 +129,6 @@ class CommentForm extends PureComponent {
           </p>
           <button className="reviews__submit form__submit button" type="submit"
             disabled={!this.state.isFormValid || isSubmitForm}>Submit</button>
-          <MessageErrorForm
-            error = {errorForm} />
         </div>
       </form>);
   }
@@ -138,7 +136,6 @@ class CommentForm extends PureComponent {
 
 CommentForm.propTypes = {
   onSubmitDisableButton: PropTypes.func.isRequired,
-  errorForm: PropTypes.number.isRequired,
   isSubmitForm: PropTypes.bool.isRequired,
   idCard: PropTypes.number.isRequired,
   onSubmit: PropTypes.func.isRequired,
@@ -147,7 +144,7 @@ CommentForm.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmitDisableButton() {
-    dispatch(ActionCreator.setIsFormSubmit());
+    dispatch(ActionCreator.setIsFormSubmit(true));
   },
   onSubmit(comment, idHotel) {
     return dispatch(CommentOperation.submitComment(comment, idHotel));

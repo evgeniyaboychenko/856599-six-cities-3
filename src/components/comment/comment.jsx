@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-
 const getPercent = (rating) => {
   return rating * 100 / 5;
 };
@@ -49,4 +48,4 @@ Comment.propTypes = {
   }).isRequired,
 };
 
-export default Comment;
+export default React.memo(Comment);

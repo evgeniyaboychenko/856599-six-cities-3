@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should AboutOffer render correctly 1`] = `
+<button
+  className="favorite__bookmark-button place-card__bookmark-button--active button"
+  onClick={[Function]}
+  type="button"
+>
+  <svg
+    className="place-card__bookmark-icon"
+    height="20"
+    width="20"
+  >
+    <use
+      href="#icon-bookmark"
+    />
+  </svg>
+  <span
+    className="visually-hidden"
+  >
+    In bookmarks
+  </span>
+</button>
+`;

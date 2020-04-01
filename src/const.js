@@ -1,6 +1,7 @@
 const CardType = {
   NEAR: `near-places`,
-  CITY: `cities`
+  CITY: `cities`,
+  FAVORITES: `favorites`
 };
 
 const SortType = {
@@ -17,12 +18,11 @@ const AppRoute = {
   MAIN: `/`,
 };
 
-const ServerCode = {
-  SUCCESS: 200,
+const ResponseErrorCode = {
   UNAUTHORIZED: 401,
   INVALID_REQUEST: 400,
   NOT_FOUND: 404,
   SERVER_IS_NOT_AVAILABLE: 500
 };
 
-export {CardType, SortType, AppRoute, ServerCode};
+export {CardType, SortType, AppRoute, ResponseErrorCode};

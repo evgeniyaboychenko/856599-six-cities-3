@@ -50,9 +50,8 @@ const mapDispatchToProps = (dispatch) => ({
   onCityClick(activeCity) {
     dispatch(ActionCreator.changeSort(SortType.DEFAULT));
     dispatch(DataActionCreator.changeCity(activeCity));
-    // dispatch(DataActionCreator.getOfferList(activeCity));
   }
 });
 
 export {CityList};
-export default connect(mapStateToProps, mapDispatchToProps)(CityList);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(CityList));

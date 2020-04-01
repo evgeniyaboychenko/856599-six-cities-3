@@ -23,6 +23,10 @@ export const getOffersNear = (state) => {
   return state[NAME_SPACE].offersNear;
 };
 
+export const getOffersFavorites = (state) => {
+  return state[NAME_SPACE].offersFavorite;
+};
+
 export const getStatusFavorite = (state) => {
   return state[NAME_SPACE].isFavorite;
 };

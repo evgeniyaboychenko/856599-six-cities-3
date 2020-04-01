@@ -1,5 +1,5 @@
 import {extend} from '../../utils/utils.js';
-import {adaptOffers, adaptCity} from '../../utils/adapter.js';
+import {adaptOffers, adaptCity, adaptOffersFavorite} from '../../utils/adapter.js';
 
 const initialState = {
   isData: false,
@@ -12,6 +12,7 @@ const initialState = {
   offers: [],
   offersNear: [],
   isFavorite: false,
+  offersFavorite: [],
 };
 
 const ActionType = {
@@ -20,7 +21,7 @@ const ActionType = {
   LOAD_OFFERS_NEAR: `LOAD_OFFERS_NEAR`,
   CHANGE_DOWNLOAD_STATUS: `CHANGE_DOWNLOAD_STATUS`,
   CHANGE_STATUS_FAVORITE: `CHANGE_STATUS_FAVORITE`,
-  GET_STATUS_FAVORITE: `GET_STATUS_FAVORITE`,
+  LOAD_OFFERS_FAVORITE: `LOAD_OFFERS_FAVORITE`,
   RESET_OFFERS_NEAR: `RESET_OFFERS_NEAR`
 };
 
@@ -45,9 +46,9 @@ const ActionCreator = {
     type: ActionType.CHANGE_STATUS_FAVORITE,
     payload: {idHotel, status}
   }),
-  getStatusFavorite: (offers) => ({
-    type: ActionType.GET_STATUS_FAVORITE,
-    payload: offers
+  loadOffersFavorite: (offersFavorite) => ({
+    type: ActionType.LOAD_OFFERS_FAVORITE,
+    payload: offersFavorite
   }),
   resertOffersNear: () => ({
     type: ActionType.LOAD_OFFERS_NEAR,
@@ -69,10 +70,10 @@ const Operation = {
         dispatch(ActionCreator.loadOffersNear(response.data));
       });
   },
-  getStatusFavorite: () => (dispatch, setState, api) => {
+  getOffersFavorite: () => (dispatch, setState, api) => {
     return api.get(`/favorite`)
       .then((response) => {
-        dispatch(ActionCreator.loadOfferList(response.data));
+        dispatch(ActionCreator.loadOffersFavorite(response.data));
       });
   },
   changeStatusFavoriteHotel: (idHotel, status) => (dispatch, setState, api) => {
@@ -90,11 +91,11 @@ const Operation = {
 };
 
 const getUpdateOffers = (offers, idCard, isFavorite) => {
-  let o = offers.slice();
+  const newOffers = offers.slice();
   const index = offers.findIndex((offer) => offer.id === idCard);
-  let offer = extend(offers[index], {isFavorite});
-  o.splice(index, 1, offer);
-  return o;
+  const offer = extend(offers[index], {isFavorite});
+  newOffers.splice(index, 1, offer);
+  return newOffers;
 };
 
 const reducer = (state = initialState, action) => {
@@ -126,9 +127,9 @@ const reducer = (state = initialState, action) => {
         offers: getUpdateOffers(state.offers, action.payload.idHotel, action.payload.status),
       });
 
-    case ActionType.GET_STATUS_FAVORITE:
+    case ActionType.LOAD_OFFERS_FAVORITE:
       return extend(state, {
-        offers: adaptOffers(action.payload),
+        offersFavorite: adaptOffersFavorite(action.payload),
       });
 
     case ActionType.RESET_OFFERS_NEAR:

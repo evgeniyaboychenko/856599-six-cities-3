@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-//  import {getIdActiveCard} from '../../reducer/state/selector.js';
 import {ActionCreator} from '../../reducer/state/state.js';
 import {CardType} from '../../const.js';
 import FavoriteToggle from '../favorite-toggle/favorite-toggle.jsx';
@@ -11,8 +10,13 @@ const getPercent = (rating) => {
   return rating * 100 / 5;
 };
 
-const OfferCard = (props) => {
-  const {offerCard, onCardMouseover, cardType} = props;
+const OfferCard = ({offerCard, onCardMouseover, cardType}) => {
+// class OfferCard extends PureComponent {
+//   constructor(props) {
+//     super(props);
+//   }
+//   render() {
+//     const {offerCard, onCardMouseover, cardType} = this.props;
   const {id, previewImage, name, rating, price, type, isPremium, isFavorite} = offerCard;
   return (
     <article className={cardType + `__place-card place-card`} key = {id}
@@ -31,7 +35,7 @@ const OfferCard = (props) => {
           <img className="place-card__image" src = {previewImage} width="260" height="200" alt="Place image"/>
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={cardType === CardType.FAVORITES ? `favorites__card-info place-card__info` : `place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -53,7 +57,7 @@ const OfferCard = (props) => {
             <Link to={`/offer/` + id}>
               {name}
             </Link>}
-          {cardType === CardType.NEAR &&
+          {(cardType === CardType.NEAR || cardType === CardType.FAVORITES) &&
           <a href= "#">
             {name}
           </a>}
@@ -62,6 +66,7 @@ const OfferCard = (props) => {
       </div>
     </article>);
 };
+// }
 
 OfferCard.propTypes = {
   offerCard: PropTypes.shape({
@@ -79,12 +84,6 @@ OfferCard.propTypes = {
   cardType: PropTypes.string.isRequired,
 };
 
-// const mapStateToProps = (state) => (
-//   {
-//   //  idActiveCard: getIdActiveCard(state),
-//   }
-// );
-
 const mapDispatchToProps = (dispatch) => ({
   onCardMouseover(idActiveCard) {
     dispatch(ActionCreator.changeCurrenCard(idActiveCard));
@@ -92,4 +91,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {OfferCard};
-export default connect(null, mapDispatchToProps)(OfferCard);
+export default connect(null, mapDispatchToProps)(React.memo(OfferCard));

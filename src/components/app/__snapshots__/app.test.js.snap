@@ -1,140 +1,254 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should App render correctly 1`] = `
-<div
-  className="page page--gray page--main"
->
-  <header
-    className="header"
+Array [
+  <div
+    className="page page--gray page--main"
   >
-    <div
-      className="container"
+    <header
+      className="header"
     >
       <div
-        className="header__wrapper"
+        className="container"
       >
         <div
-          className="header__left"
+          className="header__wrapper"
         >
-          <a
-            className="header__logo-link header__logo-link--active"
+          <div
+            className="header__left"
           >
-            <img
-              alt="6 cities logo"
-              className="header__logo"
-              height="41"
-              src="img/logo.svg"
-              width="81"
-            />
-          </a>
+            <a
+              className="header__logo-link header__logo-link--active"
+            >
+              <img
+                alt="6 cities logo"
+                className="header__logo"
+                height="41"
+                src="img/logo.svg"
+                width="81"
+              />
+            </a>
+          </div>
+          <nav
+            className="header__nav"
+          >
+            <ul
+              className="header__nav-list"
+            >
+              <li
+                className="header__nav-item user"
+              >
+                <a
+                  className="header__nav-link header__nav-link--profile"
+                  href="/favorites"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="header__avatar-wrapper user__avatar-wrapper"
+                    style={
+                      Object {
+                        "backgroundImage": "url(https://htmlacademy-react-3.appspot.com/six-citiesnike.jpg)",
+                      }
+                    }
+                  />
+                  <span
+                    className="header__user-name user__name"
+                  >
+                    nike@n.ru
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
-        <nav
-          className="header__nav"
+      </div>
+    </header>
+    <main
+      className="page__main page__main--index"
+    >
+      <h1
+        className="visually-hidden"
+      >
+        Cities
+      </h1>
+      <div
+        className="tabs"
+      >
+        <section
+          className="locations container"
         >
           <ul
-            className="header__nav-list"
+            className="locations__list tabs__list"
           >
             <li
-              className="header__nav-item user"
-            />
+              className="locations__item"
+              onClick={[Function]}
+            >
+              <a
+                className="locations__item-link tabs__item tabs__item--active"
+                href="#"
+              >
+                <span>
+                  Paris
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+              onClick={[Function]}
+            >
+              <a
+                className="locations__item-link tabs__item"
+                href="#"
+              >
+                <span>
+                  Cologne
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+              onClick={[Function]}
+            >
+              <a
+                className="locations__item-link tabs__item"
+                href="#"
+              >
+                <span>
+                  Brussels
+                </span>
+              </a>
+            </li>
           </ul>
-        </nav>
+        </section>
       </div>
-    </div>
-  </header>
-  <div
+      <div
+        className="cities"
+      >
+        <div
+          className="cities__places-container container"
+        >
+          <section
+            className="cities__places places"
+          >
+            <h2
+              className="visually-hidden"
+            >
+              Places
+            </h2>
+            <b
+              className="places__found"
+            >
+              2
+               places to stay in 
+              Paris
+            </b>
+            <form
+              action="#"
+              className="places__sorting"
+              method="get"
+            >
+              <span
+                className="places__sorting-caption"
+              >
+                Sort by
+              </span>
+              <span
+                className="places__sorting-type"
+                onClick={[Function]}
+                tabIndex="0"
+              >
+                Popular
+                <svg
+                  className="places__sorting-arrow"
+                  height="4"
+                  width="7"
+                >
+                  <use
+                    href="#icon-arrow-select"
+                  />
+                </svg>
+              </span>
+              <ul
+                className="places__options places__options--custom"
+              >
+                <li
+                  className="places__option places__option--active"
+                  onClick={[Function]}
+                  tabIndex="0"
+                >
+                  Popular
+                </li>
+                <li
+                  className="places__option"
+                  onClick={[Function]}
+                  tabIndex="0"
+                >
+                  Price: low to high
+                </li>
+                <li
+                  className="places__option"
+                  onClick={[Function]}
+                  tabIndex="0"
+                >
+                  Price: high to low
+                </li>
+                <li
+                  className="places__option"
+                  onClick={[Function]}
+                  tabIndex="0"
+                >
+                  Top rated first
+                </li>
+              </ul>
+            </form>
+            <div
+              className="cities__places-list places__list tabs__content"
+            />
+          </section>
+          <div
+            className="cities__right-section"
+          >
+            <section
+              className="cities__map map"
+            />
+          </div>
+        </div>
+      </div>
+      2
+    </main>
+  </div>,
+  <section
     style={
       Object {
-        "content": "",
-        "marginLeft": "50%",
-        "marginTop": "200px",
-        "position": "absolute",
+        "display": "none",
       }
     }
   >
-    <svg
-      height="64px"
-      version="1.0"
-      viewBox="0 0 128 128"
-      width="64px"
-      xmlSpace="preserve"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
+    <h2
+      style={
+        Object {
+          "display": "flex",
+          "textAlign": "center",
+        }
+      }
     >
-      <g>
-        <circle
-          cx="16"
-          cy="64"
-          fill="#000000"
-          fillOpacity="1"
-          r="16"
-        />
-        <circle
-          cx="16"
-          cy="64"
-          fill="#000000"
-          fillOpacity="1"
-          r="14.344"
-          transform="rotate(45 64 64)"
-        />
-        <circle
-          cx="16"
-          cy="64"
-          fill="#000000"
-          fillOpacity="1"
-          r="12.531"
-          transform="rotate(90 64 64)"
-        />
-        <circle
-          cx="16"
-          cy="64"
-          fill="#000000"
-          fillOpacity="1"
-          r="10.75"
-          transform="rotate(135 64 64)"
-        />
-        <circle
-          cx="16"
-          cy="64"
-          fill="#000000"
-          fillOpacity="1"
-          r="10.063"
-          transform="rotate(180 64 64)"
-        />
-        <circle
-          cx="16"
-          cy="64"
-          fill="#000000"
-          fillOpacity="1"
-          r="8.063"
-          transform="rotate(225 64 64)"
-        />
-        <circle
-          cx="16"
-          cy="64"
-          fill="#000000"
-          fillOpacity="1"
-          r="6.438"
-          transform="rotate(270 64 64)"
-        />
-        <circle
-          cx="16"
-          cy="64"
-          fill="#000000"
-          fillOpacity="1"
-          r="5.375"
-          transform="rotate(315 64 64)"
-        />
-        <animateTransform
-          attributeName="transform"
-          calcMode="discrete"
-          dur="720ms"
-          repeatCount="indefinite"
-          type="rotate"
-          values="0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64"
-        />
-      </g>
-    </svg>
-  </div>
-</div>
+      Ошибка 
+      
+    </h2>
+    <button
+      aria-label="Закрыть модальное окно"
+      onClick={[Function]}
+      style={
+        Object {
+          "display": "flex",
+          "margin": "auto",
+        }
+      }
+      type="button"
+    >
+      Закрыть
+    </button>
+  </section>,
+]
 `;

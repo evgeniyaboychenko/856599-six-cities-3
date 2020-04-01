@@ -8,19 +8,20 @@ const NAMES = [`Angelina`, `Max`, `Kate`, `Pol`, `Mike`];
 
 const comment =
 {
-  id: `1`,
-  avatar: AVATARS[0],
-  name: NAMES[0],
+  id: 1,
+  avatar: AVATARS[1],
+  name: NAMES[1],
   rating: 2,
-  text: DESCRIPTIONS[0],
-  date: 1661954344,
+  text: DESCRIPTIONS[1],
+  date: `2020-03-29T18:07:19.382Z`,
+  idUser: 1,
+  isPro: false,
 };
 
 it(`should Comment render correctly`, () => {
   const tree = renderer.create(
       <Comment
         comment = {comment}
-        key = {comment.id}
       />).toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -82,6 +82,14 @@ const state = {
   activeSortItem: `Popular`,
   idActiveCard: -1,
 };
+it(`Reducer without additional parameters should return initial state`, () => {
+  expect(reducer(void 0, {})).toEqual({
+    activeSortItem: `Popular`,
+    idActiveCard: -1,
+  });
+});
+
+
 it(`Reducer should change current card`, () => {
   expect(reducer(state, {
     type: ActionType.CHANGE_CURRENT_CARD,
