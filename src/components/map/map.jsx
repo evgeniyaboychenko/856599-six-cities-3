@@ -117,7 +117,6 @@ Map.propTypes = {
   ),
   idCurrentCard: PropTypes.number.isRequired,
   activeCity: PropTypes.shape({
-    // id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     zoom: PropTypes.number.isRequired,
@@ -129,7 +128,6 @@ const mapStateToProps = (state) => (
   {
     activeCity: getActiveCity(state),
     offerCards: getOffersByCityName(state),
-    // offersNear: getOffersNear(state),
     idCurrentCard: getIdActiveCard(state)
   }
 );

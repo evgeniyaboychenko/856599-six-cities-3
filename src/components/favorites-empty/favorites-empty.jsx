@@ -16,4 +16,4 @@ const FavoritesEmpty = () => {
   );
 };
 
-export default FavoritesEmpty;
+export default React.memo(FavoritesEmpty);

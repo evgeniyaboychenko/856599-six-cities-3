@@ -8,7 +8,7 @@ import reducer from './reducer/reducer.js';
 import {Operation as OffersOperation} from './reducer/data/data.js';
 import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
 import {composeWithDevTools} from 'redux-devtools-extension';
-import {createAPI} from "./api.js";
+import {createAPI, apiDefault} from "./api.js";
 import history from "./history.js";
 import {AppRoute} from './const.js';
 
@@ -23,7 +23,6 @@ const onUnauthorized = () => {
 
 const onServerError = (error) => {
   store.dispatch(ActionCreator.setLoadingError(error));
-  // store.dispatch(ActionCreator.setLoadingError(``));
 };
 
 const api = createAPI((onUnauthorized), (onServerError));
@@ -36,7 +35,7 @@ const store = createStore(
 );
 
 store.dispatch(OffersOperation.loadOfferList());
-store.dispatch(UserOperation.checkAuth());
+store.dispatch(UserOperation.checkAuth(apiDefault));
 
 ReactDOM.render(
     <Provider store={store}>

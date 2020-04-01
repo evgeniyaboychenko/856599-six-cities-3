@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import Comment from '../comment/comment.jsx';
 import CommentForm from '../comment-form/comment-form.jsx';
 import {AuthorizationStatus} from "../../reducer/user/user.js";
+import moment from 'moment';
 
 const CommentList = ({idCard, comments, authorizationStatus, isSubmitForm, errorForm}) => {
-  comments.reverse();
-  const sortingComments = comments.slice(0, 10);
+  const sortingComments = comments.slice().sort((a, b) => {
+    return moment(b.date).valueOf() - moment(a.date).valueOf();
+  });
+  const sortingCommentsShort = sortingComments.slice(0, 10);
   return (<section className="property__reviews reviews">
     <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
     <ul className="reviews__list">
-      {sortingComments.map((comment) => {
+      {sortingCommentsShort.map((comment) => {
         const {id} = comment;
         return <Comment
           comment = {comment}
@@ -22,7 +25,6 @@ const CommentList = ({idCard, comments, authorizationStatus, isSubmitForm, error
       <CommentForm
         isSubmitForm = {isSubmitForm}
         errorForm = {errorForm}
-        // isErrorSubmitForm = {isErrorSubmitForm}
         idCard = {idCard}/>
     }
   </section>);
@@ -30,7 +32,7 @@ const CommentList = ({idCard, comments, authorizationStatus, isSubmitForm, error
 
 CommentList.propTypes = {
   isSubmitForm: PropTypes.bool.isRequired,
-  errorForm: PropTypes.number.isRequired,
+  errorForm: PropTypes.string.isRequired,
   idCard: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   comments: PropTypes.arrayOf(

@@ -88,18 +88,6 @@ Favorites.propTypes = {
     email: PropTypes.string.isRequired,
     isPro: PropTypes.bool.isRequired,
   }).isRequired,
-  // offersCount: PropTypes.number.isRequired,
-  // citiesFavorite: PropTypes.arrayOf(PropTypes.shape({
-  //   name: PropTypes.string.isRequired,
-  //   coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  //   zoom: PropTypes.number.isRequired,
-  // })).isRequired,
-  // activeCity: PropTypes.shape({
-  //   name: PropTypes.string.isRequired,
-  //   coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  //   zoom: PropTypes.number.isRequired,
-  // }).isRequired,
-  // authorizationStatus: PropTypes.string.isRequired,
 };
 
-export default Favorites;
+export default React.memo(Favorites);

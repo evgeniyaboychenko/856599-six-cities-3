@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should MessageError render correctly 1`] = `
+<section
+  style={
+    Object {
+      "backgroundColor": "#f5f5f5",
+      "display": "block",
+      "left": "50%",
+      "marginLeft": "-250px",
+      "position": "fixed",
+      "top": "50%",
+      "width": "500px",
+      "zIndex": 30,
+    }
+  }
+>
+  <h2
+    style={
+      Object {
+        "display": "flex",
+        "textAlign": "center",
+      }
+    }
+  >
+    Ошибка 
+    error
+  </h2>
+  <button
+    aria-label="Закрыть модальное окно"
+    onClick={[Function]}
+    style={
+      Object {
+        "display": "flex",
+        "margin": "auto",
+      }
+    }
+    type="button"
+  >
+    Закрыть
+  </button>
+</section>
+`;

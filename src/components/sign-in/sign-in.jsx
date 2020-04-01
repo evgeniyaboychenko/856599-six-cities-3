@@ -1,7 +1,5 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
-// import MessageError from '../message-error/message-error.jsx';
-
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -21,7 +19,6 @@ class SignIn extends PureComponent {
   }
 
   render() {
-    // const {error} = this.props;
     return (<div className="page page--gray page--login">
       <main className="page__main page__main--login">
         <div className="page__login-container container">
@@ -39,7 +36,7 @@ class SignIn extends PureComponent {
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" required=""
+                <input className="login__input form__input" type="password" name="password" placeholder="Password" required
                   ref={this.passwordRef}
                 />
               </div>
@@ -54,9 +51,6 @@ class SignIn extends PureComponent {
             </div>
           </section>
         </div>
-        {/* <MessageError
-          error = {error}
-        /> */}
       </main>
     </div>
     );
@@ -64,7 +58,6 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
-  error: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 

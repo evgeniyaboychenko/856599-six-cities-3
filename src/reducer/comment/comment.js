@@ -1,20 +1,14 @@
 import {extend} from '../../utils/utils.js';
 import {adaptComments} from '../../utils/adapter.js';
-import {ServerCode} from '../../const.js';
+import {ActionCreator as ActionCreatorError} from "../user/user.js";
 
 const initialState = {
-  // isErrorSubmitForm: false,
   isSubmitForm: false,
-  errorForm: ServerCode.SUCCESS,
   comments: [],
 };
 
 const ActionType = {
   LOAD_COMMENTS: `LOAD_COMMENTS`,
-  POST_COMMENT: `POST_COMMENT`,
-  SET_IS_ERROR: `SET_IS_ERROR`,
-  SET_SUCCESS_FORM_SUBMISSION: `SET_SUCCESS_FORM_SUBMISSION`,
-  SET_FAIL_FORM_SUBMISSION: `SET_FAIL_FORM_SUBMISSION`,
   SET_IS_FORM_SUBMIT: `SET_IS_FORM_SUBMIT`,
 };
 
@@ -23,25 +17,9 @@ const ActionCreator = {
     type: ActionType.LOAD_COMMENTS,
     payload: comments
   }),
-  // postComment: (comments) => ({
-  //   type: ActionType.POST_COMMENT,
-  //   payload: comments
-  // }),
-  setIsError: (error) => ({
-    type: ActionType.SET_IS_ERROR,
-    payload: error
-  }),
-  setIsFormSubmit: () => ({
+  setIsFormSubmit: (status) => ({
     type: ActionType.SET_IS_FORM_SUBMIT,
-    payload: true
-  }),
-  setSuccessFormSubmission: (error) => ({
-    type: ActionType.SET_SUCCESS_FORM_SUBMISSION,
-    payload: {isSubmitForm: false, error}
-  }),
-  setFailFormSubmission: (error) => ({
-    type: ActionType.SET_FAIL_FORM_SUBMISSION,
-    payload: {isSubmitForm: false, error}
+    payload: status
   }),
 };
 
@@ -50,24 +28,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_COMMENTS:
       return extend(state, {
         comments: adaptComments(action.payload),
-      });
-    // case ActionType.POST_COMMENT:
-    //   return extend(state, {
-    //     comments: adaptComments(action.payload)
-    //   });
-    case ActionType.SET_IS_ERROR:
-      return extend(state, {
-        errorForm: action.payload
-      });
-    case ActionType.SET_SUCCESS_FORM_SUBMISSION:
-      return extend(state, {
-        isSubmitForm: action.payload.isSubmitForm,
-        errorForm: action.payload.error
-      });
-    case ActionType.SET_FAIL_FORM_SUBMISSION:
-      return extend(state, {
-        isSubmitForm: action.payload.isSubmitForm,
-        errorForm: action.payload.error
       });
     case ActionType.SET_IS_FORM_SUBMIT:
       return extend(state, {
@@ -92,13 +52,12 @@ const Operation = {
       rating: comment.rating,
     })
       .then((response) => {
-        dispatch(ActionCreator.setSuccessFormSubmission(response.status));
+        dispatch(ActionCreator.setIsFormSubmit(false));
         dispatch(ActionCreator.loadComments(response.data));
-        // dispatch(ActionCreator.setSuccessFormSubmission(response.status));
+        dispatch(ActionCreatorError.setLoadingError(``));
       })
     .catch((err) => {
-      const {response} = err;
-      dispatch(ActionCreator.setFailFormSubmission(response.status));
+      dispatch(ActionCreator.setIsFormSubmit(false));
       throw err;
     });
   },

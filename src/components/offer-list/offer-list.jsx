@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import OfferCard from '../offer-card/offer-card.jsx';
+import {OfferCard} from '../offer-card/offer-card.jsx';
 import {SortType} from '../../const.js';
 
 const sortOffers = (offers, sortType) => {
@@ -35,4 +35,4 @@ OfferList.propTypes = {
   activeSortItem: PropTypes.string.isRequired
 };
 
-export default OfferList;
+export default React.memo(OfferList);

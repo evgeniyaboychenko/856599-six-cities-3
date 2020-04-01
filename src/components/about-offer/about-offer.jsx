@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getAuthorizationStatus, getUserData, getError} from "../../reducer/user/selector.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {getComments, getIsSubmitForm, getErrorForm} from '../../reducer/comment/selector.js';
+import {getComments, getIsSubmitForm} from '../../reducer/comment/selector.js';
 import {getOffersNear} from '../../reducer/data/selectors.js';
 import FavoriteToggle from '../favorite-toggle/favorite-toggle.jsx';
 import {SortType} from '../../const.js';
@@ -31,8 +31,7 @@ const getInsideList = (appliances) => {
   );
 };
 
-const AboutOffer = (props) => {
-  const {comments, authorizationStatus, user, offerCard, offersNear, isSubmitForm, errorForm} = props;
+const AboutOffer = ({comments, authorizationStatus, user, offerCard, offersNear, isSubmitForm, error}) => {
   const {name, rating, price, type, id, isFavorite, isPremium, descriptions, photos, countRooms, maxGuests, appliances, owner} = offerCard;
   const {avatar, email} = user;
   return (
@@ -135,7 +134,7 @@ const AboutOffer = (props) => {
               </div>
               <CommentList
                 isSubmitForm = {isSubmitForm}
-                errorForm = {errorForm}
+                errorForm = {error}
                 authorizationStatus = {authorizationStatus}
                 comments = {comments}
                 idCard = {offerCard.id}
@@ -168,8 +167,8 @@ const AboutOffer = (props) => {
 };
 
 AboutOffer.propTypes = {
+  error: PropTypes.string.isRequired,
   isSubmitForm: PropTypes.bool.isRequired,
-  errorForm: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -222,11 +221,9 @@ AboutOffer.propTypes = {
   ).isRequired,
 };
 
-
 const mapStateToProps = (state) => (
   {
     isSubmitForm: getIsSubmitForm(state),
-    errorForm: getErrorForm(state),
     comments: getComments(state),
     error: getError(state),
     user: getUserData(state),

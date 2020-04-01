@@ -15,8 +15,6 @@ const withActiveSortList = (Component) => {
     render() {
       return <Component
         {...this.props}
-        // activeSortItem
-        // onSortClick
         isActive={this.state.isActiveSort}
         onSortListClick={this._handleActiveChange}
       />;

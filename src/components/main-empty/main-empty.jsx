@@ -19,10 +19,9 @@ const MainEmpty = ({activeCity}) => {
 
 MainEmpty.propTypes = {
   activeCity: PropTypes.shape({
-    // id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     coordinatesCity: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   }).isRequired,
 };
 
-export default MainEmpty;
+export default React.memo(MainEmpty);

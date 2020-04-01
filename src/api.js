@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ServerCode} from './const.js';
+import {ResponseErrorCode} from './const.js';
 
 export const createAPI = (onUnauthorized, onServerError) => {
   const api = axios.create({
@@ -15,24 +15,25 @@ export const createAPI = (onUnauthorized, onServerError) => {
   const onFail = (err) => {
     const {response} = err;
     switch (response.status) {
-      case ServerCode.UNAUTHORIZED: {
+      case ResponseErrorCode.UNAUTHORIZED: {
         onUnauthorized();
-        throw err;
+        break;
       }
-      case ServerCode.NOT_FOUND: {
+      case ResponseErrorCode.NOT_FOUND: {
         onServerError(response.data.error);
-        throw response.data.error;
+        break;
       }
-    }
-    if (response.status >= ServerCode.SERVER_IS_NOT_AVAILABLE) {
-      onServerError(response.data.error);
-      throw response.data.error;
+
+      case ResponseErrorCode.INVALID_REQUEST: {
+        onServerError(response.data.error);
+        break;
+      }
     }
 
-    // if (response.status === Error.UNAUTHORIZED) {
-    //   onUnauthorized();
-    //   throw err;
-    // }
+    if (response.status >= ResponseErrorCode.SERVER_IS_NOT_AVAILABLE) {
+      onServerError(response.data.error);
+    }
+
     throw err;
   };
 

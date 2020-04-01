@@ -1,18 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OfferList component render correctly should OfferList render correctly for offer cities 1`] = `
+exports[`should OfferList render correctly 1`] = `
 Array [
   <article
     className="cities__place-card place-card"
     onMouseOver={[Function]}
   >
-    <div
-      className="place-card__mark"
-    >
-      <span>
-        Premium
-      </span>
-    </div>
     <div
       className="cities__image-wrapper place-card__image-wrapper"
     >
@@ -23,7 +16,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="apartment-01.jpg"
+          src="img/1.png"
           width="260"
         />
       </a>
@@ -51,6 +44,7 @@ Array [
         </div>
         <button
           className="place-card__bookmark-button place-card__bookmark-button--active button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -78,7 +72,7 @@ Array [
           <span
             style={
               Object {
-                "width": 40,
+                "width": 60,
               }
             }
           />
@@ -96,7 +90,7 @@ Array [
           href="/offer/1"
           onClick={[Function]}
         >
-          Canal View Prinsengracht
+          Beautiful & luxurious studio at great location
         </a>
       </h2>
       <p
@@ -120,7 +114,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="apartment-01.jpg"
+          src="img/1.png"
           width="260"
         />
       </a>
@@ -138,7 +132,7 @@ Array [
             className="place-card__price-value"
           >
             €
-            120
+            100
           </b>
           <span
             className="place-card__price-text"
@@ -148,6 +142,7 @@ Array [
         </div>
         <button
           className="place-card__bookmark-button place-card__bookmark-button--active button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -193,316 +188,13 @@ Array [
           href="/offer/2"
           onClick={[Function]}
         >
-          Nice, cozy, warm big bed apartment
-        </a>
-      </h2>
-      <p
-        className="place-card__type"
-      >
-        privet room
-      </p>
-    </div>
-  </article>,
-]
-`;
-
-exports[`OfferList component render correctly should OfferList render correctly for offer near 1`] = `
-Array [
-  <article
-    className="near-places__place-card place-card"
-    onMouseOver={[Function]}
-  >
-    <div
-      className="place-card__mark"
-    >
-      <span>
-        Premium
-      </span>
-    </div>
-    <div
-      className="near-places__image-wrapper place-card__image-wrapper"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="Place image"
-          className="place-card__image"
-          height="200"
-          src="apartment-01.jpg"
-          width="260"
-        />
-      </a>
-    </div>
-    <div
-      className="place-card__info"
-    >
-      <div
-        className="place-card__price-wrapper"
-      >
-        <div
-          className="place-card__price"
-        >
-          <b
-            className="place-card__price-value"
-          >
-            €
-            100
-          </b>
-          <span
-            className="place-card__price-text"
-          >
-            / night
-          </span>
-        </div>
-        <button
-          className="place-card__bookmark-button place-card__bookmark-button--active button"
-          type="button"
-        >
-          <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
-          >
-            <use
-              href="#icon-bookmark"
-            />
-          </svg>
-          <span
-            className="visually-hidden"
-          >
-            In bookmarks
-          </span>
-        </button>
-      </div>
-      <div
-        className="place-card__rating rating"
-      >
-        <div
-          className="place-card__stars rating__stars"
-        >
-          <span
-            style={
-              Object {
-                "width": 40,
-              }
-            }
-          />
-          <span
-            className="visually-hidden"
-          >
-            Rating
-          </span>
-        </div>
-      </div>
-      <h2
-        className="place-card__name"
-      >
-        <a
-          href="/offer/11"
-          onClick={[Function]}
-        >
-          Canal View Prinsengracht
+          Beautiful & luxurious studio at great location
         </a>
       </h2>
       <p
         className="place-card__type"
       >
         apartment
-      </p>
-    </div>
-  </article>,
-  <article
-    className="near-places__place-card place-card"
-    onMouseOver={[Function]}
-  >
-    <div
-      className="near-places__image-wrapper place-card__image-wrapper"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="Place image"
-          className="place-card__image"
-          height="200"
-          src="apartment-01.jpg"
-          width="260"
-        />
-      </a>
-    </div>
-    <div
-      className="place-card__info"
-    >
-      <div
-        className="place-card__price-wrapper"
-      >
-        <div
-          className="place-card__price"
-        >
-          <b
-            className="place-card__price-value"
-          >
-            €
-            120
-          </b>
-          <span
-            className="place-card__price-text"
-          >
-            / night
-          </span>
-        </div>
-        <button
-          className="place-card__bookmark-button place-card__bookmark-button--active button"
-          type="button"
-        >
-          <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
-          >
-            <use
-              href="#icon-bookmark"
-            />
-          </svg>
-          <span
-            className="visually-hidden"
-          >
-            In bookmarks
-          </span>
-        </button>
-      </div>
-      <div
-        className="place-card__rating rating"
-      >
-        <div
-          className="place-card__stars rating__stars"
-        >
-          <span
-            style={
-              Object {
-                "width": 60,
-              }
-            }
-          />
-          <span
-            className="visually-hidden"
-          >
-            Rating
-          </span>
-        </div>
-      </div>
-      <h2
-        className="place-card__name"
-      >
-        <a
-          href="/offer/22"
-          onClick={[Function]}
-        >
-          Nice, cozy, warm big bed apartment
-        </a>
-      </h2>
-      <p
-        className="place-card__type"
-      >
-        privet room
-      </p>
-    </div>
-  </article>,
-  <article
-    className="near-places__place-card place-card"
-    onMouseOver={[Function]}
-  >
-    <div
-      className="near-places__image-wrapper place-card__image-wrapper"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="Place image"
-          className="place-card__image"
-          height="200"
-          src="apartment-01.jpg"
-          width="260"
-        />
-      </a>
-    </div>
-    <div
-      className="place-card__info"
-    >
-      <div
-        className="place-card__price-wrapper"
-      >
-        <div
-          className="place-card__price"
-        >
-          <b
-            className="place-card__price-value"
-          >
-            €
-            120
-          </b>
-          <span
-            className="place-card__price-text"
-          >
-            / night
-          </span>
-        </div>
-        <button
-          className="place-card__bookmark-button place-card__bookmark-button--active button"
-          type="button"
-        >
-          <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
-          >
-            <use
-              href="#icon-bookmark"
-            />
-          </svg>
-          <span
-            className="visually-hidden"
-          >
-            In bookmarks
-          </span>
-        </button>
-      </div>
-      <div
-        className="place-card__rating rating"
-      >
-        <div
-          className="place-card__stars rating__stars"
-        >
-          <span
-            style={
-              Object {
-                "width": 60,
-              }
-            }
-          />
-          <span
-            className="visually-hidden"
-          >
-            Rating
-          </span>
-        </div>
-      </div>
-      <h2
-        className="place-card__name"
-      >
-        <a
-          href="/offer/23"
-          onClick={[Function]}
-        >
-          Nice, cozy, warm big bed apartment
-        </a>
-      </h2>
-      <p
-        className="place-card__type"
-      >
-        privet room
       </p>
     </div>
   </article>,

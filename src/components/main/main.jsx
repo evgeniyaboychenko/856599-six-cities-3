@@ -4,7 +4,6 @@ import OfferList from '../offer-list/offer-list.jsx';
 import CityList from '../city-list/city-list.jsx';
 import {CardType} from '../../const.js';
 import Map from '../map/map.jsx';
-//  import MessageError from '../message-error/message-error.jsx';
 import MainEmpty from '../main-empty/main-empty.jsx';
 import SortList from '../sort-list/sort-list.jsx';
 import withActiveSortList from '../../hocs/withAtiveSortList.jsx';
@@ -12,8 +11,7 @@ const SortListWrapperd = withActiveSortList(SortList);
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from 'react-router-dom';
 
-const Main = (props) => {
-  const {isData, authorizationStatus, user, cities, activeCity, offerCards, activeSortItem} = props;
+const Main = ({isData, authorizationStatus, user, cities, activeCity, offerCards, activeSortItem}) => {
   const offersCount = offerCards.length;
   return (
     <div className="page page--gray page--main">
@@ -95,16 +93,12 @@ const Main = (props) => {
         }
         {offersCount || <MainEmpty activeCity = {activeCity}/>}
       </main>}
-      {/* <MessageError
-        error = {error}
-      /> */}
     </div>
   );
 };
 
 Main.propTypes = {
   activeSortItem: PropTypes.string.isRequired,
-  // error: PropTypes.string.isRequired,
   offerCards: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -138,4 +132,4 @@ Main.propTypes = {
 };
 
 
-export default Main;
+export default React.memo(Main);

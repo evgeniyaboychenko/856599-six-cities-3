@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-//  import {getIdActiveCard} from '../../reducer/state/selector.js';
 import {ActionCreator} from '../../reducer/state/state.js';
 import {CardType} from '../../const.js';
 import FavoriteToggle from '../favorite-toggle/favorite-toggle.jsx';
@@ -11,8 +10,7 @@ const getPercent = (rating) => {
   return rating * 100 / 5;
 };
 
-const OfferCard = (props) => {
-  const {offerCard, onCardMouseover, cardType} = props;
+const OfferCard = ({offerCard, onCardMouseover, cardType}) => {
   const {id, previewImage, name, rating, price, type, isPremium, isFavorite} = offerCard;
   return (
     <article className={cardType + `__place-card place-card`} key = {id}
@@ -79,12 +77,6 @@ OfferCard.propTypes = {
   cardType: PropTypes.string.isRequired,
 };
 
-// const mapStateToProps = (state) => (
-//   {
-//   //  idActiveCard: getIdActiveCard(state),
-//   }
-// );
-
 const mapDispatchToProps = (dispatch) => ({
   onCardMouseover(idActiveCard) {
     dispatch(ActionCreator.changeCurrenCard(idActiveCard));
@@ -92,4 +84,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {OfferCard};
-export default connect(null, mapDispatchToProps)(OfferCard);
+export default connect(null, mapDispatchToProps)(React.memo(OfferCard));

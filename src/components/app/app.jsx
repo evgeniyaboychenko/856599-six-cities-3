@@ -8,15 +8,15 @@ import AboutOffer from '../about-offer/about-offer.jsx';
 import {AppRoute} from '../../const.js';
 import {connect} from 'react-redux';
 import {getActiveCity, getCities, getOffersByCityName, getIsData, getOffersFavorites} from '../../reducer/data/selectors.js';
-import {getAuthorizationStatus, getUserData, getError} from "../../reducer/user/selector.js";
+import {getAuthorizationStatus, getUserData, getError} from '../../reducer/user/selector.js';
 import {getActiveSortItem} from '../../reducer/state/selector.js';
-import {Operation as UserOperation, AuthorizationStatus} from "../../reducer/user/user.js";
+import {Operation as UserOperation, AuthorizationStatus} from '../../reducer/user/user.js';
 import {Operation as OffersOperation} from '../../reducer/data/data.js';
 import {Operation as CommentOperation} from '../../reducer/comment/comment.js';
-import history from "../../history.js";
+import history from '../../history.js';
 import MessageError from '../message-error/message-error.jsx';
 import {ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
-import PrivateRoute from "../private-route/private-route.jsx";
+import PrivateRoute from '../private-route/private-route.jsx';
 
 const App = (props) => {
   const {activeSortItem, offersFavorite, onLoadFavorites, onLoadOffersNear, onLoadComments, error, isData, authorizationStatus, user, offerCards, cities, activeCity, onSubmitLogin} = props;
