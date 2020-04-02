@@ -3,8 +3,6 @@ import renderer from 'react-test-renderer';
 import CommentList from './comment-list.jsx';
 import {AuthorizationStatus} from '../../reducer/user/user.js';
 
-jest.mock(`../comment-form/comment-form.jsx`);
-
 const DESCRIPTIONS = [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`, `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`];
 const AVATARS = [`avatar-angelina.jpg`, `avatar-max.jpg`];
 const NAMES = [`Angelina`, `Max`, `Kate`, `Pol`, `Mike`];
@@ -35,6 +33,8 @@ const authorizationStatus = AuthorizationStatus.AUTH;
 it(`should CommentList render correctly`, () => {
   const tree = renderer.create(
       <CommentList
+        onSubmit = {()=>{}}
+        onSubmitDisableButton = {()=>{}}
         comments = {comments}
         idCard = {1}
         authorizationStatus = {authorizationStatus}

@@ -169,6 +169,8 @@ it(`should AboutOffer render correctly`, () => {
       <Provider store={store}>
         <MemoryRouter>
           <AboutOffer
+            onSubmit = {()=>{}}
+            onSubmitDisableButton = {()=>{}}
             isSubmitForm = {isSubmitForm}
             comments = {comments}
             offersNear = {offersNear}

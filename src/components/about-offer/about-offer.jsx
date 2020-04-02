@@ -12,6 +12,8 @@ import {getComments, getIsSubmitForm} from '../../reducer/comment/selector.js';
 import {getOffersNear} from '../../reducer/data/selectors.js';
 import FavoriteToggle from '../favorite-toggle/favorite-toggle.jsx';
 import {SortType} from '../../const.js';
+import {Operation as CommentOperation} from '../../reducer/comment/comment.js';
+import {ActionCreator} from '../../reducer/comment/comment.js';
 
 const getGallery = (photos) => {
   return photos.map((photo, i) => (<div className="property__image-wrapper" key = {i + photo}>
@@ -31,7 +33,7 @@ const getInsideList = (appliances) => {
   );
 };
 
-const AboutOffer = ({comments, authorizationStatus, user, offerCard, offersNear, isSubmitForm, error}) => {
+const AboutOffer = ({onSubmit, onSubmitDisableButton, comments, authorizationStatus, user, offerCard, offersNear, isSubmitForm, error}) => {
   const {name, rating, price, type, id, isFavorite, isPremium, descriptions, photos, countRooms, maxGuests, appliances, owner} = offerCard;
   const {avatar, email} = user;
   return (
@@ -133,6 +135,8 @@ const AboutOffer = ({comments, authorizationStatus, user, offerCard, offersNear,
                 </div>
               </div>
               <CommentList
+                onSubmitDisableButton = {onSubmitDisableButton}
+                onSubmit = {onSubmit}
                 isSubmitForm = {isSubmitForm}
                 errorForm = {error}
                 authorizationStatus = {authorizationStatus}
@@ -167,6 +171,8 @@ const AboutOffer = ({comments, authorizationStatus, user, offerCard, offersNear,
 };
 
 AboutOffer.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onSubmitDisableButton: PropTypes.func.isRequired,
   error: PropTypes.string.isRequired,
   isSubmitForm: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
@@ -232,5 +238,15 @@ const mapStateToProps = (state) => (
   }
 );
 
+const mapDispatchToProps = (dispatch) => ({
+  onSubmitDisableButton() {
+    dispatch(ActionCreator.setIsFormSubmit(true));
+  },
+  onSubmit(comment, idHotel) {
+    return dispatch(CommentOperation.submitComment(comment, idHotel));
+  },
+});
+
+
 export {AboutOffer};
-export default connect(mapStateToProps)(React.memo(AboutOffer));
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(AboutOffer));

@@ -6,7 +6,7 @@ import {CardType} from '../../const.js';
 import Map from '../map/map.jsx';
 import MainEmpty from '../main-empty/main-empty.jsx';
 import SortList from '../sort-list/sort-list.jsx';
-import withActiveSortList from '../../hocs/withAtiveSortList.jsx';
+import withActiveSortList from '../../hocs/with-active-sort/with-active-sort.js';
 const SortListWrapperd = withActiveSortList(SortList);
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from 'react-router-dom';

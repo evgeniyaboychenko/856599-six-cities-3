@@ -74,6 +74,10 @@ const Operation = {
     })
       .then((response) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, adaptUser(response.data)));
+      })
+      .catch((err) => {
+        const {response} = err;
+        dispatch(ActionCreator.setLoadingError(response.data.error));
       });
   },
 };
