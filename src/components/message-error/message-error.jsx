@@ -9,10 +9,11 @@ const MessageError = ({error, onCloseClick}) => {
       {display: `block`, position: `fixed`, zIndex: 30,
         width: `500px`, marginLeft: `-250px`, left: `50%`, top: `50%`, backgroundColor: `#f5f5f5`}}>
       <h2 style = {{display: `flex`, textAlign: `center`}}>Ошибка {error}</h2>
-      <button type="button" aria-label="Закрыть модальное окно" style = {{display: `flex`, margin: `auto`}}onClick = {(evt) => {
-        evt.preventDefault();
-        onCloseClick();
-      }}>
+      <button type="button" aria-label="Закрыть модальное окно" style = {{display: `flex`, margin: `auto`}}
+        onClick = {(evt) => {
+          evt.preventDefault();
+          onCloseClick();
+        }}>
         Закрыть
       </button>
     </section>

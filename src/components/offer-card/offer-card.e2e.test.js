@@ -4,20 +4,32 @@ import Adapter from 'enzyme-adapter-react-16';
 import {OfferCard} from './offer-card.jsx';
 import {CardType} from '../../const.js';
 
-const OFFER_IMAGES = [`room.jpg`, `apartment-01.jpg`];
-const OFFER_NAMES = [`Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
-const OFFER_TYPES = [`apartment`, `privet room`];
+const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 const offerCard =
 {
-  id: 889,
-  photos: OFFER_IMAGES,
-  previewImage: `apartment-01.jpg`,
-  name: OFFER_NAMES[0],
-  rating: 2,
+  id: 1,
+  cityLocation: {
+    coordinates: [48.856663, 2.351556], zoom: 10
+  },
+  cityName: CITIES[0],
+  name: `Beautiful & luxurious studio at great location`,
+  rating: 3,
   price: 100,
-  type: OFFER_TYPES[0],
-  isPremium: true,
+  type: `apartment`,
+  isPremium: false,
+  isFavorite: true,
+  descriptions: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+  photos: [`img/1.png`, `img/2.png`],
+  previewImage: `img/1.png`,
+  countRooms: 3,
+  maxGuests: 4,
+  appliances: [`Heating`, `Kitchen`],
+  coordinates: [52.35514938496378, 4.673877537499948],
+  zoom: 8,
+  owner: {
+    avatar: `img/1.png`, id: 3, name: `Angelina`, isSuper: true
+  }
 };
 
 const mockEvent = {
@@ -33,7 +45,6 @@ it(`onMouseover on heading should get key in handler`, () => {
   const card = shallow(
       <OfferCard
         offerCard = {offerCard}
-        // onHeaderCardClick = {() => {}}
         onCardMouseover = {onCardMouseover}
         cardType = {CardType.CITY}
       />
@@ -43,35 +54,3 @@ it(`onMouseover on heading should get key in handler`, () => {
   expect(onCardMouseover.mock.calls[0][0]).toBe(offerCard.id);
 });
 
-// it(`click on heading should get key in handler`, ()=> {
-//   const onHeaderCardClick = jest.fn();
-//   const card = shallow(
-//       <OfferCard
-//         offerCard = {offerCard}
-//         onHeaderCardClick = {onHeaderCardClick}
-//         onCardMouseover = {() => {}}
-//         cardType = {CardType.CITY}
-//       />
-//   );
-
-//   const currentCard = card.find(`.place-card__name a`);
-//   currentCard.simulate(`click`, mockEvent);
-
-//   expect(onHeaderCardClick.mock.calls[0][0]).toBe(offerCard.id);
-// });
-
-// it(`Should ad heading be pressed`, () => {
-//   const onHeaderCardClick = jest.fn();
-//   const main = shallow(
-//       <OfferCard
-//         offerCard = {offerCard}
-//         onHeaderCardClick = {onHeaderCardClick}
-//         onCardMouseover = {() => {}}
-//         cardType = {CardType.CITY}
-//       />
-//   );
-
-//   const headerCard = main.find(`.place-card__name a`);
-//   headerCard.simulate(`click`, mockEvent);
-//   expect(onHeaderCardClick.mock.calls.length).toBe(1);
-// });

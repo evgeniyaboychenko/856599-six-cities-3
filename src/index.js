@@ -5,10 +5,9 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './reducer/reducer.js';
-import {Operation as OffersOperation} from './reducer/data/data.js';
-import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
+import {ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
 import {composeWithDevTools} from 'redux-devtools-extension';
-import {createAPI, apiDefault} from "./api.js";
+import {createAPI} from "./api.js";
 import history from "./history.js";
 import {AppRoute} from './const.js';
 
@@ -34,12 +33,12 @@ const store = createStore(
     )
 );
 
-store.dispatch(OffersOperation.loadOfferList());
-store.dispatch(UserOperation.checkAuth(apiDefault));
-
 ReactDOM.render(
     <Provider store={store}>
       <App/>
     </Provider>,
     document.querySelector(`#root`)
 );
+
+
+export default store;

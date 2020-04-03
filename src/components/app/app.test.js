@@ -226,6 +226,8 @@ it(`should App render correctly`, () => {
           onSubmitLogin = {() => {}}
           onLoadFavorites = {() => {}}
           onLoadComments = {() => {}}
+          onLoadOffesList = {() => {}}
+          onCheckAuth = {() => {}}
         />
       </Provider>
   ).toJSON();

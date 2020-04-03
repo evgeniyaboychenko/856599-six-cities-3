@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Comment from '../comment/comment.jsx';
 import CommentForm from '../comment-form/comment-form.jsx';
+import withComment from '../../hocs/with-comment/with-comment.js';
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import moment from 'moment';
+const CommentUserWrapperd = withComment(CommentForm);
 
-const CommentList = ({idCard, comments, authorizationStatus, isSubmitForm, errorForm}) => {
+const CommentList = ({onSubmit, onSubmitDisableButton, idCard, comments, authorizationStatus, isSubmitForm, errorForm}) => {
   const sortingComments = comments.slice().sort((a, b) => {
     return moment(b.date).valueOf() - moment(a.date).valueOf();
   });
@@ -22,15 +24,19 @@ const CommentList = ({idCard, comments, authorizationStatus, isSubmitForm, error
       })}
     </ul>
     {authorizationStatus === AuthorizationStatus.AUTH &&
-      <CommentForm
-        isSubmitForm = {isSubmitForm}
-        errorForm = {errorForm}
-        idCard = {idCard}/>
+    <CommentUserWrapperd
+      onSubmitDisableButton = {onSubmitDisableButton}
+      onSubmit = {onSubmit}
+      isSubmitForm = {isSubmitForm}
+      errorForm = {errorForm}
+      idCard = {idCard}/>
     }
   </section>);
 };
 
 CommentList.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onSubmitDisableButton: PropTypes.func.isRequired,
   isSubmitForm: PropTypes.bool.isRequired,
   errorForm: PropTypes.string.isRequired,
   idCard: PropTypes.number.isRequired,
