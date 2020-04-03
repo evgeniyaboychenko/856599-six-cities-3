@@ -98,6 +98,32 @@ const getUpdateOffers = (offers, idCard, isFavorite) => {
   return newOffers;
 };
 
+const getUpdateOffersFavorite = (offersByCity, idCard) => {
+  let cityIndex = -1;
+  let offerIndex = -1;
+  for (let i = 0; i < offersByCity.length; i++) {
+    offerIndex = offersByCity[i].offersFavoriteByCity.findIndex((item) => item.id === idCard);
+    if (offerIndex !== -1) {
+      cityIndex = i;
+      break;
+    }
+  }
+
+  if (offerIndex !== -1 && cityIndex !== -1) {
+    offersByCity = offersByCity.slice();
+    let city = offersByCity[cityIndex];
+    const cityOffers = city.offersFavoriteByCity.slice();
+    cityOffers.splice(offerIndex, 1);
+    if (cityOffers.length) {
+      city = extend(city, {offersFavoriteByCity: cityOffers});
+      offersByCity.splice(cityIndex, 1, city);
+    } else {
+      offersByCity.splice(cityIndex, 1);
+    }
+  }
+  return offersByCity;
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
@@ -125,6 +151,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_STATUS_FAVORITE:
       return extend(state, {
         offers: getUpdateOffers(state.offers, action.payload.idHotel, action.payload.status),
+        offersFavorite: getUpdateOffersFavorite(state.offersFavorite, action.payload.idHotel),
       });
 
     case ActionType.LOAD_OFFERS_FAVORITE:
