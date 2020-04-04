@@ -37,13 +37,6 @@ const getInsideList = (appliances) => {
 };
 
 class AboutOffer extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isDataComments: false,
-      isDataNearOffers: false
-    };
-  }
   componentDidMount() {
     const {onLoadOffersNear, onLoadComments} = this.props;
     onLoadOffersNear(this.props.match.params.id);
