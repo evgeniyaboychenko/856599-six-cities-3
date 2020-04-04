@@ -5,11 +5,12 @@ import Favorites from '../favorites/favorites.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import {Switch, Route, Router} from 'react-router-dom';
 import AboutOffer from '../about-offer/about-offer.jsx';
+import Loading from '../loading/loading.jsx';
 import {AppRoute} from '../../const.js';
 import {connect} from 'react-redux';
 import {getActiveCity, getCities, getOffersByCityName, getIsData, getOffersFavorites} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus, getUserData, getError} from '../../reducer/user/selector.js';
-import {getActiveSortItem} from '../../reducer/state/selector.js';
+import {getActiveSortItem, getIdActiveCard} from '../../reducer/state/selector.js';
 import {Operation as UserOperation, AuthorizationStatus} from '../../reducer/user/user.js';
 import {Operation as OffersOperation} from '../../reducer/data/data.js';
 import history from '../../history.js';
@@ -27,9 +28,10 @@ class App extends PureComponent {
   }
 
   renderMain() {
-    const {activeSortItem, error, isData, authorizationStatus, user, offerCards, cities, activeCity} = this.props;
+    const {idCurrentCard, activeSortItem, error, isData, authorizationStatus, user, offerCards, cities, activeCity} = this.props;
     if (isData) {
       return <Main
+        idCurrentCard = {idCurrentCard}
         error = {error}
         isData = {isData}
         authorizationStatus = {authorizationStatus}
@@ -40,21 +42,7 @@ class App extends PureComponent {
         activeSortItem = {activeSortItem}
       />;
     }
-    return (
-      <div style = {{position: `absolute`, content: ``, marginLeft: `50%`, marginTop: `200px`}}>
-        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xmlSpace="preserve">
-          <g><circle cx="16" cy="64" r="16" fill="#000000" fillOpacity="1"/><circle cx="16" cy="64" r="14.344" fill="#000000" fillOpacity="1" transform="rotate(45 64 64)"/>
-            <circle cx="16" cy="64" r="12.531" fill="#000000" fillOpacity="1" transform="rotate(90 64 64)"/>
-            <circle cx="16" cy="64" r="10.75" fill="#000000" fillOpacity="1" transform="rotate(135 64 64)"/>
-            <circle cx="16" cy="64" r="10.063" fill="#000000" fillOpacity="1" transform="rotate(180 64 64)"/>
-            <circle cx="16" cy="64" r="8.063" fill="#000000" fillOpacity="1" transform="rotate(225 64 64)"/>
-            <circle cx="16" cy="64" r="6.438" fill="#000000" fillOpacity="1" transform="rotate(270 64 64)"/>
-            <circle cx="16" cy="64" r="5.375" fill="#000000" fillOpacity="1" transform="rotate(315 64 64)"/>
-            <animateTransform attributeName="transform" type="rotate" values="0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64" calcMode="discrete" dur="720ms" repeatCount="indefinite">
-            </animateTransform></g>
-        </svg>
-      </div>
-    );
+    return <Loading/>;
   }
 
   render() {
@@ -100,6 +88,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  idCurrentCard: PropTypes.number.isRequired,
   activeSortItem: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,
   isData: PropTypes.bool.isRequired,
@@ -168,6 +157,7 @@ const mapStateToProps = (state) => (
     offerCards: getOffersByCityName(state),
     offersFavorite: getOffersFavorites(state),
     activeSortItem: getActiveSortItem(state),
+    idCurrentCard: getIdActiveCard(state)
   }
 );
 

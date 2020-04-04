@@ -170,6 +170,7 @@ it(`should Main render correctly`, () => {
       <Provider store={store}>
         <MemoryRouter>
           <Main
+            idCurrentCard = {1}
             isData = {true}
             offerCards = {offerCards}
             activeCity = {activeCity}
@@ -199,6 +200,7 @@ it(`should Main render correctly if offers-count equal null`, () => {
       <Provider store={store}>
         <MemoryRouter>
           <Main
+            idCurrentCard = {1}
             isData = {true}
             offerCards = {[]}
             activeCity = {activeCity}

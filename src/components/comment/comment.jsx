@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-
-const getPercent = (rating) => {
-  return rating * 100 / 5;
-};
+import {getPercent} from '../../utils/utils.js';
+import {WidthStarBlock} from '../../const.js';
 
 const getDate = (date) => {
   return moment(date).format(`MMMM YYYY`);
@@ -25,7 +23,7 @@ const Comment = ({comment}) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: getPercent(rating)}}></span>
+            <span style={{width: getPercent(rating, WidthStarBlock.COMMENT)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

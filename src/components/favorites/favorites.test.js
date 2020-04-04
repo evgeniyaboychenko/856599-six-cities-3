@@ -4,6 +4,7 @@ import {Favorites} from './favorites.jsx';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import NameSpace from '../../reducer/name-space.js';
+import {MemoryRouter} from "react-router-dom";
 
 
 const mockStore = configureStore([]);
@@ -88,11 +89,13 @@ it(`should Favorites render correctly`, () => {
   });
   const tree = renderer.create(
       <Provider store={store}>
-        <Favorites
-          offersFavorite = {offersFavorite}
-          user = {user}
-          onLoadFavorites = {() => {}}
-        />
+        <MemoryRouter>
+          <Favorites
+            offersFavorite = {offersFavorite}
+            user = {user}
+            onLoadFavorites = {() => {}}
+          />
+        </MemoryRouter>
       </Provider>
   ).toJSON();
   expect(tree).toMatchSnapshot();
@@ -105,11 +108,13 @@ it(`should FavoritesEmpty render correctly`, () => {
   });
   const tree = renderer.create(
       <Provider store={store}>
-        <Favorites
-          offersFavorite = {offersFavoriteEmpty}
-          user = {user}
-          onLoadFavorites = {() => {}}
-        />
+        <MemoryRouter>
+          <Favorites
+            offersFavorite = {offersFavoriteEmpty}
+            user = {user}
+            onLoadFavorites = {() => {}}
+          />
+        </MemoryRouter>
       </Provider>).toJSON();
   expect(tree).toMatchSnapshot();
 });

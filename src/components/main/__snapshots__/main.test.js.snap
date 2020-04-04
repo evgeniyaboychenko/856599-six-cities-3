@@ -221,156 +221,97 @@ exports[`should Main render correctly 1`] = `
 
 exports[`should Main render correctly if offers-count equal null 1`] = `
 <div
-  className="page page--gray page--main"
+  style={
+    Object {
+      "content": "",
+      "marginLeft": "50%",
+      "marginTop": "200px",
+      "position": "absolute",
+    }
+  }
 >
-  <header
-    className="header"
+  <svg
+    height="64px"
+    version="1.0"
+    viewBox="0 0 128 128"
+    width="64px"
+    xmlSpace="preserve"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
   >
-    <div
-      className="container"
-    >
-      <div
-        className="header__wrapper"
-      >
-        <div
-          className="header__left"
-        >
-          <a
-            className="header__logo-link header__logo-link--active"
-          >
-            <img
-              alt="6 cities logo"
-              className="header__logo"
-              height="41"
-              src="img/logo.svg"
-              width="81"
-            />
-          </a>
-        </div>
-        <nav
-          className="header__nav"
-        >
-          <ul
-            className="header__nav-list"
-          >
-            <li
-              className="header__nav-item user"
-            >
-              <a
-                className="header__nav-link header__nav-link--profile"
-                href="/favorites"
-                onClick={[Function]}
-              >
-                <div
-                  className="header__avatar-wrapper user__avatar-wrapper"
-                  style={
-                    Object {
-                      "backgroundImage": "url(https://htmlacademy-react-3.appspot.com/six-citiesnike.jpg)",
-                    }
-                  }
-                />
-                <span
-                  className="header__user-name user__name"
-                >
-                  nike@n.ru
-                </span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
-  <main
-    className="page__main page__main--index page__main--index-empty"
-  >
-    <h1
-      className="visually-hidden"
-    >
-      Cities
-    </h1>
-    <div
-      className="tabs"
-    >
-      <section
-        className="locations container"
-      >
-        <ul
-          className="locations__list tabs__list"
-        >
-          <li
-            className="locations__item"
-            onClick={[Function]}
-          >
-            <a
-              className="locations__item-link tabs__item tabs__item--active"
-              href="#"
-            >
-              <span>
-                Paris
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-            onClick={[Function]}
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Cologne
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-            onClick={[Function]}
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Brussels
-              </span>
-            </a>
-          </li>
-        </ul>
-      </section>
-    </div>
-    0
-    <div
-      className="cities"
-    >
-      <div
-        className="cities__places-container cities__places-container--empty container"
-      >
-        <section
-          className="cities__no-places"
-        >
-          <div
-            className="cities__status-wrapper tabs__content"
-          >
-            <b
-              className="cities__status"
-            >
-              No places to stay available
-            </b>
-            <p
-              className="cities__status-description"
-            >
-              We could not find any property availbale at the moment in 
-              Paris
-            </p>
-          </div>
-        </section>
-        <div
-          className="cities__right-section"
-        />
-      </div>
-    </div>
-  </main>
+    <g>
+      <circle
+        cx="16"
+        cy="64"
+        fill="#000000"
+        fillOpacity="1"
+        r="16"
+      />
+      <circle
+        cx="16"
+        cy="64"
+        fill="#000000"
+        fillOpacity="1"
+        r="14.344"
+        transform="rotate(45 64 64)"
+      />
+      <circle
+        cx="16"
+        cy="64"
+        fill="#000000"
+        fillOpacity="1"
+        r="12.531"
+        transform="rotate(90 64 64)"
+      />
+      <circle
+        cx="16"
+        cy="64"
+        fill="#000000"
+        fillOpacity="1"
+        r="10.75"
+        transform="rotate(135 64 64)"
+      />
+      <circle
+        cx="16"
+        cy="64"
+        fill="#000000"
+        fillOpacity="1"
+        r="10.063"
+        transform="rotate(180 64 64)"
+      />
+      <circle
+        cx="16"
+        cy="64"
+        fill="#000000"
+        fillOpacity="1"
+        r="8.063"
+        transform="rotate(225 64 64)"
+      />
+      <circle
+        cx="16"
+        cy="64"
+        fill="#000000"
+        fillOpacity="1"
+        r="6.438"
+        transform="rotate(270 64 64)"
+      />
+      <circle
+        cx="16"
+        cy="64"
+        fill="#000000"
+        fillOpacity="1"
+        r="5.375"
+        transform="rotate(315 64 64)"
+      />
+      <animateTransform
+        attributeName="transform"
+        calcMode="discrete"
+        dur="720ms"
+        repeatCount="indefinite"
+        type="rotate"
+        values="0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64"
+      />
+    </g>
+  </svg>
 </div>
 `;

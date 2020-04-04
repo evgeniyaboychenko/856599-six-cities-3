@@ -30,7 +30,17 @@ const OfferList = ({offers, cardType, activeSortItem}) => {
 };
 
 OfferList.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        name: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        isPremium: PropTypes.bool.isRequired
+      })
+  ).isRequired,
   cardType: PropTypes.string.isRequired,
   activeSortItem: PropTypes.string.isRequired
 };

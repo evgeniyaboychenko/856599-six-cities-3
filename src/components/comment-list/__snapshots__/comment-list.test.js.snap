@@ -52,7 +52,7 @@ exports[`should CommentList render correctly 1`] = `
             <span
               style={
                 Object {
-                  "width": 40,
+                  "width": 39.2,
                 }
               }
             />
@@ -111,7 +111,7 @@ exports[`should CommentList render correctly 1`] = `
             <span
               style={
                 Object {
-                  "width": 40,
+                  "width": 39.2,
                 }
               }
             />

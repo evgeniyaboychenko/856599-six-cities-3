@@ -4,11 +4,12 @@ import {adaptUser} from '../../utils/adapter.js';
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+  UNKNOWN: `UNKNOWN`
 };
 
 const initialState = {
   error: ``,
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
   user: {
     id: -1,
     name: ``,

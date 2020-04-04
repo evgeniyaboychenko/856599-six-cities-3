@@ -71,7 +71,7 @@ exports[`OfferCard component render correctly should OfferCard render correctly 
         <span
           style={
             Object {
-              "width": 60,
+              "width": 43.8,
             }
           }
         />

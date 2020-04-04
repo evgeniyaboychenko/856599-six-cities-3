@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import {connect} from 'react-redux';
 import {CardType} from '../../const.js';
-import {getIdActiveCard} from '../../reducer/state/selector.js';
 import {getActiveCity, getOffersByCityName} from '../../reducer/data/selectors.js';
 
 const icon = leaflet.icon({
@@ -30,7 +29,12 @@ class Map extends PureComponent {
     if (cardType === CardType.CITY) {
       offersOnMap = offerCards;
     } else {
-      offersOnMap = offersNear.concat(offerCards.find((offer) => offer.id === idCurrentCard));
+      const currentOffer = offerCards.find((offer) => offer.id === idCurrentCard);
+      if (currentOffer) {
+        offersOnMap = offersNear.concat(currentOffer);
+      } else {
+        offersOnMap = offersNear;
+      }
     }
 
     const coordinatesCity = activeCity.coordinatesCity;
@@ -69,7 +73,12 @@ class Map extends PureComponent {
     if (cardType === CardType.CITY) {
       offersOnMap = offerCards;
     } else {
-      offersOnMap = offersNear.concat(offerCards.find((offer) => offer.id === idCurrentCard));
+      const currentOffer = offerCards.find((offer) => offer.id === idCurrentCard);
+      if (currentOffer) {
+        offersOnMap = offersNear.concat(currentOffer);
+      } else {
+        offersOnMap = offersNear;
+      }
     }
 
     if (activeCity.name !== prevProps.activeCity.name || idCurrentCard !== prevProps.idCurrentCard) {
@@ -128,7 +137,6 @@ const mapStateToProps = (state) => (
   {
     activeCity: getActiveCity(state),
     offerCards: getOffersByCityName(state),
-    idCurrentCard: getIdActiveCard(state)
   }
 );
 

@@ -7,6 +7,7 @@ const api = createAPI(() => {});
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+  UNKNOWN: `UNKNOWN`
 };
 
 const error = `error`;
@@ -44,7 +45,7 @@ const state = {
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     error: ``,
-    authorizationStatus: AuthorizationStatus.NO_AUTH,
+    authorizationStatus: AuthorizationStatus.UNKNOWN,
     user: {
       id: -1,
       name: ``,

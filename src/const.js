@@ -25,4 +25,12 @@ const ResponseErrorCode = {
   SERVER_IS_NOT_AVAILABLE: 500
 };
 
-export {CardType, SortType, AppRoute, ResponseErrorCode};
+const WidthStarBlock = {
+  ABOUT_OFFER: 147,
+  COMMENT: 98,
+  OFFER_CARD: 73,
+};
+
+const COUNT_STARS = 5;
+
+export {CardType, SortType, AppRoute, ResponseErrorCode, WidthStarBlock, COUNT_STARS};

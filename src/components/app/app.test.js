@@ -213,6 +213,7 @@ it(`should App render correctly`, () => {
   const tree = renderer.create(
       <Provider store={store}>
         <App
+          idCurrentCard = {1}
           isData = {isData}
           activeCity = {activeCity}
           cities = {cities}

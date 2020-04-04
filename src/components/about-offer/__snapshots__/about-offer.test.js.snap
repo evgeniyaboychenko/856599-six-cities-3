@@ -18,7 +18,8 @@ exports[`should AboutOffer render correctly 1`] = `
         >
           <a
             className="header__logo-link"
-            href="main.html"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -140,7 +141,7 @@ exports[`should AboutOffer render correctly 1`] = `
               <span
                 style={
                   Object {
-                    "width": 60,
+                    "width": 88.2,
                   }
                 }
               />
@@ -153,7 +154,7 @@ exports[`should AboutOffer render correctly 1`] = `
             <span
               className="property__rating-value rating__value"
             >
-              4.8
+              3
             </span>
           </div>
           <ul

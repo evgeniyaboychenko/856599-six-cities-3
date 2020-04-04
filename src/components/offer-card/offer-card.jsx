@@ -5,10 +5,8 @@ import {Link} from 'react-router-dom';
 import {ActionCreator} from '../../reducer/state/state.js';
 import {CardType} from '../../const.js';
 import FavoriteToggle from '../favorite-toggle/favorite-toggle.jsx';
-
-const getPercent = (rating) => {
-  return rating * 100 / 5;
-};
+import {getPercent} from '../../utils/utils.js';
+import {WidthStarBlock} from '../../const.js';
 
 const OfferCard = ({offerCard, onCardMouseover, cardType}) => {
   const {id, previewImage, name, rating, price, type, isPremium, isFavorite} = offerCard;
@@ -42,7 +40,7 @@ const OfferCard = ({offerCard, onCardMouseover, cardType}) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: getPercent(rating)}}></span>
+            <span style={{width: getPercent(rating, WidthStarBlock.OFFER_CARD)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

@@ -5,6 +5,7 @@ import OfferList from '../offer-list/offer-list.jsx';
 import {CardType, SortType} from '../../const.js';
 import {connect} from 'react-redux';
 import {Operation as OffersOperation} from '../../reducer/data/data.js';
+import {Link} from 'react-router-dom';
 
 class Favorites extends PureComponent {
   componentDidMount() {
@@ -20,9 +21,9 @@ class Favorites extends PureComponent {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <a className="header__logo-link" href="main.html">
+                <Link to = {`/`} className="header__logo-link" href="main.html">
                   <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
+                </Link>
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
